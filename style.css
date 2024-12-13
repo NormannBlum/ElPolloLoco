@@ -2,8 +2,14 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-family: "Rye";
 }
 
 canvas {
     background-color: black;
 }
+
+h1 {
+    color: rgb(125, 62, 7);
+}
+
