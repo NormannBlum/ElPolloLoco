@@ -9,46 +9,55 @@ function init() {
   console.log("My Character is", world.character);
 }
 
-window.addEventListener("keydown", (e) => {
-  if (e.keyCode == 39) {
+window.addEventListener("keydown", (event) => {
+  console.log(event.key);
+  if (event.code == "ArrowRight") {
     keyboard.RIGHT = true;
   }
 
-  if (e.keyCode == 37) {
+  if (event.code == "ArrowLeft") {
     keyboard.LEFT = true;
   }
 
-  if (e.keyCode == 38) {
+  if (event.code == "ArrowUp") {
     keyboard.UP = true;
   }
 
-  if (e.keyCode == 40) {
+  if (event.code == "ArrowDown") {
     keyboard.DOWN = true;
   }
 
-  if (e.keyCode == 32) {
+  if (event.code == "Space") {
     keyboard.SPACE = true;
+  }
+
+  if (event.code == "KeyD") {
+    keyboard.D = true;
   }
 });
 
-window.addEventListener("keyup", (e) => {
-  if (e.keyCode == 39) {
+window.addEventListener("keyup", (event) => {
+  if (event.code == "ArrowRight") {
     keyboard.RIGHT = false;
   }
 
-  if (e.keyCode == 37) {
+  if (event.code == "ArrowLeft") {
     keyboard.LEFT = false;
   }
 
-  if (e.keyCode == 38) {
+  if (event.code == "ArrowUp") {
     keyboard.UP = false;
   }
 
-  if (e.keyCode == 40) {
+  if (event.code == "ArrowDown") {
     keyboard.DOWN = false;
   }
 
-  if (e.keyCode == 32) {
+  if (event.code == "Space") {
     keyboard.SPACE = false;
+  }
+
+  if (event.code == "KeyD") {
+    keyboard.D = false;
   }
 });
