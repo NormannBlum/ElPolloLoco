@@ -1,8 +1,19 @@
+@font-face {
+    font-family: 'rye';
+    src: url("../fonts/rye.ttf") format("truetype");
+}
+
 body {
     display: flex;
+    justify-content: center;
     flex-direction: column;
     align-items: center;
-    font-family: "Rye";
+    min-height: 100vh;
+    margin: 0;
+    background-image: url(./img_pollo_locco/img/10_project_img/desert-bg.jpg);
+    background-position: center;
+    background-size: cover;
+    font-family: 'rye', Arial, Helvetica, sans-serif;
 }
 
 canvas {
@@ -10,6 +21,9 @@ canvas {
 }
 
 h1 {
-    color: rgb(125, 62, 7);
-}
+    color: rgb(26, 16, 3);
+    font-size: 64px;
+    letter-spacing: 4px;
+    text-shadow: 4px 4px 8px rgba(0, 0, 0,0.5);
 
+}
