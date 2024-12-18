@@ -6,6 +6,11 @@ class World {
   keyboard;
   camera_x = 0;
   statusBar = new StatusBar();
+  coinsStatusBar = new CoinsStatusBar();
+  bottlesStatusBar = new BottlesStatusBar();
+  endbossStatusBar = new EndbossStatusBar();
+  coins = 0;
+  bottles = 0;
   throwableObjects = [];
 
   constructor(canvas, keyboard) {
@@ -26,6 +31,13 @@ class World {
       this.checkCollisions();
       this.checkThrowObjects();
     }, 200);
+  }
+
+  checkCollectibles() {
+    this.coins++;
+    this.bottles++;
+    this.coinsStatusBar.setPercentage((this.coins / 10) * 100);
+    this.bottlesStatusBar.setPercentage((this.bottles / 10) * 100);
   }
 
   checkThrowObjects() {
@@ -53,6 +65,10 @@ class World {
     this.ctx.translate(-this.camera_x, 0);
     // -------- Space for fixed objects ------------
     this.addToMap(this.statusBar);
+    this.addToMap(this.coinsStatusBar);
+    this.addToMap(this.bottlesStatusBar);
+    this.addToMap(this.endbossStatusBar);
+
     this.ctx.translate(this.camera_x, 0); // Forward
 
     this.addToMap(this.character);
