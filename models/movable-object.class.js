@@ -16,7 +16,8 @@ class MovableObject extends DrawableObject {
   }
 
   isAboveGround() {
-    if (this instanceof ThrowableObject) { // Throwableobject should always fall
+    if (this instanceof ThrowableObject) {
+      // Throwableobject should always fall
       return true;
     } else {
       return this.y < 180;
@@ -25,13 +26,18 @@ class MovableObject extends DrawableObject {
 
   // character.iscolliding(chicken);
   isColliding(mo) {
-    return (
-      this.x + this.width > mo.x &&
-      this.y + this.height > mo.y &&
-      this.x < mo.x + mo.width &&
-      this.y < mo.y + mo.height
-    );
+    return this.x + this.offset.x + this.width - this.offset.width > mo.x + mo.offset.x &&
+        this.y + this.offset.y + this.height - this.offset.height > mo.y + mo.offset.y &&
+        this.x + this.offset.x < mo.x+ mo.offset.x  + mo.width - mo.offset.width &&
+        this.y + this.offset.y < mo.y + mo.offset.y + mo.height - mo.offset.height;
   }
+
+  offset = {
+    x: 0,
+    y: 0,
+    width: 0,
+    height: 0,
+  };
 
   hit() {
     this.energy -= 5;

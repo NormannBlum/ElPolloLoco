@@ -27,6 +27,19 @@ class DrawableObject {
     }
   }
 
+  drawOffsetFrame(ctx) {
+    if (this instanceof Character || this instanceof Chicken) {
+        ctx.beginPath();
+        ctx.lineWidth = '3';
+        ctx.strokeStyle = 'red';
+        ctx.rect(this.x + this.offset.x, 
+            this.y + this.offset.y, 
+            this.width - this.offset.width, 
+            this.height - this.offset.height);
+        ctx.stroke();
+    }
+}
+
   loadImages(arr) {
     arr.forEach((path) => {
       let img = new Image();

@@ -52,6 +52,13 @@ class Character extends MovableObject {
     this.animate();
   }
 
+  offset = {
+    x: 15,
+    y: 95,
+    width: 40,
+    height: 100,
+  };
+
   animate() {
     setInterval(() => {
       this.walking_sound.pause();
