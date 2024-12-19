@@ -11,7 +11,7 @@ class World {
   endbossStatusBar = new EndbossStatusBar();
   coins = 0;
   bottles = 0;
-  maxBottles = 5;
+  maxBottles = 10;
   allBottles = [];
   throwableObjects = [];
   lastThrowTime = 0;
@@ -27,9 +27,9 @@ class World {
   }
 
   generateBottles() {
-    for (let i = 0; i < 20; i++) {
-      let bottle = new Bottle(200 + Math.random() * 4000, 370); // Bottles auf Boden verteilen
-      this.allBottles.push(bottle);
+  for (let i = 0; i < 20; i++) {
+    let bottle = new Bottle(200 + Math.random() * 4000, 370); // Flaschen über die Spielwelt verteilen
+    this.allBottles.push(bottle);
     }
   }
 
@@ -107,6 +107,7 @@ class World {
   drawBackground() {
     this.ctx.translate(this.camera_x, 0);
     this.addObjectsToMap(this.level.backgroundObjects);
+    this.addObjectsToMap(this.level.clouds); // Eigentlich dynamic aber hier wegen Überlappung
     this.addObjectsToMap(this.allBottles);
     this.ctx.translate(-this.camera_x, 0);
   }
@@ -121,7 +122,7 @@ class World {
   drawDynamicObjects() {
     this.ctx.translate(this.camera_x, 0);
     this.addToMap(this.character);
-    this.addObjectsToMap(this.level.clouds);
+    // this.addObjectsToMap(this.level.clouds);
     this.addObjectsToMap(this.level.enemies);
     this.addObjectsToMap(this.throwableObjects);
     this.ctx.translate(-this.camera_x, 0);

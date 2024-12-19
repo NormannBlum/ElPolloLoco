@@ -6,7 +6,24 @@ const level1 = new Level (
     new Endboss()
     ],
     [
-    new Cloud()
+    new Cloud(210),
+    new Cloud(430),
+    new Cloud(670),
+    new Cloud(820),
+    new Cloud(1170),
+    new Cloud(1350),
+    new Cloud(1580),
+    new Cloud(1900),
+    new Cloud(2150),
+    new Cloud(2430),
+    new Cloud(2670),
+    new Cloud(2820),
+    new Cloud(3160),
+    new Cloud(3410),
+    new Cloud(3670),
+    new Cloud(3820),
+    new Cloud(4060),
+    new Cloud(4250),
     ],
     [
     new BackgroundObject("img_pollo_locco/img/5_background/layers/air.png", -719),
@@ -18,6 +35,7 @@ const level1 = new Level (
     new BackgroundObject("img_pollo_locco/img/5_background/layers/3_third_layer/1.png", 0),
     new BackgroundObject("img_pollo_locco/img/5_background/layers/2_second_layer/1.png",0),
     new BackgroundObject("img_pollo_locco/img/5_background/layers/1_first_layer/1.png",0),
+
     new BackgroundObject("img_pollo_locco/img/5_background/layers/air.png", 719),
     new BackgroundObject("img_pollo_locco/img/5_background/layers/3_third_layer/2.png", 719),
     new BackgroundObject("img_pollo_locco/img/5_background/layers/2_second_layer/2.png", 719),
@@ -27,9 +45,20 @@ const level1 = new Level (
     new BackgroundObject("img_pollo_locco/img/5_background/layers/3_third_layer/1.png", 719*2),
     new BackgroundObject("img_pollo_locco/img/5_background/layers/2_second_layer/1.png", 719*2),
     new BackgroundObject("img_pollo_locco/img/5_background/layers/1_first_layer/1.png", 719*2),
+
     new BackgroundObject("img_pollo_locco/img/5_background/layers/air.png", 719*3),
     new BackgroundObject("img_pollo_locco/img/5_background/layers/3_third_layer/2.png", 719*3),
     new BackgroundObject("img_pollo_locco/img/5_background/layers/2_second_layer/2.png", 719*3),
     new BackgroundObject("img_pollo_locco/img/5_background/layers/1_first_layer/2.png", 719*3),
+
+    new BackgroundObject("img_pollo_locco/img/5_background/layers/air.png", 719*4),
+    new BackgroundObject("img_pollo_locco/img/5_background/layers/3_third_layer/1.png", 719*4),
+    new BackgroundObject("img_pollo_locco/img/5_background/layers/2_second_layer/1.png", 719*4),
+    new BackgroundObject("img_pollo_locco/img/5_background/layers/1_first_layer/1.png", 719*4),
+
+    new BackgroundObject("img_pollo_locco/img/5_background/layers/air.png", 719*5),
+    new BackgroundObject("img_pollo_locco/img/5_background/layers/3_third_layer/2.png", 719*5),
+    new BackgroundObject("img_pollo_locco/img/5_background/layers/2_second_layer/2.png", 719*5),
+    new BackgroundObject("img_pollo_locco/img/5_background/layers/1_first_layer/2.png", 719*5),
   ]
 );

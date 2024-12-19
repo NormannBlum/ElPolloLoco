@@ -7,6 +7,13 @@ class DrawableObject {
   height = 150;
   width = 100;
 
+  offset = {
+    x: 0,
+    y: 0,
+    width: 0,
+    height: 0,
+  };
+
   // loadImage(img/test.png);
   loadImage(path) {
     this.img = new Image(); // this.img = document.getElementById("image") <img id="image" src>
