@@ -9,9 +9,10 @@ class World {
   coinsStatusBar = new CoinsStatusBar();
   bottlesStatusBar = new BottlesStatusBar();
   endbossStatusBar = new EndbossStatusBar();
-  coins = 0;
   bottles = 0;
+  coins = 0;
   maxBottles = 5;
+  maxCoins = 8;
   throwableObjects = [];
   lastThrowTime = 0;
 
@@ -46,6 +47,11 @@ class World {
   }
 
   checkCollectibles() {
+    this.checkBottleCollectibles();
+    this.checkCoinCollectibles();
+  }
+
+  checkBottleCollectibles() {
     this.level.bottles.forEach((bottle, index) => {
       if (this.character.isColliding(bottle) && this.bottles < this.maxBottles) {
         console.log("Flasche eingesammelt");
@@ -55,7 +61,18 @@ class World {
       }
     });
   }
-  
+
+  checkCoinCollectibles() {
+    this.level.coins.forEach((coin, index) => {
+      if (this.character.isColliding(coin) && this.coins < this.maxCoins) {
+        console.log("Coin eingesammelt");
+        this.coins++;
+        this.coinsStatusBar.setPercentage((this.coins / this.maxCoins) * 100);
+        this.level.coins.splice(index, 1); // Coin entfernen
+      }
+    });
+  }
+
   checkThrowObjects() {
     if (this.isBottleThrowReady()) {
       this.throwBottle();
@@ -112,8 +129,8 @@ class World {
   drawDynamicObjects() {
     this.ctx.translate(this.camera_x, 0);
     this.addToMap(this.character);
-    // this.addObjectsToMap(this.level.clouds); - Kann später weg?
     this.addObjectsToMap(this.level.bottles);
+    this.addObjectsToMap(this.level.coins);
     this.addObjectsToMap(this.level.enemies);
     this.addObjectsToMap(this.throwableObjects);
     this.ctx.translate(-this.camera_x, 0);
