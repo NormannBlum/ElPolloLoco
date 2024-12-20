@@ -22,7 +22,7 @@ class ThrowableObject extends MovableObject {
     this.applyGravity();
 
     setInterval(() => {
-      this.x += 10 * this.direction; // Bewegt die Flasche in die Richtung des Charakters
+      this.x += 10 * this.direction;
     }, 25);
 
     this.animate();

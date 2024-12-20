@@ -60,5 +60,19 @@ const level1 = new Level (
     new BackgroundObject("img_pollo_locco/img/5_background/layers/3_third_layer/2.png", 719*5),
     new BackgroundObject("img_pollo_locco/img/5_background/layers/2_second_layer/2.png", 719*5),
     new BackgroundObject("img_pollo_locco/img/5_background/layers/1_first_layer/2.png", 719*5),
-  ]
+    ],
+    [
+    new Bottle(510, 370),
+    new Bottle(800, 370),
+    new Bottle(1120, 370),
+    new Bottle(1530, 370),
+    new Bottle(1860, 370),
+    new Bottle(2240, 370),
+    new Bottle(2400, 370),
+    new Bottle(2620, 370),
+    new Bottle(2870, 370),
+    new Bottle(3050, 370),
+    new Bottle(3200, 370),
+    new Bottle(3490, 370),
+    ]
 );

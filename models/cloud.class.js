@@ -4,7 +4,7 @@ class Cloud extends MovableObject {
 
   IMAGES = [
     "img_pollo_locco/img/5_background/layers/4_clouds/1.png",
-    "img_pollo_locco/img/5_background/layers/4_clouds/2.png", // Zweites Wolkenbild
+    "img_pollo_locco/img/5_background/layers/4_clouds/2.png", 
   ];
 
   constructor(x) {

@@ -11,8 +11,7 @@ class World {
   endbossStatusBar = new EndbossStatusBar();
   coins = 0;
   bottles = 0;
-  maxBottles = 10;
-  allBottles = [];
+  maxBottles = 5;
   throwableObjects = [];
   lastThrowTime = 0;
 
@@ -20,17 +19,9 @@ class World {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
-    this.generateBottles();
     this.draw();
     this.setWorld();
     this.run();
-  }
-
-  generateBottles() {
-  for (let i = 0; i < 20; i++) {
-    let bottle = new Bottle(200 + Math.random() * 4000, 370); // Flaschen über die Spielwelt verteilen
-    this.allBottles.push(bottle);
-    }
   }
 
   setWorld() {
@@ -42,7 +33,7 @@ class World {
       this.checkCollisions();
       this.checkCollectibles();
       this.checkThrowObjects();
-    }, 100); // von 200 auf 100 geändert
+    }, 100); // 200 ok mit bottles? sonst auf 100!
   }
 
   checkCollisions() {
@@ -55,16 +46,16 @@ class World {
   }
 
   checkCollectibles() {
-    this.allBottles.forEach((bottle, index) => {
+    this.level.bottles.forEach((bottle, index) => {
       if (this.character.isColliding(bottle) && this.bottles < this.maxBottles) {
         console.log("Flasche eingesammelt");
         this.bottles++;
         this.bottlesStatusBar.setPercentage((this.bottles / this.maxBottles) * 100);
-        this.allBottles.splice(index, 1); // Flasche entfernen
+        this.level.bottles.splice(index, 1); // Flasche entfernen
       }
     });
   }
-
+  
   checkThrowObjects() {
     if (this.isBottleThrowReady()) {
       this.throwBottle();
@@ -107,8 +98,7 @@ class World {
   drawBackground() {
     this.ctx.translate(this.camera_x, 0);
     this.addObjectsToMap(this.level.backgroundObjects);
-    this.addObjectsToMap(this.level.clouds); // Eigentlich dynamic aber hier wegen Überlappung
-    this.addObjectsToMap(this.allBottles);
+    this.addObjectsToMap(this.level.clouds); // Eigentlich dynamic aber hier gesetzt wegen Überlappung
     this.ctx.translate(-this.camera_x, 0);
   }
 
@@ -122,7 +112,8 @@ class World {
   drawDynamicObjects() {
     this.ctx.translate(this.camera_x, 0);
     this.addToMap(this.character);
-    // this.addObjectsToMap(this.level.clouds);
+    // this.addObjectsToMap(this.level.clouds); - Kann später weg?
+    this.addObjectsToMap(this.level.bottles);
     this.addObjectsToMap(this.level.enemies);
     this.addObjectsToMap(this.throwableObjects);
     this.ctx.translate(-this.camera_x, 0);
