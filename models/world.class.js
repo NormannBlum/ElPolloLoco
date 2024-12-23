@@ -12,7 +12,7 @@ class World {
   bottles = 0;
   coins = 0;
   maxBottles = 5;
-  maxCoins = 8;
+  maxCoins = 10;
   throwableObjects = [];
   lastThrowTime = 0;
 

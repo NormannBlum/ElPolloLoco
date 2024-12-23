@@ -25,27 +25,29 @@ class DrawableObject {
   }
 
   drawFrame(ctx) {
-    if (this instanceof Character || this instanceof Chicken) {
+    if (this instanceof Character) {
       ctx.beginPath();
-      ctx.lineWidth = "5";
-      ctx.strokeStyle = "blue";
+      // ctx.lineWidth = "5";
+      // ctx.strokeStyle = "blue";
       ctx.rect(this.x, this.y, this.width, this.height);
-      ctx.stroke();
+      // ctx.stroke();
     }
   }
 
   drawOffsetFrame(ctx) {
-    if (this instanceof Character || this instanceof Chicken) {
-        ctx.beginPath();
-        ctx.lineWidth = '3';
-        ctx.strokeStyle = 'red';
-        ctx.rect(this.x + this.offset.x, 
-            this.y + this.offset.y, 
-            this.width - this.offset.width, 
-            this.height - this.offset.height);
-        ctx.stroke();
+    if (this instanceof Character || this instanceof Chicken || this instanceof SmallChicken) {
+      ctx.beginPath();
+      ctx.lineWidth = "3";
+      ctx.strokeStyle = "red";
+      ctx.rect(
+        this.x + this.offset.x,
+        this.y + this.offset.y,
+        this.width - this.offset.width,
+        this.height - this.offset.height
+      );
+      ctx.stroke();
     }
-}
+  }
 
   loadImages(arr) {
     arr.forEach((path) => {
@@ -53,5 +55,11 @@ class DrawableObject {
       img.src = path;
       this.imagesCache[path] = img;
     });
+  }
+
+  playAnimation(images) {
+    let i = this.currentImage % images.length;
+    this.img = this.imagesCache[images[i]];
+    this.currentImage++;
   }
 }
