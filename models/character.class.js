@@ -3,6 +3,8 @@ class Character extends MovableObject {
   y = 180;
   speed = 10;
   energy = 200; // Leben erhöht von 100 auf 200
+  lastActionTime = Date.now();     // hier wird die Zeit des letzten Tastendrucks / der letzten Aktion gespeichert
+  idleTimeout = 5000;
 
   IMAGES_LONGIDLE = [
     "img_pollo_locco/img/2_character_pepe/1_idle/long_idle/I-11.png",
@@ -73,6 +75,7 @@ class Character extends MovableObject {
   constructor() {
     super().loadImage("img_pollo_locco/img/2_character_pepe/2_walk/W-21.png");
     this.loadImages(this.IMAGES_IDLE);
+    this.loadImages(this.IMAGES_LONGIDLE);
     this.loadImages(this.IMAGES_WALKING);
     this.loadImages(this.IMAGES_JUMPING);
     this.loadImages(this.IMAGES_DEAD);
@@ -102,12 +105,13 @@ class Character extends MovableObject {
       this.updateCamera();
     }, 1000 / 60);
   }
-  
+
   handleRightMovement() {
     if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
       this.moveRight();
       this.otherDirection = false;
       this.walking_sound.play();
+      this.lastActionTime = Date.now(); // <--- Zeit aktualisieren
     }
   }
   
@@ -116,14 +120,16 @@ class Character extends MovableObject {
       this.moveLeft();
       this.otherDirection = true;
       this.walking_sound.play();
+      this.lastActionTime = Date.now(); // <--- Zeit aktualisieren
     }
   }
   
   handleJump() {
     if (this.world.keyboard.SPACE && !this.isAboveGround()) {
       this.jump();
+      this.lastActionTime = Date.now(); // <--- Zeit aktualisieren
     }
-  }
+  }  
   
   updateCamera() {
     this.world.camera_x = -this.x + 100;
@@ -163,15 +169,27 @@ class Character extends MovableObject {
     }
   }
 
-  playIdleAnimation() {
-    // Idle-Animation abspielen, wenn keine andere Bedingung erfüllt ist
-    if (
+  isIdle() {
+    return (
       !this.isDead() &&
       !this.isHurt() &&
       !this.isAboveGround() &&
       !this.world.keyboard.RIGHT &&
       !this.world.keyboard.LEFT
-    ) {
+    );
+  }
+  
+  playIdleAnimation() {
+    if (this.isIdle()) {
+      this.chooseIdleAnimation();
+    }
+  }
+  
+  chooseIdleAnimation() {
+    let timeSinceLastAction = Date.now() - this.lastActionTime;
+    if (timeSinceLastAction >= this.idleTimeout) {
+      this.playAnimation(this.IMAGES_LONGIDLE);
+    } else {
       this.playAnimation(this.IMAGES_IDLE);
     }
   }
