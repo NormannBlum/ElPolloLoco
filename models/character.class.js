@@ -3,7 +3,7 @@ class Character extends MovableObject {
   y = 180;
   speed = 10;
   energy = 200; // Leben erhöht von 100 auf 200
-  lastActionTime = Date.now();     // hier wird die Zeit des letzten Tastendrucks / der letzten Aktion gespeichert
+  lastActionTime = Date.now(); // Hier wird die Zeit des letzten Tastendrucks gespeichert
   idleTimeout = 5000;
 
   IMAGES_LONGIDLE = [
@@ -111,7 +111,7 @@ class Character extends MovableObject {
       this.moveRight();
       this.otherDirection = false;
       this.walking_sound.play();
-      this.lastActionTime = Date.now(); // <--- Zeit aktualisieren
+      this.lastActionTime = Date.now(); // <- Zeit aktualisieren
     }
   }
   
@@ -120,14 +120,14 @@ class Character extends MovableObject {
       this.moveLeft();
       this.otherDirection = true;
       this.walking_sound.play();
-      this.lastActionTime = Date.now(); // <--- Zeit aktualisieren
+      this.lastActionTime = Date.now(); 
     }
   }
   
   handleJump() {
     if (this.world.keyboard.SPACE && !this.isAboveGround()) {
       this.jump();
-      this.lastActionTime = Date.now(); // <--- Zeit aktualisieren
+      this.lastActionTime = Date.now(); 
     }
   }  
   
