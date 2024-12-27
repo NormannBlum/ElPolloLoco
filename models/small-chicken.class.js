@@ -1,32 +1,59 @@
 class SmallChicken extends MovableObject {
-    height = 45; 
-    width = 55;  
-    y = 380; 
+  height = 45;
+  width = 55;
+  y = 380;
+
+  offset = {
+    x: 5,
+    y: 5,
+    width: 10,
+    height: 5,
+  };
   
-    IMAGES_WALKING = [
+
+  IMAGES_WALKING = [
       "img_pollo_locco/img/3_enemies_chicken/chicken_small/1_walk/1_w.png",
       "img_pollo_locco/img/3_enemies_chicken/chicken_small/1_walk/2_w.png",
       "img_pollo_locco/img/3_enemies_chicken/chicken_small/1_walk/3_w.png",
-    ];
-  
-    constructor() {
+  ];
+
+  IMAGES_DEAD = [
+      "img_pollo_locco/img/3_enemies_chicken/chicken_small/2_dead/dead.png",
+  ];
+
+  isDead = false; // Flag für den Todeszustand
+
+  constructor() {
       super().loadImage("img_pollo_locco/img/3_enemies_chicken/chicken_small/1_walk/1_w.png");
       this.loadImages(this.IMAGES_WALKING);
-  
-      this.x = 700 + Math.random() * 3800; // Zufällige X-Position
-      this.speed = 0.2 + Math.random() * 0.4; // Langsamer, aber zufällige Geschwindigkeit
-  
+      this.loadImages(this.IMAGES_DEAD);
+
+      this.x = 700 + Math.random() * 3800; // Zufällige Startposition
+      this.speed = 0.1 + Math.random() * 0.3; // Langsame Geschwindigkeit
+
       this.animate();
-    }
-  
-    animate() {
-      setInterval(() => {
-        this.moveLeft(); 
-      }, 1000 / 60);
-  
-      setInterval(() => {
-        this.playAnimation(this.IMAGES_WALKING); 
-      }, 200);
-    }
   }
-  
+
+  animate() {
+      // Bewegungs-Intervall
+      setInterval(() => {
+          if (!this.isDead) {
+              this.moveLeft();
+          }
+      }, 1000 / 60);
+
+      // Animations-Intervall
+      setInterval(() => {
+          if (!this.isDead) {
+              this.playAnimation(this.IMAGES_WALKING);
+          }
+      }, 200);
+  }
+
+  // Methode zum Töten der SmallChicken
+  kill() {
+      this.isDead = true; // Setze den Todeszustand
+      this.speed = 0; // Stoppe die Bewegung
+      this.playAnimation(this.IMAGES_DEAD); // Starte die Dead-Animation
+  }
+}

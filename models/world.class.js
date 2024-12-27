@@ -37,14 +37,72 @@ class World {
     }, 100); // 200 ok mit bottles? sonst auf 100!
   }
 
+  // enemy collision start -->
+
   checkCollisions() {
-    this.level.enemies.forEach((enemy) => {
-      if (this.character.isColliding(enemy)) {
-        this.character.hit();
-        this.statusBar.setPercentage(this.character.energy);
-      }
-    });
+      this.checkCharacterEnemyCollisions();
+      this.checkBottleEnemyCollisions();
   }
+
+  checkCharacterEnemyCollisions() {
+      this.level.enemies.forEach((enemy) => {
+          if (this.character.isColliding(enemy)) {
+              this.handleEnemyCollision(enemy);
+          }
+      });
+  }
+
+  checkBottleEnemyCollisions() {
+      this.throwableObjects.forEach((bottle, bottleIndex) => {
+          this.level.enemies.forEach((enemy) => {
+              if (bottle.isColliding(enemy)) {
+                  this.killEnemy(enemy); // Flasche trifft Feind
+                  this.throwableObjects.splice(bottleIndex, 1); // Entferne Flasche
+              }
+          });
+      });
+  }
+
+  // handleEnemyCollision(enemy) {
+  //     if (this.isJumpingOnEnemy(enemy)) {
+  //         this.killEnemy(enemy); // Feind stirbt sofort
+  //         this.character.speedY = 15; // Rückstoß nach oben
+  //     } else {
+  //         this.character.hit(); // Charakter wird getroffen
+  //         this.statusBar.setPercentage(this.character.energy);
+  //     }
+  // }
+
+  handleEnemyCollision(enemy) {
+    if (this.isJumpingOnEnemy(enemy)) {
+      this.killEnemy(enemy); // Feind stirbt
+    } else {
+      this.character.hit(); // Charakter wird getroffen
+      this.statusBar.setPercentage(this.character.energy);
+    }
+  }
+  
+
+  isJumpingOnEnemy(enemy) {
+      return (
+          this.character.speedY < 0 && // Charakter fällt nach unten
+          this.character.y + this.character.height - 10 < enemy.y + enemy.height / 2 // Charakter ist oberhalb des Feinds
+      );
+  }
+
+  killEnemy(enemy) {
+      if (!enemy.isDead) { // Stelle sicher, dass die Chicken noch lebt
+          enemy.kill(); // Töte die Chicken
+          setTimeout(() => {
+              const enemyIndex = this.level.enemies.indexOf(enemy);
+              if (enemyIndex > -1) {
+                  this.level.enemies.splice(enemyIndex, 1); // Entferne Feind nach 5 Sekunden
+              }
+          }, 5000); // Wartezeit für die Dead-Animation
+      }
+  }
+
+  // <----- enemy collision end
 
   checkCollectibles() {
     this.checkBottleCollectibles();
