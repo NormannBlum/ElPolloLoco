@@ -34,7 +34,7 @@ class World {
       this.checkCollisions();
       this.checkCollectibles();
       this.checkThrowObjects();
-    }, 100); // 200 ok mit bottles? sonst auf 100!
+    }, 10); // 200 ok mit bottles? sonst auf 100! test 50 für collision
   }
 
   // enemy collision start -->
@@ -63,26 +63,18 @@ class World {
       });
   }
 
-  // handleEnemyCollision(enemy) {
-  //     if (this.isJumpingOnEnemy(enemy)) {
-  //         this.killEnemy(enemy); // Feind stirbt sofort
-  //         this.character.speedY = 15; // Rückstoß nach oben
-  //     } else {
-  //         this.character.hit(); // Charakter wird getroffen
-  //         this.statusBar.setPercentage(this.character.energy);
-  //     }
-  // }
-
   handleEnemyCollision(enemy) {
+    if (enemy.isDead) return;
+  
     if (this.isJumpingOnEnemy(enemy)) {
       this.killEnemy(enemy); // Feind stirbt
+      // this.character.speedY = 15; Pepe fällt tiefer --> fixen?
     } else {
       this.character.hit(); // Charakter wird getroffen
       this.statusBar.setPercentage(this.character.energy);
     }
   }
   
-
   isJumpingOnEnemy(enemy) {
       return (
           this.character.speedY < 0 && // Charakter fällt nach unten
@@ -91,17 +83,18 @@ class World {
   }
 
   killEnemy(enemy) {
-      if (!enemy.isDead) { // Stelle sicher, dass die Chicken noch lebt
-          enemy.kill(); // Töte die Chicken
-          setTimeout(() => {
-              const enemyIndex = this.level.enemies.indexOf(enemy);
-              if (enemyIndex > -1) {
-                  this.level.enemies.splice(enemyIndex, 1); // Entferne Feind nach 5 Sekunden
-              }
-          }, 5000); // Wartezeit für die Dead-Animation
-      }
+    if (!enemy.isDead) { // Check dass Chicken noch lebt
+      enemy.isDead = true; // Markiere Feind als tot
+      enemy.kill(); // Starte die Dead-Animation
+      setTimeout(() => {
+        const enemyIndex = this.level.enemies.indexOf(enemy);
+        if (enemyIndex > -1) {
+          this.level.enemies.splice(enemyIndex, 1); // Entferne Feind nach 5 Sekunden
+        }
+      }, 10000); // Wartezeit für die Dead-Animation - Alternativ 5000?
+    }
   }
-
+  
   // <----- enemy collision end
 
   checkCollectibles() {
@@ -206,7 +199,7 @@ class World {
     }
 
     mo.draw(this.ctx);
-    mo.drawFrame(this.ctx);
+    // mo.drawFrame(this.ctx);
     mo.drawOffsetFrame(this.ctx)
 
     if (mo.otherDirection) {

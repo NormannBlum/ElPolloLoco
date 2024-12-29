@@ -32,14 +32,23 @@ class MovableObject extends DrawableObject {
         this.y + this.offset.y < mo.y + mo.offset.y + mo.height - mo.offset.height;
   }
 
+  // hit() {
+  //   this.energy -= 5;
+  //   if (this.energy < 0) {
+  //     this.energy = 0;
+  //   } else {
+  //     this.lastHit = new Date().getTime();
+  //   }
+  // }
+
   hit() {
-    this.energy -= 5;
-    if (this.energy < 0) {
-      this.energy = 0;
-    } else {
-      this.lastHit = new Date().getTime();
+    const now = new Date().getTime();
+    if (now - this.lastHit > 200) { // Cooldown von 200ms
+      this.energy -= 5; // Ziehe Energie ab
+      if (this.energy < 0) this.energy = 0; // Verhindere negativen Energiewert
+      this.lastHit = now; // Aktualisiere Zeitstempel des letzten Treffers
     }
-  }
+  }  
 
   isHurt() {
     let timepassed = new Date().getTime() - this.lastHit; // Difference in ms
