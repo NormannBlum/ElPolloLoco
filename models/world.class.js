@@ -20,8 +20,10 @@ class World {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
-    this.draw();
+
     this.setWorld();
+    this.assignCharacterToEnemies(); // <- Endboss wird hier aktualisiert
+    this.draw();
     this.run();
   }
 
@@ -29,15 +31,22 @@ class World {
     this.character.world = this;
   }
 
+  assignCharacterToEnemies() {
+    this.level.enemies.forEach((enemy) => {
+      if (enemy instanceof Endboss) {
+        enemy.character = this.character; // Endboss erhält Referenz auf den Charakter
+      }
+    });
+  }
+
   run() {
     setInterval(() => {
       this.checkCollisions();
       this.checkCollectibles();
       this.checkThrowObjects();
+      this.checkEndbossSpawn();
     }, 10); // 200 ok mit bottles? sonst auf 100! test 50 für collision
   }
-
-  // enemy collision start -->
 
   checkCollisions() {
       this.checkCharacterEnemyCollisions();
@@ -94,8 +103,6 @@ class World {
       }, 10000); // Wartezeit für die Dead-Animation - Alternativ 5000?
     }
   }
-  
-  // <----- enemy collision end
 
   checkCollectibles() {
     this.checkBottleCollectibles();
@@ -148,6 +155,14 @@ class World {
     this.bottles--;
     this.bottlesStatusBar.setPercentage((this.bottles / this.maxBottles) * 100);
   }
+
+  checkEndbossSpawn() {
+    const endboss = this.level.enemies.find((enemy) => enemy instanceof Endboss);
+    if (endboss && !endboss.hadFirstContact && this.character.x + 500 > endboss.x) {
+      endboss.hadFirstContact = true;
+      endboss.startWalking(); // Endboss beginnt zu laufen
+    }
+  }  
 
   draw() {
     this.clearCanvas();
