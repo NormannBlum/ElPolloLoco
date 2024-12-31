@@ -39,6 +39,14 @@ class World {
     });
   }
 
+  assignCharacterToEnemies() {
+    this.level.enemies.forEach((enemy) => {
+      if (enemy instanceof Endboss) {
+        enemy.character = this.character;
+      }
+    });
+  }
+
   run() {
     setInterval(() => {
       this.checkCollisions();
@@ -49,55 +57,70 @@ class World {
   }
 
   checkCollisions() {
-      this.checkCharacterEnemyCollisions();
-      this.checkBottleEnemyCollisions();
+    this.checkCharacterEnemyCollisions();
+    this.checkBottleEnemyCollisions();
   }
 
   checkCharacterEnemyCollisions() {
-      this.level.enemies.forEach((enemy) => {
-          if (this.character.isColliding(enemy)) {
-              this.handleEnemyCollision(enemy);
-          }
-      });
+    this.level.enemies.forEach((enemy) => {
+      if (this.character.isColliding(enemy)) {
+        this.handleEnemyCollision(enemy);
+      }
+    });
   }
 
   checkBottleEnemyCollisions() {
     this.throwableObjects.forEach((bottle, bottleIndex) => {
       this.level.enemies.forEach((enemy) => {
         if (bottle.isColliding(enemy)) {
-          if (enemy instanceof Endboss) {
-            enemy.hit(); // Reduziere Energie des Endbosses
-            this.updateEndbossStatusBar(enemy); // Aktualisiere Statusbar
-          } else {
-            this.killEnemy(enemy); // Normale Feinde sterben sofort
-          }
-          this.throwableObjects.splice(bottleIndex, 1); // Entferne Flasche
+          this.processBottleCollision(bottleIndex, enemy);
         }
       });
     });
-  }  
+  }
+
+  processBottleCollision(bottleIndex, enemy) {
+    if (enemy instanceof Endboss) {
+      enemy.hit(); // Reduziere Energie des Endbosses
+      this.updateEndbossStatusBar(enemy); // Aktualisiere Statusbar
+    } else {
+      this.killEnemy(enemy); // Normale Feinde sterben sofort
+    }
+    this.throwableObjects.splice(bottleIndex, 1); // Entferne Flasche
+  }
 
   handleEnemyCollision(enemy) {
-    if (enemy.isDead) return;
-  
+    if (enemy instanceof Endboss) {
+      this.handleEndbossCollision();
+    } else if (!enemy.isDead) {
+      this.handleNormalEnemyCollision(enemy);
+    }
+  }
+
+  handleEndbossCollision() {
+    this.character.hit(); // Charakter nimmt Schaden
+    this.statusBar.setPercentage(this.character.energy);
+  }
+
+  handleNormalEnemyCollision(enemy) {
     if (this.isJumpingOnEnemy(enemy)) {
       this.killEnemy(enemy); // Feind stirbt
-      // this.character.speedY = 15; Pepe fällt tiefer --> fixen?
     } else {
       this.character.hit(); // Charakter wird getroffen
       this.statusBar.setPercentage(this.character.energy);
     }
   }
-  
+
   isJumpingOnEnemy(enemy) {
-      return (
-          this.character.speedY < 0 && // Charakter fällt nach unten
-          this.character.y + this.character.height - 10 < enemy.y + enemy.height / 2 // Charakter ist oberhalb des Feinds
-      );
+    return (
+      this.character.speedY < 0 && // Charakter fällt nach unten
+      this.character.y + this.character.height - 10 < enemy.y + enemy.height / 2 // Charakter ist oberhalb des Feinds
+    );
   }
 
   killEnemy(enemy) {
-    if (!enemy.isDead) { // Check dass Chicken noch lebt
+    if (!enemy.isDead) {
+      // Check dass Chicken noch lebt
       enemy.isDead = true; // Markiere Feind als tot
       enemy.kill(); // Starte die Dead-Animation
       setTimeout(() => {
@@ -116,10 +139,14 @@ class World {
 
   checkBottleCollectibles() {
     this.level.bottles.forEach((bottle, index) => {
-      if (this.character.isColliding(bottle) && this.bottles < this.maxBottles) {
-        console.log("Flasche eingesammelt");
+      if (
+        this.character.isColliding(bottle) &&
+        this.bottles < this.maxBottles
+      ) {
         this.bottles++;
-        this.bottlesStatusBar.setPercentage((this.bottles / this.maxBottles) * 100);
+        this.bottlesStatusBar.setPercentage(
+          (this.bottles / this.maxBottles) * 100
+        );
         this.level.bottles.splice(index, 1); // Flasche entfernen
       }
     });
@@ -128,7 +155,6 @@ class World {
   checkCoinCollectibles() {
     this.level.coins.forEach((coin, index) => {
       if (this.character.isColliding(coin) && this.coins < this.maxCoins) {
-        console.log("Coin eingesammelt");
         this.coins++;
         this.coinsStatusBar.setPercentage((this.coins / this.maxCoins) * 100);
         this.level.coins.splice(index, 1); // Coin entfernen
@@ -145,13 +171,21 @@ class World {
 
   isBottleThrowReady() {
     const currentTime = new Date().getTime();
-    return this.keyboard.D && this.bottles > 0 && currentTime - this.lastThrowTime > 300;
+    return (
+      this.keyboard.D &&
+      this.bottles > 0 &&
+      currentTime - this.lastThrowTime > 300
+    );
   }
 
   throwBottle() {
     this.lastThrowTime = new Date().getTime();
     let direction = this.character.otherDirection ? -1 : 1; // Nach links oder rechts werfen
-    let bottle = new ThrowableObject(this.character.x + 50 * direction, this.character.y + 100, direction);
+    let bottle = new ThrowableObject(
+      this.character.x + 50 * direction,
+      this.character.y + 100,
+      direction
+    );
     bottle.speed = 10 * direction; // Geschwindigkeit in Richtung
     this.throwableObjects.push(bottle);
   }
@@ -162,17 +196,21 @@ class World {
   }
 
   checkEndbossSpawn() {
-    const endboss = this.level.enemies.find((enemy) => enemy instanceof Endboss);
-    if (endboss && !endboss.hadFirstContact && this.character.x + 500 > endboss.x) {
+    const endboss = this.level.enemies.find(
+      (enemy) => enemy instanceof Endboss
+    );
+    if (
+      endboss && !endboss.hadFirstContact && this.character.x + 500 > endboss.x
+    ) {
       endboss.hadFirstContact = true;
       endboss.startWalking(); // Endboss beginnt zu laufen
     }
-  }  
+  }
 
   updateEndbossStatusBar(endboss) {
     const percentage = (endboss.energy / 20) * 100; // Berechnung basierend auf maximaler Energie
     this.endbossStatusBar.setPercentage(percentage);
-  }  
+  }
 
   draw() {
     this.clearCanvas();
@@ -224,7 +262,7 @@ class World {
     }
 
     mo.draw(this.ctx);
-    mo.drawOffsetFrame(this.ctx)
+    // mo.drawOffsetFrame(this.ctx)
 
     if (mo.otherDirection) {
       this.flipImageBack(mo);

@@ -24,20 +24,20 @@ class DrawableObject {
     ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
   }
 
-  drawOffsetFrame(ctx) {
-    if (this instanceof Character || this instanceof Endboss) {
-      ctx.beginPath();
-      ctx.lineWidth = "3";
-      ctx.strokeStyle = "red";
-      ctx.rect(
-        this.x + this.offset.x,
-        this.y + this.offset.y,
-        this.width - this.offset.width,
-        this.height - this.offset.height
-      );
-      ctx.stroke();
-    }
-  }
+  // drawOffsetFrame(ctx) {
+  //   if (this instanceof Character || this instanceof Endboss) {
+  //     ctx.beginPath();
+  //     ctx.lineWidth = "3";
+  //     ctx.strokeStyle = "red";
+  //     ctx.rect(
+  //       this.x + this.offset.x,
+  //       this.y + this.offset.y,
+  //       this.width - this.offset.width,
+  //       this.height - this.offset.height
+  //     );
+  //     ctx.stroke();
+  //   }
+  // }
 
   loadImages(arr) {
     arr.forEach((path) => {

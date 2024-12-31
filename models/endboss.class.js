@@ -49,7 +49,7 @@ class Endboss extends MovableObject {
   hadFirstContact = false;
   attackCooldown = false;
   isAttacking = false;
-  character; // Referenz auf den Charakter
+  character;
 
   constructor(character) {
     super().loadImage(this.IMAGES_ALERT[0]);
@@ -59,7 +59,7 @@ class Endboss extends MovableObject {
     this.loadImages(this.IMAGES_HURT);
     this.loadImages(this.IMAGES_DEAD);
     this.x = 3900;
-    this.character = character; // Referenz auf den Charakter speichern
+    this.character = character;
     this.animate();
     this.initAnimation();
   }
