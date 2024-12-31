@@ -62,15 +62,20 @@ class World {
   }
 
   checkBottleEnemyCollisions() {
-      this.throwableObjects.forEach((bottle, bottleIndex) => {
-          this.level.enemies.forEach((enemy) => {
-              if (bottle.isColliding(enemy)) {
-                  this.killEnemy(enemy); // Flasche trifft Feind
-                  this.throwableObjects.splice(bottleIndex, 1); // Entferne Flasche
-              }
-          });
+    this.throwableObjects.forEach((bottle, bottleIndex) => {
+      this.level.enemies.forEach((enemy) => {
+        if (bottle.isColliding(enemy)) {
+          if (enemy instanceof Endboss) {
+            enemy.hit(); // Reduziere Energie des Endbosses
+            this.updateEndbossStatusBar(enemy); // Aktualisiere Statusbar
+          } else {
+            this.killEnemy(enemy); // Normale Feinde sterben sofort
+          }
+          this.throwableObjects.splice(bottleIndex, 1); // Entferne Flasche
+        }
       });
-  }
+    });
+  }  
 
   handleEnemyCollision(enemy) {
     if (enemy.isDead) return;
@@ -164,6 +169,11 @@ class World {
     }
   }  
 
+  updateEndbossStatusBar(endboss) {
+    const percentage = (endboss.energy / 20) * 100; // Berechnung basierend auf maximaler Energie
+    this.endbossStatusBar.setPercentage(percentage);
+  }  
+
   draw() {
     this.clearCanvas();
     this.drawBackground();
@@ -214,7 +224,6 @@ class World {
     }
 
     mo.draw(this.ctx);
-    // mo.drawFrame(this.ctx);
     mo.drawOffsetFrame(this.ctx)
 
     if (mo.otherDirection) {

@@ -32,15 +32,6 @@ class MovableObject extends DrawableObject {
         this.y + this.offset.y < mo.y + mo.offset.y + mo.height - mo.offset.height;
   }
 
-  // hit() {
-  //   this.energy -= 5;
-  //   if (this.energy < 0) {
-  //     this.energy = 0;
-  //   } else {
-  //     this.lastHit = new Date().getTime();
-  //   }
-  // }
-
   hit() {
     const now = new Date().getTime();
     if (now - this.lastHit > 200) { // Cooldown von 200ms
