@@ -61,3 +61,12 @@ window.addEventListener("keyup", (event) => {
     keyboard.D = false;
   }
 });
+
+function restartGame() {
+  location.reload(); // Seite neu laden
+}
+
+function quitGame() {
+  alert("Thank you for playing!"); // Zeige eine Nachricht oder beende das Spiel
+}
+

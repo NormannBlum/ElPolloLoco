@@ -24,6 +24,68 @@ h1 {
     color: rgb(26, 16, 3);
     font-size: 64px;
     letter-spacing: 4px;
-    text-shadow: 4px 4px 8px rgba(0, 0, 0,0.5);
+    text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
 
+}
+
+#game-container {
+    position: relative;
+    width: 720px;
+    height: 480px;
+    top: -480px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+#end-screen {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.hidden {
+    display: none;
+}
+
+#end-image {
+    max-width: 120%;
+    height: auto;
+    margin-bottom: 120px;
+}
+
+#button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+    margin-top: -180px;
+}
+
+#button-container button {
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    border: 2px solid #8B4513;
+    border-radius: 10px;
+    background-color: #FFD700;
+    color: black;
+    font-family: 'Courier New', Courier, monospace;
+    text-transform: uppercase;
+    box-shadow: 2px 2px 0 #8B4513;
+    transition: all 0.2s ease-in-out;
+}
+
+#button-container button:hover {
+    background-color: #FFA500;
+    transform: translateY(-2px);
+    box-shadow: 3px 3px 0 #8B4513;
+}
+
+#button-container button:active {
+    transform: translateY(1px);
+    box-shadow: 1px 1px 0 #8B4513;
 }

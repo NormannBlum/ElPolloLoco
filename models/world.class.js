@@ -15,11 +15,13 @@ class World {
   maxCoins = 10;
   throwableObjects = [];
   lastThrowTime = 0;
+  intervals = [];
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
+    // this.intervals = [];
 
     this.setWorld();
     this.assignCharacterToEnemies(); // <- Endboss wird hier aktualisiert
@@ -29,6 +31,17 @@ class World {
 
   setWorld() {
     this.character.world = this;
+  }
+
+  addInterval(fn, time) {
+    const id = setInterval(fn, time);
+    this.intervals.push(id); // Speichert die Intervall-ID
+    return id;
+  }
+
+  clearAllIntervals() {
+    this.intervals.forEach(clearInterval);
+    console.log("All intervals cleared!");
   }
 
   assignCharacterToEnemies() {
@@ -48,12 +61,60 @@ class World {
   }
 
   run() {
-    setInterval(() => {
+    this.addInterval(() => {
       this.checkCollisions();
       this.checkCollectibles();
       this.checkThrowObjects();
       this.checkEndbossSpawn();
     }, 10); // 200 ok mit bottles? sonst auf 100! test 50 für collision
+
+    this.addInterval(() => {
+      this.checkGameOver();
+    }, 100); // Überprüfung auf Spielende alle 100ms
+  }
+
+  checkGameOver() {
+    if (this.character.isDead()) {
+      this.stopGame(false); // Zeige den Game Over Screen
+    } else if (this.isEndbossDead()) {
+      this.stopGame(true); // Zeige den Win Screen
+    }
+  }
+
+  isEndbossDead() {
+    return this.level.enemies.some(
+      (enemy) => enemy instanceof Endboss && enemy.isDead()
+    );
+  }
+
+  stopGame(win = false) {
+    this.clearAllIntervals(); // Stoppe alle Bewegungen
+    this.showEndScreen(win); // Zeige den Endscreen
+  }
+
+  showEndScreen(win) {
+    const endScreen = document.getElementById("end-screen");
+    const endImage = document.getElementById("end-image");
+
+    // Wähle das passende Bild basierend auf dem Status
+    if (win) {
+      endImage.src =
+        "img_pollo_locco/img/9_intro_outro_screens/game_over/win_screen.png";
+    } else {
+      endImage.src =
+        "img_pollo_locco/img/9_intro_outro_screens/game_over/game over.png";
+    }
+
+    // Zeige den Endscreen an, indem die 'hidden'-Klasse entfernt wird
+    endScreen.classList.remove("hidden");
+  }
+
+  restartGame() {
+    location.reload(); // Neustart des Spiels
+  }
+
+  goToMainMenu() {
+    alert("Returning to Main Menu!"); // Hauptmenü-Logik implementieren
   }
 
   checkCollisions() {
@@ -200,7 +261,9 @@ class World {
       (enemy) => enemy instanceof Endboss
     );
     if (
-      endboss && !endboss.hadFirstContact && this.character.x + 500 > endboss.x
+      endboss &&
+      !endboss.hadFirstContact &&
+      this.character.x + 500 > endboss.x
     ) {
       endboss.hadFirstContact = true;
       endboss.startWalking(); // Endboss beginnt zu laufen
