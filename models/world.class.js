@@ -89,24 +89,19 @@ class World {
 
   stopGame(win = false) {
     this.clearAllIntervals(); // Stoppe alle Bewegungen
-    this.showEndScreen(win); // Zeige den Endscreen
+    if (win) {
+        this.showYouWinScreen(); // Zeige den "You Win"-Screen
+    } else {
+        this.showGameOverScreen(); // Zeige den "Game Over"-Screen
+    }
   }
 
-  showEndScreen(win) {
-    const endScreen = document.getElementById("end-screen");
-    const endImage = document.getElementById("end-image");
+  showGameOverScreen() {
+    document.getElementById("game-over-screen").classList.remove("hidden");
+  }
 
-    // Wähle das passende Bild basierend auf dem Status
-    if (win) {
-      endImage.src =
-        "img_pollo_locco/img/9_intro_outro_screens/game_over/win_screen.png";
-    } else {
-      endImage.src =
-        "img_pollo_locco/img/9_intro_outro_screens/game_over/game over.png";
-    }
-
-    // Zeige den Endscreen an, indem die 'hidden'-Klasse entfernt wird
-    endScreen.classList.remove("hidden");
+  showYouWinScreen() {
+    document.getElementById("you-win-screen").classList.remove("hidden");
   }
 
   restartGame() {

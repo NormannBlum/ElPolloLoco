@@ -37,7 +37,7 @@ h1 {
     overflow: hidden;
 }
 
-#end-screen {
+.end-screen {
     position: absolute;
     width: 100%;
     display: flex;
@@ -51,41 +51,48 @@ h1 {
     display: none;
 }
 
-#end-image {
+#game-over-screen img {
     max-width: 120%;
-    height: auto;
-    margin-bottom: 120px;
+    max-height: 115%;
+    object-fit: contain;
+    margin-bottom: 20px;
 }
 
-#button-container {
+#you-win-screen img {
+    position: relative;
+    top: 140px;
+    max-width: 70%;
+    object-fit: contain;
+    margin-bottom: 260px;
+}
+
+.button-container {
     display: flex;
-    flex-direction: row;
     justify-content: center;
     gap: 20px;
-    margin-top: -180px;
+    margin-top: -90px;
 }
 
-#button-container button {
+.button-container button {
     padding: 10px 20px;
     font-size: 18px;
     cursor: pointer;
     border: 2px solid #8B4513;
     border-radius: 10px;
     background-color: #FFD700;
-    color: black;
     font-family: 'Courier New', Courier, monospace;
     text-transform: uppercase;
     box-shadow: 2px 2px 0 #8B4513;
     transition: all 0.2s ease-in-out;
 }
 
-#button-container button:hover {
+.button-container button:hover {
     background-color: #FFA500;
     transform: translateY(-2px);
     box-shadow: 3px 3px 0 #8B4513;
 }
 
-#button-container button:active {
+.button-container button:active {
     transform: translateY(1px);
     box-shadow: 1px 1px 0 #8B4513;
 }

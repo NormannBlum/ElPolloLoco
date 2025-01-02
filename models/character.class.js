@@ -2,7 +2,7 @@ class Character extends MovableObject {
   height = 250;
   y = 180;
   speed = 10;
-  energy = 200; // Leben erhöht von 100 auf 200
+  energy = 100; // Leben erhöht von 100 auf 200
   lastActionTime = Date.now(); // Hier wird die Zeit des letzten Tastendrucks gespeichert
   idleTimeout = 5000;
 

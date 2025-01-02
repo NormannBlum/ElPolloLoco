@@ -35,17 +35,25 @@
     <h1>El Pollo Loco</h1>
 
     <canvas id="canvas" width="720" height="480"> </canvas>
-
-    <div id="game-container">
-      <div id="end-screen" class="hidden">
-          <img id="end-image">
-          <div id="button-container">
-              <button onclick="restartGame()">New Game</button>
-              <button onclick="goToMainMenu()">Main Menu</button>
-          </div>
-      </div>
-  </div>
   
+  <div id="game-container">
+    <div id="game-over-screen" class="end-screen hidden">
+        <img src="img_pollo_locco/img/9_intro_outro_screens/game_over/game over.png" alt="Game Over">
+        <div class="button-container">
+            <button onclick="restartGame()">New Game</button>
+            <button onclick="goToMainMenu()">Main Menu</button>
+        </div>
+    </div>
+
+    <div id="you-win-screen" class="end-screen hidden">
+        <img src="img_pollo_locco/img/9_intro_outro_screens/win/win_1.png" alt="You Win">
+        <div class="button-container">
+            <button onclick="restartGame()">New Game</button>
+            <button onclick="goToMainMenu()">Main Menu</button>
+        </div>
+    </div>
+</div>
+
   
   </body>
 </html>
