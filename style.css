@@ -16,10 +16,6 @@ body {
     font-family: 'rye', Arial, Helvetica, sans-serif;
 }
 
-canvas {
-    background-color: black;
-}
-
 h1 {
     color: rgb(26, 16, 3);
     font-size: 64px;
@@ -27,25 +23,22 @@ h1 {
     text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
 }
 
-/* Der übergeordnete Container zentriert alles */
 #center-container {
     display: flex;
-    justify-content: center; /* Horizontal zentrieren */
-    align-items: center; /* Vertikal zentrieren */
-    width: 100vw; /* Füllt die gesamte Breite */
-    height: 100vh; /* Füllt die gesamte Höhe */
-    position: relative; /* Grundlage für absolute Positionierung von Kind-Elementen */
+    justify-content: center; 
+    /* align-items: center;  */
+    width: 100vw; 
+    height: 100vh; 
+    position: relative; 
 }
 
-/* Canvas */
 canvas {
-    position: absolute; /* Damit der Canvas zentriert bleibt */
-    width: 720px; /* Feste Breite */
-    height: 480px; /* Feste Höhe */
+    position: absolute; 
+    width: 720px; 
+    height: 480px; 
     background-color: black;
-    z-index: 1; /* Hinter anderen Bildschirmen */
+    z-index: 1; 
 }
-
 
 #start-screen {
     position: absolute;
@@ -77,10 +70,6 @@ canvas {
     z-index: 2;
 }
 
-.hidden {
-    display: none;
-}
-
 #game-over-screen img {
     max-width: 100%;
     max-height: 100%;
@@ -98,33 +87,6 @@ canvas {
     margin-bottom: 180px;
 }
 
-.button-container {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-top: -90px;
-}
-
-.button-container button {
-    padding: 10px 20px;
-    font-size: 18px;
-    cursor: pointer;
-    border: 2px solid #8B4513;
-    border-radius: 10px;
-    background-color: #FFD700;
-    font-family: 'Courier New', Courier, monospace;
-    text-transform: uppercase;
-    box-shadow: 2px 2px 0 #8B4513;
-    transition: all 0.2s ease-in-out;
-}
-
-.button-container button:hover {
-    background-color: #FFA500;
-    transform: translateY(-2px);
-    box-shadow: 3px 3px 0 #8B4513;
-}
-
-.button-container button:active {
-    transform: translateY(1px);
-    box-shadow: 1px 1px 0 #8B4513;
+.hidden {
+    display: none;
 }

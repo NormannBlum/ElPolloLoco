@@ -1,5 +1,4 @@
 class World {
-  // Eigenschaften
   character = new Character();
   level = level1;
   canvas;
@@ -44,7 +43,7 @@ class World {
 
   run() {
     this.addInterval(() => {
-      if (this.gameOver) return; // Beende alle Logik, wenn das Spiel vorbei ist
+      if (this.gameOver) return;
       this.checkCollisions();
       this.checkCollectibles();
       this.checkThrowObjects();
@@ -94,20 +93,20 @@ class World {
   }
 
   handleCharacterDeath() {
-    this.gameOver = true; // Spiel stoppen
-    this.character.playAnimation(this.character.IMAGES_DEAD); // Spiele Dead-Animation
-    this.stopGame(false); // Zeige den Game Over Screen
+    this.gameOver = true; 
+    this.character.playAnimation(this.character.IMAGES_DEAD); 
+    this.stopGame(false); 
   }
 
   handleEndbossDeath() {
-    this.gameOver = true; // Spiel stoppen
+    this.gameOver = true; 
     const endboss = this.level.enemies.find(
       (enemy) => enemy instanceof Endboss && enemy.isDead()
     );
     if (endboss) {
-      endboss.playAnimation(endboss.IMAGES_DEAD); // Spiele Dead-Animation
+      endboss.playAnimation(endboss.IMAGES_DEAD); 
     }
-    this.stopGame(true); // Zeige den You Win Screen
+    this.stopGame(true); 
   }
 
   isEndbossDead() {
@@ -280,7 +279,6 @@ class World {
   // Rendering
   draw() {
     if (!this.gameOver) {
-      // Zeichnen nur, wenn das Spiel nicht vorbei ist
       this.clearCanvas();
       this.drawBackground();
       this.drawFixedObjects();

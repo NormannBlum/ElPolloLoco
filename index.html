@@ -10,6 +10,7 @@
       type="image/x-icon"
     />
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="styles/assets.css" />
     <script src="models/drawable-object.class.js"></script>
     <script src="models/movable-object.class.js"></script>
     <script src="models/bottle.class.js"></script>
@@ -35,7 +36,7 @@
     <h1>El Pollo Loco</h1>
 
     <div id="center-container">
-      <!-- Start Screen -->
+    
       <div id="start-screen">
         <img
           id="start-image"
@@ -43,18 +44,17 @@
           class="startscreen-image"
         />
         <div class="button-container">
-          <button id="game-info">Spielinfo</button>
+          <button id="start-button" onclick="startGame()">Start</button>
           <button id="controls">Steuerung</button>
           <button id="impressum">Impressum</button>
-          <button id="start-button">Start</button>
-          <button id="mute-fullscreen">Stumm/Vollbild</button>
+          <button id="mute">Mute</button>
+          <!-- <button id="fullscreen">Vollbild</button>
+          <button id="game-info">Spielinfo</button> -->
         </div>
       </div>
 
-      <!-- Canvas -->
       <canvas id="canvas" width="720" height="480"></canvas>
 
-      <!-- Game Over Screen -->
       <div id="game-over-screen" class="end-screen hidden">
         <img
           src="img_pollo_locco/img/9_intro_outro_screens/game_over/game over.png"
@@ -66,7 +66,6 @@
         </div>
       </div>
 
-      <!-- You Win Screen -->
       <div id="you-win-screen" class="end-screen hidden">
         <img
           src="img_pollo_locco/img/9_intro_outro_screens/win/win_1.png"

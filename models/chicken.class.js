@@ -49,7 +49,6 @@ class Chicken extends MovableObject {
       }, 200);
   }
 
-  // Methode zum Töten der Chicken
   kill() {
       this.isDead = true; // Setze den Todeszustand
       this.speed = 0; // Stoppe die Bewegung

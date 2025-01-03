@@ -13,17 +13,17 @@ class Coin extends DrawableObject {
 
   constructor(x, y) {
     super().loadImage("img_pollo_locco/img/8_coin/coin_1.png");
-    this.loadImages(this.IMAGES_COIN); // Lade alle Bilder der Animation
+    this.loadImages(this.IMAGES_COIN); 
     this.x = x;
     this.y = y;
     this.width = 100;
     this.height = 100;
-    this.startAnimation(); // Starte die Animation
+    this.startAnimation();
   }
 
   startAnimation() {
     setInterval(() => {
-      this.playAnimation(this.IMAGES_COIN); // Wechsle zwischen den Bildern
-    }, 200); // Wechsle alle 200ms
+      this.playAnimation(this.IMAGES_COIN);
+    }, 200);
   }
 }
