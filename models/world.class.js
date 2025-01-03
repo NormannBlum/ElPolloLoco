@@ -1,4 +1,5 @@
 class World {
+  // Eigenschaften
   character = new Character();
   level = level1;
   canvas;
@@ -16,40 +17,21 @@ class World {
   throwableObjects = [];
   lastThrowTime = 0;
   intervals = [];
+  gameOver = false;
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
-    // this.intervals = [];
 
     this.setWorld();
-    this.assignCharacterToEnemies(); // <- Endboss wird hier aktualisiert
+    this.assignCharacterToEnemies();
     this.draw();
     this.run();
   }
 
   setWorld() {
     this.character.world = this;
-  }
-
-  addInterval(fn, time) {
-    const id = setInterval(fn, time);
-    this.intervals.push(id); // Speichert die Intervall-ID
-    return id;
-  }
-
-  clearAllIntervals() {
-    this.intervals.forEach(clearInterval);
-    console.log("All intervals cleared!");
-  }
-
-  assignCharacterToEnemies() {
-    this.level.enemies.forEach((enemy) => {
-      if (enemy instanceof Endboss) {
-        enemy.character = this.character; // Endboss erhält Referenz auf den Charakter
-      }
-    });
   }
 
   assignCharacterToEnemies() {
@@ -62,37 +44,36 @@ class World {
 
   run() {
     this.addInterval(() => {
+      if (this.gameOver) return; // Beende alle Logik, wenn das Spiel vorbei ist
       this.checkCollisions();
       this.checkCollectibles();
       this.checkThrowObjects();
       this.checkEndbossSpawn();
-    }, 10); // 200 ok mit bottles? sonst auf 100! test 50 für collision
+    }, 10);
 
     this.addInterval(() => {
+      if (this.gameOver) return;
       this.checkGameOver();
-    }, 100); // Überprüfung auf Spielende alle 100ms
+    }, 100);
   }
 
-  checkGameOver() {
-    if (this.character.isDead()) {
-      this.stopGame(false); // Zeige den Game Over Screen
-    } else if (this.isEndbossDead()) {
-      this.stopGame(true); // Zeige den Win Screen
-    }
+  addInterval(fn, time) {
+    const id = setInterval(fn, time);
+    this.intervals.push(id);
+    return id;
   }
 
-  isEndbossDead() {
-    return this.level.enemies.some(
-      (enemy) => enemy instanceof Endboss && enemy.isDead()
-    );
+  clearAllIntervals() {
+    this.intervals.forEach(clearInterval);
   }
 
   stopGame(win = false) {
-    this.clearAllIntervals(); // Stoppe alle Bewegungen
+    this.clearAllIntervals();
+    this.gameOver = true;
     if (win) {
-        this.showYouWinScreen(); // Zeige den "You Win"-Screen
+      this.showYouWinScreen();
     } else {
-        this.showGameOverScreen(); // Zeige den "Game Over"-Screen
+      this.showGameOverScreen();
     }
   }
 
@@ -104,14 +85,38 @@ class World {
     document.getElementById("you-win-screen").classList.remove("hidden");
   }
 
-  restartGame() {
-    location.reload(); // Neustart des Spiels
+  checkGameOver() {
+    if (this.character.isDead()) {
+      this.handleCharacterDeath();
+    } else if (this.isEndbossDead()) {
+      this.handleEndbossDeath();
+    }
   }
 
-  goToMainMenu() {
-    alert("Returning to Main Menu!"); // Hauptmenü-Logik implementieren
+  handleCharacterDeath() {
+    this.gameOver = true; // Spiel stoppen
+    this.character.playAnimation(this.character.IMAGES_DEAD); // Spiele Dead-Animation
+    this.stopGame(false); // Zeige den Game Over Screen
   }
 
+  handleEndbossDeath() {
+    this.gameOver = true; // Spiel stoppen
+    const endboss = this.level.enemies.find(
+      (enemy) => enemy instanceof Endboss && enemy.isDead()
+    );
+    if (endboss) {
+      endboss.playAnimation(endboss.IMAGES_DEAD); // Spiele Dead-Animation
+    }
+    this.stopGame(true); // Zeige den You Win Screen
+  }
+
+  isEndbossDead() {
+    return this.level.enemies.some(
+      (enemy) => enemy instanceof Endboss && enemy.isDead()
+    );
+  }
+
+  // Kollisionsprüfung
   checkCollisions() {
     this.checkCharacterEnemyCollisions();
     this.checkBottleEnemyCollisions();
@@ -137,12 +142,12 @@ class World {
 
   processBottleCollision(bottleIndex, enemy) {
     if (enemy instanceof Endboss) {
-      enemy.hit(); // Reduziere Energie des Endbosses
-      this.updateEndbossStatusBar(enemy); // Aktualisiere Statusbar
+      enemy.hit();
+      this.updateEndbossStatusBar(enemy);
     } else {
-      this.killEnemy(enemy); // Normale Feinde sterben sofort
+      this.killEnemy(enemy);
     }
-    this.throwableObjects.splice(bottleIndex, 1); // Entferne Flasche
+    this.throwableObjects.splice(bottleIndex, 1);
   }
 
   handleEnemyCollision(enemy) {
@@ -154,40 +159,40 @@ class World {
   }
 
   handleEndbossCollision() {
-    this.character.hit(); // Charakter nimmt Schaden
+    this.character.hit();
     this.statusBar.setPercentage(this.character.energy);
   }
 
   handleNormalEnemyCollision(enemy) {
     if (this.isJumpingOnEnemy(enemy)) {
-      this.killEnemy(enemy); // Feind stirbt
+      this.killEnemy(enemy);
     } else {
-      this.character.hit(); // Charakter wird getroffen
+      this.character.hit();
       this.statusBar.setPercentage(this.character.energy);
     }
   }
 
   isJumpingOnEnemy(enemy) {
     return (
-      this.character.speedY < 0 && // Charakter fällt nach unten
-      this.character.y + this.character.height - 10 < enemy.y + enemy.height / 2 // Charakter ist oberhalb des Feinds
+      this.character.speedY < 0 &&
+      this.character.y + this.character.height - 10 < enemy.y + enemy.height / 2
     );
   }
 
   killEnemy(enemy) {
     if (!enemy.isDead) {
-      // Check dass Chicken noch lebt
-      enemy.isDead = true; // Markiere Feind als tot
-      enemy.kill(); // Starte die Dead-Animation
+      enemy.isDead = true;
+      enemy.kill();
       setTimeout(() => {
         const enemyIndex = this.level.enemies.indexOf(enemy);
         if (enemyIndex > -1) {
-          this.level.enemies.splice(enemyIndex, 1); // Entferne Feind nach 5 Sekunden
+          this.level.enemies.splice(enemyIndex, 1);
         }
-      }, 10000); // Wartezeit für die Dead-Animation - Alternativ 5000?
+      }, 10000);
     }
   }
 
+  // Sammelobjekte
   checkCollectibles() {
     this.checkBottleCollectibles();
     this.checkCoinCollectibles();
@@ -203,7 +208,7 @@ class World {
         this.bottlesStatusBar.setPercentage(
           (this.bottles / this.maxBottles) * 100
         );
-        this.level.bottles.splice(index, 1); // Flasche entfernen
+        this.level.bottles.splice(index, 1);
       }
     });
   }
@@ -213,11 +218,12 @@ class World {
       if (this.character.isColliding(coin) && this.coins < this.maxCoins) {
         this.coins++;
         this.coinsStatusBar.setPercentage((this.coins / this.maxCoins) * 100);
-        this.level.coins.splice(index, 1); // Coin entfernen
+        this.level.coins.splice(index, 1);
       }
     });
   }
 
+  // Flaschen-Logik
   checkThrowObjects() {
     if (this.isBottleThrowReady()) {
       this.throwBottle();
@@ -236,13 +242,13 @@ class World {
 
   throwBottle() {
     this.lastThrowTime = new Date().getTime();
-    let direction = this.character.otherDirection ? -1 : 1; // Nach links oder rechts werfen
+    let direction = this.character.otherDirection ? -1 : 1;
     let bottle = new ThrowableObject(
       this.character.x + 50 * direction,
       this.character.y + 100,
       direction
     );
-    bottle.speed = 10 * direction; // Geschwindigkeit in Richtung
+    bottle.speed = 10 * direction;
     this.throwableObjects.push(bottle);
   }
 
@@ -251,6 +257,7 @@ class World {
     this.bottlesStatusBar.setPercentage((this.bottles / this.maxBottles) * 100);
   }
 
+  // Endboss-Logik
   checkEndbossSpawn() {
     const endboss = this.level.enemies.find(
       (enemy) => enemy instanceof Endboss
@@ -261,20 +268,24 @@ class World {
       this.character.x + 500 > endboss.x
     ) {
       endboss.hadFirstContact = true;
-      endboss.startWalking(); // Endboss beginnt zu laufen
+      endboss.startWalking();
     }
   }
 
   updateEndbossStatusBar(endboss) {
-    const percentage = (endboss.energy / 20) * 100; // Berechnung basierend auf maximaler Energie
+    const percentage = (endboss.energy / 20) * 100;
     this.endbossStatusBar.setPercentage(percentage);
   }
 
+  // Rendering
   draw() {
-    this.clearCanvas();
-    this.drawBackground();
-    this.drawFixedObjects();
-    this.drawDynamicObjects();
+    if (!this.gameOver) {
+      // Zeichnen nur, wenn das Spiel nicht vorbei ist
+      this.clearCanvas();
+      this.drawBackground();
+      this.drawFixedObjects();
+      this.drawDynamicObjects();
+    }
     requestAnimationFrame(() => {
       this.draw();
     });
@@ -287,7 +298,7 @@ class World {
   drawBackground() {
     this.ctx.translate(this.camera_x, 0);
     this.addObjectsToMap(this.level.backgroundObjects);
-    this.addObjectsToMap(this.level.clouds); // Eigentlich dynamic aber hier gesetzt wegen Überlappung
+    this.addObjectsToMap(this.level.clouds);
     this.ctx.translate(-this.camera_x, 0);
   }
 
@@ -320,7 +331,6 @@ class World {
     }
 
     mo.draw(this.ctx);
-    // mo.drawOffsetFrame(this.ctx)
 
     if (mo.otherDirection) {
       this.flipImageBack(mo);

@@ -1,12 +1,42 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let isMuted = false;
 
 function init() {
   canvas = document.getElementById("canvas");
   world = new World(canvas, keyboard);
 
   console.log("My Character is", world.character);
+}
+
+// Logik für den Startbildschirm
+const startScreen = document.getElementById("start-screen");
+const startButton = document.getElementById("start-button");
+const muteButton = document.getElementById("mute-fullscreen");
+
+// startButton.addEventListener("click", () => {
+//   startScreen.style.display = "none";
+//   startGame();
+// });
+
+// muteButton.addEventListener("click", () => {
+//   isMuted = !isMuted;
+//   muteButton.innerText = isMuted ? "Lautstärke an" : "Stumm/Vollbild";
+//   toggleMute();
+// });
+
+// document.getElementById('start-button').addEventListener('click', () => {
+//   document.getElementById('start-screen').style.display = 'none';
+// });
+
+function startGame() {
+  world = new World(canvas, keyboard);
+  console.log("Spiel gestartet!");
+}
+
+function toggleMute() {
+  console.log(isMuted ? "Stumm geschaltet" : "Lautstärke an");
 }
 
 window.addEventListener("keydown", (event) => {
@@ -69,4 +99,3 @@ function restartGame() {
 function quitGame() {
   alert("Thank you for playing!"); // Zeige eine Nachricht oder beende das Spiel
 }
-

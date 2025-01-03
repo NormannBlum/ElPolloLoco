@@ -25,26 +25,56 @@ h1 {
     font-size: 64px;
     letter-spacing: 4px;
     text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
-
 }
 
-#game-container {
-    position: relative;
+/* Der übergeordnete Container zentriert alles */
+#center-container {
+    display: flex;
+    justify-content: center; /* Horizontal zentrieren */
+    align-items: center; /* Vertikal zentrieren */
+    width: 100vw; /* Füllt die gesamte Breite */
+    height: 100vh; /* Füllt die gesamte Höhe */
+    position: relative; /* Grundlage für absolute Positionierung von Kind-Elementen */
+}
+
+/* Canvas */
+canvas {
+    position: absolute; /* Damit der Canvas zentriert bleibt */
+    width: 720px; /* Feste Breite */
+    height: 480px; /* Feste Höhe */
+    background-color: black;
+    z-index: 1; /* Hinter anderen Bildschirmen */
+}
+
+
+#start-screen {
+    position: absolute;
     width: 720px;
     height: 480px;
-    top: -480px;
-    margin: 0 auto;
-    overflow: hidden;
+    transform: translate(0%, -5%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+    z-index: 3; 
+}
+
+#start-image {
+    width: 100%;
+    height: 100%;
+    max-width: 720px; 
 }
 
 .end-screen {
     position: absolute;
-    width: 100%;
+    width: 720px;
+    height: 480px;
     display: flex;
+    transform: translate(0%, -5%);
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
+    z-index: 2;
 }
 
 .hidden {
@@ -52,18 +82,20 @@ h1 {
 }
 
 #game-over-screen img {
-    max-width: 120%;
-    max-height: 115%;
-    object-fit: contain;
-    margin-bottom: 20px;
+    max-width: 100%;
+    max-height: 100%;
+    width: 100vw;
+    height: 40vh;
+    object-fit: cover;
+
 }
 
 #you-win-screen img {
     position: relative;
-    top: 140px;
-    max-width: 70%;
+    top: 15%;
+    max-width: 75%;
     object-fit: contain;
-    margin-bottom: 260px;
+    margin-bottom: 180px;
 }
 
 .button-container {
