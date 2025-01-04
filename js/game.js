@@ -1,31 +1,59 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let activeIntervals = [];
+let gameRunning = false;
 
 function init() {
   canvas = document.getElementById("canvas");
+  showStartScreen();
 }
 
 function startGame() {
-  document.getElementById("start-screen").style.display = "none";
-  document.getElementById("game-over-screen").classList.add("hidden");
-  document.getElementById("you-win-screen").classList.add("hidden");
+  hideStartScreen();
+  resetGame();
   world = new World(canvas, keyboard);
+  gameRunning = true;
 }
 
 function restartGame() {
-  location.reload();
+  resetGame();
+  startGame();
 }
 
 function goToMainMenu() {
-  document.getElementById("start-screen").style.display = "flex";
-  document.getElementById("game-over-screen").classList.add("hidden");
-  document.getElementById("you-win-screen").classList.add("hidden");
+  resetGame();
+  showStartScreen();
+}
+
+function resetGame() {
   if (world) {
     world.clearAllIntervals();
-    world = null;
   }
+  gameRunning = false;
+  clearAllIntervals();
+  document.getElementById("game-over-screen").classList.add("hidden");
+  document.getElementById("you-win-screen").classList.add("hidden");
 }
+
+function clearAllIntervals() {
+  activeIntervals.forEach(clearInterval);
+  activeIntervals = [];
+}
+
+function showStartScreen() {
+  document.getElementById("start-screen").classList.remove("hidden");
+  canvas.style.display = "none";
+}
+
+function hideStartScreen() {
+  const startScreen = document.getElementById("start-screen");
+  if (startScreen) {
+    startScreen.classList.add("hidden");
+  }
+  canvas.style.display = "block";
+}
+
 
 window.addEventListener("keydown", (event) => {
   console.log(event.key);

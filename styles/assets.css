@@ -35,3 +35,9 @@
     transform: translateY(1px);
     box-shadow: 1px 1px 0 #8B4513;
 }
+
+.icon-button img {
+    width: 30px; 
+    height: 30px;
+    transition: transform 0.2s ease-in-out; 
+}

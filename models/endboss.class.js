@@ -3,7 +3,6 @@ class Endboss extends MovableObject {
   width = 250;
   y = 55;
   energy = 25;
-  // isDead = false;
 
   IMAGES_ALERT = [
     "img_pollo_locco/img/4_enemie_boss_chicken/2_alert/G5.png",
@@ -46,6 +45,7 @@ class Endboss extends MovableObject {
     "img_pollo_locco/img/4_enemie_boss_chicken/5_dead/G26.png",
   ];
 
+  // isDead = false;
   hadFirstContact = false;
   attackCooldown = false;
   isAttacking = false;

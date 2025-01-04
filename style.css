@@ -10,6 +10,7 @@ body {
     align-items: center;
     min-height: 100vh;
     margin: 0;
+    overflow: hidden;
     background-image: url(./img_pollo_locco/img/10_project_img/desert-bg.jpg);
     background-position: center;
     background-size: cover;
@@ -25,37 +26,37 @@ h1 {
 
 #center-container {
     display: flex;
-    justify-content: center; 
+    justify-content: center;
     /* align-items: center;  */
-    width: 100vw; 
-    height: 100vh; 
-    position: relative; 
+    width: 100vw;
+    height: 100vh;
+    position: relative;
 }
 
 canvas {
-    position: absolute; 
-    width: 720px; 
-    height: 480px; 
+    position: absolute;
+    width: 720px;
+    height: 480px;
     background-color: black;
-    z-index: 1; 
+    z-index: 1;
 }
 
 #start-screen {
     position: absolute;
     width: 720px;
     height: 480px;
-    transform: translate(0%, -5%);
-    display: flex;
+    transform: translate(0%, -3.2%);
+    /* display: flex; */
     flex-direction: column;
-    justify-content: center; 
-    align-items: center; 
-    z-index: 3; 
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
 }
 
 #start-image {
     width: 100%;
     height: 100%;
-    max-width: 720px; 
+    max-width: 720px;
 }
 
 .end-screen {

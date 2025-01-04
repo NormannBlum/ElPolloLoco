@@ -69,44 +69,43 @@ class World {
   stopGame(win = false) {
     this.clearAllIntervals();
     this.gameOver = true;
+    this.showEndScreen(win);
+  }
+
+  showEndScreen(win) {
+    const gameOverScreen = document.getElementById("game-over-screen");
+    const winScreen = document.getElementById("you-win-screen");
+
     if (win) {
-      this.showYouWinScreen();
+      winScreen.classList.remove("hidden");
     } else {
-      this.showGameOverScreen();
+      gameOverScreen.classList.remove("hidden");
     }
-  }
-
-  showGameOverScreen() {
-    document.getElementById("game-over-screen").classList.remove("hidden");
-  }
-
-  showYouWinScreen() {
-    document.getElementById("you-win-screen").classList.remove("hidden");
   }
 
   checkGameOver() {
     if (this.character.isDead()) {
-      this.handleCharacterDeath();
+      this.handleDeath(false);
     } else if (this.isEndbossDead()) {
-      this.handleEndbossDeath();
+      this.handleDeath(true);
     }
   }
 
-  handleCharacterDeath() {
-    this.gameOver = true; 
-    this.character.playAnimation(this.character.IMAGES_DEAD); 
-    this.stopGame(false); 
-  }
+  handleDeath(win) {
+    this.gameOver = true;
 
-  handleEndbossDeath() {
-    this.gameOver = true; 
-    const endboss = this.level.enemies.find(
-      (enemy) => enemy instanceof Endboss && enemy.isDead()
-    );
-    if (endboss) {
-      endboss.playAnimation(endboss.IMAGES_DEAD); 
+    if (win) {
+      const endboss = this.level.enemies.find(
+        (enemy) => enemy instanceof Endboss && enemy.isDead()
+      );
+      if (endboss) {
+        endboss.playAnimation(endboss.IMAGES_DEAD);
+      }
+    } else {
+      this.character.playAnimation(this.character.IMAGES_DEAD);
     }
-    this.stopGame(true); 
+
+    this.stopGame(win);
   }
 
   isEndbossDead() {
