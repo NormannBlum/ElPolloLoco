@@ -43,18 +43,23 @@
           class="startscreen-image"
         />
         <div class="button-container">
-          <button id="start-button" onclick="startGame()">Start</button>
-          <button id="controls" class="icon-button">
-            <img src="img_pollo_locco/img/10_project_img/controls.svg" alt="Steuerung" />
-          </button>
-          <button id="impressum" class="icon-button">
-            <img src="img_pollo_locco/img/10_project_img/imprint.svg" alt="Impressum" />
-          </button>
-          <button id="mute" class="icon-button">
-            <img src="img_pollo_locco/img/10_project_img/mute.svg" alt="Mute" />
-          </button>
-          <!-- <button id="fullscreen">Vollbild</button>
-          <button id="game-info">Spielinfo</button> -->
+          <div id="top-buttons">
+            <button id="start-button" onclick="startGame()">Start</button>
+            <div id="top-left-buttons">
+              <button id="controls" class="icon-button" onclick="openOverlay('controls-overlay')">
+                <img src="img_pollo_locco/img/10_project_img/controls.svg" alt="Steuerung" />
+            </button>
+            <button id="impressum" class="icon-button" onclick="openOverlay('impressum-overlay')">
+                <img src="img_pollo_locco/img/10_project_img/imprint.svg" alt="Impressum" />
+            </button>
+            </div>
+            <button id="mute" class="icon-button">
+              <img
+                src="img_pollo_locco/img/10_project_img/mute.svg"
+                alt="Mute"
+              />
+            </button>
+          </div>
         </div>
       </div>
 
@@ -80,6 +85,35 @@
           <button onclick="restartGame()">New Game</button>
           <button onclick="goToMainMenu()">Main Menu</button>
         </div>
+      </div>
+    </div>
+
+    <!-- Overlay für Controls -->
+    <div id="controls-overlay" class="overlay hidden">
+      <div class="overlay-content">
+        <h2>Steuerung</h2>
+        <p>Bewegung: Pfeiltasten links, rechts</p>
+        <p>Springen: Leertaste</p>
+        <p>Flasche werfen: Taste "D"</p>
+        <button class="close-button" onclick="closeOverlay('controls-overlay')">
+          Schließen
+        </button>
+      </div>
+    </div>
+
+    <!-- Overlay für Impressum -->
+    <div id="impressum-overlay" class="overlay hidden">
+      <div class="overlay-content">
+        <h2>Impressum</h2>
+        <p>Entwickler: Normann Blum</p>
+        <p>E-Mail: normannblum@gmail.com</p>
+        <p>Adresse: Eduard-Lucas-Str. 59, 45131 Essen</p>
+        <button
+          class="close-button"
+          onclick="closeOverlay('impressum-overlay')"
+        >
+          Schließen
+        </button>
       </div>
     </div>
   </body>
