@@ -221,4 +221,14 @@ class Endboss extends MovableObject {
   moveLeftQuickly() {
     this.x -= 150;
   }
+
+  hit() {
+    this.energy -= 5;
+    sounds.endbossHurt.play();
+    if (this.energy <= 0) {
+      this.energy = 0;
+      sounds.endbossDead.play();
+    }
+  }
+  
 }

@@ -172,8 +172,6 @@
     height: 30px;
 }
 
-
-/* Rotation-Warnung */
 #orientation-warning {
     display: none;
     position: fixed;

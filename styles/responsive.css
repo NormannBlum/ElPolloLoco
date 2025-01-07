@@ -30,4 +30,8 @@
         height: 100vh;
         width: 100vw;
     }
+
+    #top-buttons {
+        top: 20px;
+    }
 }

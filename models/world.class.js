@@ -335,6 +335,7 @@ class World {
       this.character.y + 100,
       direction
     );
+    sounds.throwBottle.play();
     bottle.speed = 10 * direction;
     this.throwableObjects.push(bottle);
   }

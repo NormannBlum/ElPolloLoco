@@ -19,6 +19,7 @@ function startGame() {
   resetGame();
   hideStartScreen();
   world = new World(canvas, keyboard);
+  backgroundMusic.play();
   gameRunning = true;
 }
 
@@ -95,43 +96,6 @@ function closeOverlay(id) {
   document.getElementById(id).classList.add("hidden");
 }
 
-/**
- * Initialisiert die Stummschaltfunktionalität, wenn das DOM vollständig geladen ist.
- */
-document.addEventListener("DOMContentLoaded", () => {
-  const muteButton = document.getElementById("mute");
-  const muteIcon = document.getElementById("mute-icon");
-  let isMuted = false;
-
-  /**
-   * Event-Listener für den Klick auf den Stummschalt-Button.
-   * Schaltet zwischen "stumm" und "laut" um und aktualisiert das Symbol entsprechend.
-   */
-  muteButton.addEventListener("click", () => {
-    isMuted = !isMuted;
-
-    if (isMuted) {
-      muteIcon.src = "img_pollo_locco/img/10_project_img/soundon.svg";
-      muteIcon.alt = "Sound On";
-      muteAllSounds();
-    } else {
-      muteIcon.src = "img_pollo_locco/img/10_project_img/mute.svg";
-      muteIcon.alt = "Mute";
-      unmuteAllSounds();
-    }
-  });
-
-  function muteAllSounds() {
-    document.querySelectorAll("audio").forEach((audio) => (audio.muted = true));
-  }
-
-  function unmuteAllSounds() {
-    document
-      .querySelectorAll("audio")
-      .forEach((audio) => (audio.muted = false));
-  }
-});
-
 window.addEventListener("keydown", (event) => {
   if (event.code === "ArrowRight") keyboard.RIGHT = true;
   if (event.code === "ArrowLeft") keyboard.LEFT = true;
@@ -155,9 +119,60 @@ window.addEventListener("keyup", (event) => {
  */
 function checkOrientation() {
   const warning = document.getElementById("orientation-warning");
-  if (window.innerWidth < 1200 && window.innerHeight > window.innerWidth) {
-    warning.classList.add("visible");
+  
+  // Prüfen, ob das Gerät im Hochformat ist und die Breite < 1200px
+  if (window.innerWidth < 1200 && window.innerWidth < window.innerHeight) {
+      warning.classList.add("visible"); // Warnung anzeigen
   } else {
-    warning.classList.remove("visible");
+      warning.classList.remove("visible"); // Warnung ausblenden
   }
 }
+
+// Event-Listener für Änderungen der Fenstergröße und beim Laden der Seite
+window.addEventListener("resize", checkOrientation);
+window.addEventListener("load", checkOrientation);
+
+let backgroundMusic = new Audio('audio/background_music.mp3');
+let sounds = {
+  throwBottle: new Audio('audio/throw_bottle.mp3'),
+  jump: new Audio('audio/jump.wav'),
+  snore: new Audio('audio/snore.mp3'),
+  hurt: new Audio('audio/hurt.mp3'),
+  dead: new Audio('audio/dead.mp3'),
+  chickenDead: new Audio('audio/chicken_dead.mp3'),
+  endbossHurt: new Audio('audio/endboss_hurt.mp3'),
+  endbossDead: new Audio('audio/endboss_dead.mp3')
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  backgroundMusic.loop = true;
+  backgroundMusic.volume = 0.5;
+  backgroundMusic.play();
+
+  const muteButton = document.getElementById("mute");
+  const muteIcon = document.getElementById("mute-icon");
+  let isMuted = false;
+
+  muteButton.addEventListener("click", () => {
+    isMuted = !isMuted;
+
+    if (isMuted) {
+      muteIcon.src = "img_pollo_locco/img/10_project_img/soundon.svg";
+      muteAllSounds();
+    } else {
+      muteIcon.src = "img_pollo_locco/img/10_project_img/mute.svg";
+      unmuteAllSounds();
+    }
+  });
+
+  function muteAllSounds() {
+    Object.values(sounds).forEach((sound) => (sound.muted = true));
+    backgroundMusic.muted = true;
+  }
+
+  function unmuteAllSounds() {
+    Object.values(sounds).forEach((sound) => (sound.muted = false));
+    backgroundMusic.muted = false;
+  }
+});
+

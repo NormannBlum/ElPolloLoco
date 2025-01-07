@@ -59,7 +59,9 @@ class SmallChicken extends MovableObject {
     kill() {
       this.isDead = true;
       this.speed = 0;
+      sounds.chickenDead.play();
       this.playAnimation(this.IMAGES_DEAD);
     }
+    
   }
   

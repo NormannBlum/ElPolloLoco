@@ -2,7 +2,7 @@ class Character extends MovableObject {
   height = 250;
   y = 180;
   speed = 10;
-  energy = 100; 
+  energy = 100;
   lastActionTime = Date.now();
   idleTimeout = 5000;
 
@@ -18,7 +18,7 @@ class Character extends MovableObject {
     "img_pollo_locco/img/2_character_pepe/1_idle/long_idle/I-19.png",
     "img_pollo_locco/img/2_character_pepe/1_idle/long_idle/I-20.png",
   ];
-  
+
   IMAGES_IDLE = [
     "img_pollo_locco/img/2_character_pepe/1_idle/idle/I-1.png",
     "img_pollo_locco/img/2_character_pepe/1_idle/idle/I-2.png",
@@ -98,7 +98,7 @@ class Character extends MovableObject {
     this.initMovement();
     this.initAnimation();
   }
-  
+
   /**
    * Startet die Bewegung des Charakters basierend auf Benutzereingaben.
    */
@@ -123,7 +123,7 @@ class Character extends MovableObject {
       this.lastActionTime = Date.now();
     }
   }
-  
+
   /**
    * Bewegt den Charakter nach links, wenn die entsprechende Taste gedrückt wird.
    */
@@ -132,27 +132,28 @@ class Character extends MovableObject {
       this.moveLeft();
       this.otherDirection = true;
       this.walking_sound.play();
-      this.lastActionTime = Date.now(); 
+      this.lastActionTime = Date.now();
     }
   }
-  
+
   /**
    * Lässt den Charakter springen, wenn die entsprechende Taste gedrückt wird.
    */
   handleJump() {
     if (this.world.keyboard.SPACE && !this.isAboveGround()) {
       this.jump();
-      this.lastActionTime = Date.now(); 
+      sounds.jump.play();
+      this.lastActionTime = Date.now();
     }
-  }  
-  
+  }
+
   /**
    * Aktualisiert die Position der Kamera basierend auf der Position des Charakters.
    */
   updateCamera() {
     this.world.camera_x = -this.x + 100;
   }
-  
+
   /**
    * Initialisiert die Animationszyklen für den Charakter.
    */
@@ -165,7 +166,7 @@ class Character extends MovableObject {
       this.playIdleAnimation();
     }, 200);
   }
-  
+
   /**
    * Spielt die Todesanimation ab, wenn der Charakter tot ist.
    */
@@ -174,7 +175,7 @@ class Character extends MovableObject {
       this.playAnimation(this.IMAGES_DEAD);
     }
   }
-  
+
   /**
    * Spielt die Verletzungsanimation ab, wenn der Charakter verletzt ist.
    */
@@ -183,7 +184,7 @@ class Character extends MovableObject {
       this.playAnimation(this.IMAGES_HURT);
     }
   }
-  
+
   /**
    * Spielt die Sprunganimation ab, wenn der Charakter springt.
    */
@@ -192,12 +193,15 @@ class Character extends MovableObject {
       this.playAnimation(this.IMAGES_JUMPING);
     }
   }
-  
+
   /**
    * Spielt die Laufanimation ab, wenn der Charakter läuft.
    */
   playWalkingAnimation() {
-    if (!this.isAboveGround() && (this.world.keyboard.RIGHT || this.world.keyboard.LEFT)) {
+    if (
+      !this.isAboveGround() &&
+      (this.world.keyboard.RIGHT || this.world.keyboard.LEFT)
+    ) {
       this.playAnimation(this.IMAGES_WALKING);
     }
   }
@@ -215,16 +219,19 @@ class Character extends MovableObject {
       !this.world.keyboard.LEFT
     );
   }
-  
+
   /**
    * Spielt die Leerlaufanimation ab, wenn der Charakter untätig ist.
    */
   playIdleAnimation() {
     if (this.isIdle()) {
+      if (Date.now() - this.lastActionTime >= this.idleTimeout) {
+        sounds.snore.play();
+      }
       this.chooseIdleAnimation();
     }
   }
-  
+
   /**
    * Wählt und spielt die entsprechende Leerlaufanimation basierend auf der Inaktivitätsdauer.
    */
@@ -236,8 +243,21 @@ class Character extends MovableObject {
       this.playAnimation(this.IMAGES_IDLE);
     }
   }
-  
+
   jump() {
     this.speedY = 30;
+  }
+
+  hit() {
+    const now = new Date().getTime();
+    if (now - this.lastHit > 200) {
+      this.energy -= 5;
+      sounds.hurt.play();
+      if (this.energy < 0) {
+        this.energy = 0;
+        sounds.dead.play();
+      }
+      this.lastHit = now;
+    }
   }
 }
