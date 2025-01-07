@@ -26,9 +26,6 @@ class Bottle extends DrawableObject {
     this.startAnimation();
   }
 
-  /**
-   * Startet die Animation der Flasche, um zwischen verschiedenen Bildern zu wechseln.
-   */
   startAnimation() {
     setInterval(() => {
       this.playAnimation(this.IMAGES_BOTTLE);

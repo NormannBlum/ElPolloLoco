@@ -85,9 +85,6 @@ class World {
     return id;
   }
 
-  /**
-   * Löscht alle aktiven Intervalle, um Ressourcen freizugeben.
-   */
   clearAllIntervals() {
     this.intervals.forEach(clearInterval);
   }
@@ -277,7 +274,7 @@ class World {
   }
 
   /**
-   * Prüft, ob Flaschen eingesammelt werden können.
+   * Prüft ob Flaschen eingesammelt werden können.
    */
   checkBottleCollectibles() {
     this.level.bottles.forEach((bottle, index) => {
@@ -295,7 +292,7 @@ class World {
   }
 
   /**
-   * Prüft, ob Münzen eingesammelt werden können.
+   * Prüft ob Münzen eingesammelt werden können.
    */
   checkCoinCollectibles() {
     this.level.coins.forEach((coin, index) => {
@@ -308,7 +305,7 @@ class World {
   }
 
   /**
-   * Prüft, ob eine Flasche geworfen werden soll.
+   * Prüft ob eine Flasche geworfen werden soll.
    */
   checkThrowObjects() {
     if (this.isBottleThrowReady()) {
@@ -318,7 +315,7 @@ class World {
   }
 
   /**
-   * Prüft, ob der Charakter bereit ist, eine Flasche zu werfen.
+   * Prüft ob der Charakter bereit ist, eine Flasche zu werfen.
    * @returns {boolean} - True, wenn eine Flasche geworfen werden kann.
    */
   isBottleThrowReady() {
@@ -330,9 +327,6 @@ class World {
     );
   }
 
-  /**
-   * Wirft eine Flasche in die entsprechende Richtung.
-   */
   throwBottle() {
     this.lastThrowTime = new Date().getTime();
     let direction = this.character.otherDirection ? -1 : 1;
@@ -345,9 +339,6 @@ class World {
     this.throwableObjects.push(bottle);
   }
 
-  /**
-   * Aktualisiert den Status der Flaschenanzeige.
-   */
   updateBottleStatus() {
     this.bottles--;
     this.bottlesStatusBar.setPercentage((this.bottles / this.maxBottles) * 100);
@@ -394,9 +385,6 @@ class World {
     });
   }
 
-  /**
-   * Löscht das Canvas.
-   */
   clearCanvas() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
   }
@@ -436,7 +424,6 @@ class World {
 
   /**
    * Fügt mehrere Objekte zur Karte hinzu.
-   * @param {MovableObject[]} objects - Die Objekte.
    */
   addObjectsToMap(objects) {
     objects.forEach((o) => {
@@ -446,7 +433,6 @@ class World {
 
   /**
    * Fügt ein einzelnes Objekt zur Karte hinzu.
-   * @param {MovableObject} mo - Das Objekt.
    */
   addToMap(mo) {
     if (mo.otherDirection) {
@@ -462,7 +448,6 @@ class World {
 
   /**
    * Spiegelt das Bild eines Objekts horizontal.
-   * @param {MovableObject} mo - Das Objekt.
    */
   flipImage(mo) {
     this.ctx.save();
@@ -473,7 +458,6 @@ class World {
 
   /**
    * Stellt das Bild eines Objekts nach einer Spiegelung wieder her.
-   * @param {MovableObject} mo - Das Objekt.
    */
   flipImageBack(mo) {
     this.ctx.restore();

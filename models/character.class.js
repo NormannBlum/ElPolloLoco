@@ -237,9 +237,6 @@ class Character extends MovableObject {
     }
   }
   
-  /**
-   * Lässt den Charakter springen.
-   */
   jump() {
     this.speedY = 30;
   }

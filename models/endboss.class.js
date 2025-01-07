@@ -136,9 +136,6 @@ class Endboss extends MovableObject {
     }
   }
 
-  /**
-   * Startet die Bewegung des Endbosses.
-   */
   startWalking() {
     setInterval(() => {
       this.updateMovementDirection();
@@ -163,9 +160,6 @@ class Endboss extends MovableObject {
     }
   }
   
-  /**
-   * Spielt die Gehanimation ab.
-   */
   playWalkingAnimation() {
     this.playAnimation(this.IMAGES_WALKING);
   }
@@ -220,16 +214,10 @@ class Endboss extends MovableObject {
     this.attackCooldown = false;
   }
 
-  /**
-   * Bewegt den Endboss schnell nach rechts.
-   */
   moveRightQuickly() {
     this.x += 150;
   }
 
-  /**
-   * Bewegt den Endboss schnell nach links.
-   */
   moveLeftQuickly() {
     this.x -= 150;
   }

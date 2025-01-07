@@ -85,23 +85,14 @@ class MovableObject extends DrawableObject {
     this.currentImage++;
   }
 
-  /**
-   * Bewegt das Objekt nach rechts.
-   */
   moveRight() {
     this.x += this.speed;
   }
 
-  /**
-   * Bewegt das Objekt nach links.
-   */
   moveLeft() {
     this.x -= this.speed;
   }
 
-  /**
-   * Lässt das Objekt springen, indem eine Aufwärtsgeschwindigkeit angewendet wird.
-   */
   jump() {
     this.speedY = 30;
   }
