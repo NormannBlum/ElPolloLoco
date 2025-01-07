@@ -2,8 +2,8 @@ class Character extends MovableObject {
   height = 250;
   y = 180;
   speed = 10;
-  energy = 100; // Leben erhöht von 100 auf 200
-  lastActionTime = Date.now(); // Hier wird die Zeit des letzten Tastendrucks gespeichert
+  energy = 100; 
+  lastActionTime = Date.now();
   idleTimeout = 5000;
 
   IMAGES_LONGIDLE = [
@@ -91,11 +91,17 @@ class Character extends MovableObject {
     height: 100,
   };
 
+  /**
+   * Initialisiert die Animationen und die Bewegung des Charakters.
+   */
   animate() {
     this.initMovement();
     this.initAnimation();
   }
   
+  /**
+   * Startet die Bewegung des Charakters basierend auf Benutzereingaben.
+   */
   initMovement() {
     setInterval(() => {
       this.walking_sound.pause();
@@ -106,15 +112,21 @@ class Character extends MovableObject {
     }, 1000 / 60);
   }
 
+  /**
+   * Bewegt den Charakter nach rechts, wenn die entsprechende Taste gedrückt wird.
+   */
   handleRightMovement() {
     if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
       this.moveRight();
       this.otherDirection = false;
       this.walking_sound.play();
-      this.lastActionTime = Date.now(); // <- Zeit aktualisieren
+      this.lastActionTime = Date.now();
     }
   }
   
+  /**
+   * Bewegt den Charakter nach links, wenn die entsprechende Taste gedrückt wird.
+   */
   handleLeftMovement() {
     if (this.world.keyboard.LEFT && this.x > 0) {
       this.moveLeft();
@@ -124,6 +136,9 @@ class Character extends MovableObject {
     }
   }
   
+  /**
+   * Lässt den Charakter springen, wenn die entsprechende Taste gedrückt wird.
+   */
   handleJump() {
     if (this.world.keyboard.SPACE && !this.isAboveGround()) {
       this.jump();
@@ -131,10 +146,16 @@ class Character extends MovableObject {
     }
   }  
   
+  /**
+   * Aktualisiert die Position der Kamera basierend auf der Position des Charakters.
+   */
   updateCamera() {
     this.world.camera_x = -this.x + 100;
   }
   
+  /**
+   * Initialisiert die Animationszyklen für den Charakter.
+   */
   initAnimation() {
     setInterval(() => {
       this.playDeadAnimation();
@@ -145,30 +166,46 @@ class Character extends MovableObject {
     }, 200);
   }
   
+  /**
+   * Spielt die Todesanimation ab, wenn der Charakter tot ist.
+   */
   playDeadAnimation() {
     if (this.isDead()) {
       this.playAnimation(this.IMAGES_DEAD);
     }
   }
   
+  /**
+   * Spielt die Verletzungsanimation ab, wenn der Charakter verletzt ist.
+   */
   playHurtAnimation() {
     if (this.isHurt()) {
       this.playAnimation(this.IMAGES_HURT);
     }
   }
   
+  /**
+   * Spielt die Sprunganimation ab, wenn der Charakter springt.
+   */
   playJumpingAnimation() {
     if (this.isAboveGround()) {
       this.playAnimation(this.IMAGES_JUMPING);
     }
   }
   
+  /**
+   * Spielt die Laufanimation ab, wenn der Charakter läuft.
+   */
   playWalkingAnimation() {
     if (!this.isAboveGround() && (this.world.keyboard.RIGHT || this.world.keyboard.LEFT)) {
       this.playAnimation(this.IMAGES_WALKING);
     }
   }
 
+  /**
+   * Prüft, ob der Charakter im Leerlauf ist.
+   * @returns {boolean} - True, wenn der Charakter im Leerlauf ist.
+   */
   isIdle() {
     return (
       !this.isDead() &&
@@ -179,12 +216,18 @@ class Character extends MovableObject {
     );
   }
   
+  /**
+   * Spielt die Leerlaufanimation ab, wenn der Charakter untätig ist.
+   */
   playIdleAnimation() {
     if (this.isIdle()) {
       this.chooseIdleAnimation();
     }
   }
   
+  /**
+   * Wählt und spielt die entsprechende Leerlaufanimation basierend auf der Inaktivitätsdauer.
+   */
   chooseIdleAnimation() {
     let timeSinceLastAction = Date.now() - this.lastActionTime;
     if (timeSinceLastAction >= this.idleTimeout) {
@@ -194,6 +237,9 @@ class Character extends MovableObject {
     }
   }
   
+  /**
+   * Lässt den Charakter springen.
+   */
   jump() {
     this.speedY = 30;
   }

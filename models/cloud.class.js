@@ -4,22 +4,29 @@ class Cloud extends MovableObject {
 
   IMAGES = [
     "img_pollo_locco/img/5_background/layers/4_clouds/1.png",
-    "img_pollo_locco/img/5_background/layers/4_clouds/2.png", 
+    "img_pollo_locco/img/5_background/layers/4_clouds/2.png",
   ];
 
+  /**
+   * Erstellt eine Instanz einer Wolke mit zufälligem Bild und Position.
+   * @param {number} x - Die x-Position der Wolke.
+   */
   constructor(x) {
     super();
-    let randomIndex = Math.floor(Math.random() * this.IMAGES.length); // Wähle ein zufälliges Bild
+    let randomIndex = Math.floor(Math.random() * this.IMAGES.length);
     let randomImage = this.IMAGES[randomIndex];
-    this.loadImage(randomImage); // Lade zufälliges Bild
-    this.x = x; // Zufällige X-Position
-    this.y = 0 + Math.random() * 100; // Zufällige Y-Position
+    this.loadImage(randomImage);
+    this.x = x;
+    this.y = 0 + Math.random() * 100;
     this.animate();
   }
 
+  /**
+   * Aktiviert die Bewegung der Wolke nach links.
+   */
   animate() {
     setInterval(() => {
-      this.moveLeft(); // Bewegung nach links
-    }, 1000 / 60); // 60 FPS
+      this.moveLeft();
+    }, 1000 / 60);
   }
 }

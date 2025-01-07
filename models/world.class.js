@@ -1,3 +1,6 @@
+/**
+ * Repräsentiert die Spielwelt, einschließlich des Charakters, Levels und Interaktionen.
+ */
 class World {
   character = new Character();
   level = level1;
@@ -18,6 +21,11 @@ class World {
   intervals = [];
   gameOver = false;
 
+  /**
+   * Konstruktor der Weltklasse, initialisiert Canvas, Eingaben und Spielkomponenten.
+   * @param {HTMLCanvasElement} canvas - Das Canvas-Element, auf dem das Spiel gezeichnet wird.
+   * @param {Keyboard} keyboard - Objekt zur Verwaltung von Tastatureingaben.
+   */
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
@@ -29,10 +37,16 @@ class World {
     this.run();
   }
 
+  /**
+   * Verknüpft die Welt mit dem Charakter.
+   */
   setWorld() {
     this.character.world = this;
   }
 
+  /**
+   * Weist jedem Endboss im Level den Charakter zu, sodass sie auf ihn reagieren können.
+   */
   assignCharacterToEnemies() {
     this.level.enemies.forEach((enemy) => {
       if (enemy instanceof Endboss) {
@@ -41,6 +55,9 @@ class World {
     });
   }
 
+  /**
+   * Hauptspielschleife: Führt wiederholt Kollisionsprüfungen, Statusupdates usw. aus.
+   */
   run() {
     this.addInterval(() => {
       if (this.gameOver) return;
@@ -56,22 +73,39 @@ class World {
     }, 100);
   }
 
+  /**
+   * Fügt eine periodisch ausgeführte Funktion (Intervall) hinzu.
+   * @param {Function} fn - Die auszuführende Funktion.
+   * @param {number} time - Die Ausführungsfrequenz in Millisekunden.
+   * @returns {number} - Die ID des erstellten Intervalls.
+   */
   addInterval(fn, time) {
     const id = setInterval(fn, time);
     this.intervals.push(id);
     return id;
   }
 
+  /**
+   * Löscht alle aktiven Intervalle, um Ressourcen freizugeben.
+   */
   clearAllIntervals() {
     this.intervals.forEach(clearInterval);
   }
 
+  /**
+   * Beendet das Spiel und zeigt den entsprechenden Endbildschirm.
+   * @param {boolean} win - Ob der Spieler gewonnen hat.
+   */
   stopGame(win = false) {
     this.clearAllIntervals();
     this.gameOver = true;
     this.showEndScreen(win);
   }
 
+  /**
+   * Zeigt den Endbildschirm (Sieg oder Niederlage).
+   * @param {boolean} win - Ob der Spieler gewonnen hat.
+   */
   showEndScreen(win) {
     const gameOverScreen = document.getElementById("game-over-screen");
     const winScreen = document.getElementById("you-win-screen");
@@ -83,6 +117,9 @@ class World {
     }
   }
 
+  /**
+   * Prüft, ob der Charakter oder der Endboss gestorben ist und das Spiel beendet werden muss.
+   */
   checkGameOver() {
     if (this.character.isDead()) {
       this.handleDeath(false);
@@ -91,6 +128,10 @@ class World {
     }
   }
 
+  /**
+   * Beendet das Spiel mit einem Sieg oder einer Niederlage.
+   * @param {boolean} win - Ob der Spieler gewonnen hat.
+   */
   handleDeath(win) {
     this.gameOver = true;
 
@@ -108,18 +149,27 @@ class World {
     this.stopGame(win);
   }
 
+  /**
+   * Überprüft, ob der Endboss besiegt wurde.
+   * @returns {boolean} - True, wenn der Endboss tot ist.
+   */
   isEndbossDead() {
     return this.level.enemies.some(
       (enemy) => enemy instanceof Endboss && enemy.isDead()
     );
   }
 
-  // Kollisionsprüfung
+  /**
+   * Prüft auf Kollisionen zwischen Charakter, Gegnern und Flaschen.
+   */
   checkCollisions() {
     this.checkCharacterEnemyCollisions();
     this.checkBottleEnemyCollisions();
   }
 
+  /**
+   * Prüft auf Kollisionen zwischen Charakter und Gegnern.
+   */
   checkCharacterEnemyCollisions() {
     this.level.enemies.forEach((enemy) => {
       if (this.character.isColliding(enemy)) {
@@ -128,6 +178,9 @@ class World {
     });
   }
 
+  /**
+   * Prüft auf Kollisionen zwischen Flaschen und Gegnern.
+   */
   checkBottleEnemyCollisions() {
     this.throwableObjects.forEach((bottle, bottleIndex) => {
       this.level.enemies.forEach((enemy) => {
@@ -138,6 +191,11 @@ class World {
     });
   }
 
+  /**
+   * Behandelt eine Kollision zwischen einer Flasche und einem Gegner.
+   * @param {number} bottleIndex - Index der kollidierenden Flasche.
+   * @param {MovableObject} enemy - Der getroffene Gegner.
+   */
   processBottleCollision(bottleIndex, enemy) {
     if (enemy instanceof Endboss) {
       enemy.hit();
@@ -148,6 +206,10 @@ class World {
     this.throwableObjects.splice(bottleIndex, 1);
   }
 
+  /**
+   * Behandelt eine Kollision zwischen dem Charakter und einem Gegner.
+   * @param {MovableObject} enemy - Der kollidierte Gegner.
+   */
   handleEnemyCollision(enemy) {
     if (enemy instanceof Endboss) {
       this.handleEndbossCollision();
@@ -156,11 +218,18 @@ class World {
     }
   }
 
+  /**
+   * Behandelt eine Kollision zwischen dem Charakter und dem Endboss.
+   */
   handleEndbossCollision() {
     this.character.hit();
     this.statusBar.setPercentage(this.character.energy);
   }
 
+  /**
+   * Behandelt eine Kollision zwischen dem Charakter und einem normalen Gegner.
+   * @param {MovableObject} enemy - Der kollidierte Gegner.
+   */
   handleNormalEnemyCollision(enemy) {
     if (this.isJumpingOnEnemy(enemy)) {
       this.killEnemy(enemy);
@@ -170,6 +239,11 @@ class World {
     }
   }
 
+  /**
+   * Prüft, ob der Charakter auf einen Gegner springt.
+   * @param {MovableObject} enemy - Der Gegner.
+   * @returns {boolean} - True, wenn der Charakter auf den Gegner springt.
+   */
   isJumpingOnEnemy(enemy) {
     return (
       this.character.speedY < 0 &&
@@ -177,6 +251,10 @@ class World {
     );
   }
 
+  /**
+   * Tötet einen Gegner, falls er noch nicht tot ist.
+   * @param {MovableObject} enemy - Der Gegner.
+   */
   killEnemy(enemy) {
     if (!enemy.isDead) {
       enemy.isDead = true;
@@ -190,12 +268,17 @@ class World {
     }
   }
 
-  // Sammelobjekte
+  /**
+   * Prüft auf sammelbare Objekte (Münzen, Flaschen).
+   */
   checkCollectibles() {
     this.checkBottleCollectibles();
     this.checkCoinCollectibles();
   }
 
+  /**
+   * Prüft, ob Flaschen eingesammelt werden können.
+   */
   checkBottleCollectibles() {
     this.level.bottles.forEach((bottle, index) => {
       if (
@@ -211,6 +294,9 @@ class World {
     });
   }
 
+  /**
+   * Prüft, ob Münzen eingesammelt werden können.
+   */
   checkCoinCollectibles() {
     this.level.coins.forEach((coin, index) => {
       if (this.character.isColliding(coin) && this.coins < this.maxCoins) {
@@ -221,7 +307,9 @@ class World {
     });
   }
 
-  // Flaschen-Logik
+  /**
+   * Prüft, ob eine Flasche geworfen werden soll.
+   */
   checkThrowObjects() {
     if (this.isBottleThrowReady()) {
       this.throwBottle();
@@ -229,6 +317,10 @@ class World {
     }
   }
 
+  /**
+   * Prüft, ob der Charakter bereit ist, eine Flasche zu werfen.
+   * @returns {boolean} - True, wenn eine Flasche geworfen werden kann.
+   */
   isBottleThrowReady() {
     const currentTime = new Date().getTime();
     return (
@@ -238,6 +330,9 @@ class World {
     );
   }
 
+  /**
+   * Wirft eine Flasche in die entsprechende Richtung.
+   */
   throwBottle() {
     this.lastThrowTime = new Date().getTime();
     let direction = this.character.otherDirection ? -1 : 1;
@@ -250,12 +345,17 @@ class World {
     this.throwableObjects.push(bottle);
   }
 
+  /**
+   * Aktualisiert den Status der Flaschenanzeige.
+   */
   updateBottleStatus() {
     this.bottles--;
     this.bottlesStatusBar.setPercentage((this.bottles / this.maxBottles) * 100);
   }
 
-  // Endboss-Logik
+  /**
+   * Prüft, ob der Endboss aktiviert werden soll.
+   */
   checkEndbossSpawn() {
     const endboss = this.level.enemies.find(
       (enemy) => enemy instanceof Endboss
@@ -270,12 +370,18 @@ class World {
     }
   }
 
+  /**
+   * Aktualisiert die Statusleiste des Endbosses.
+   * @param {Endboss} endboss - Der Endboss.
+   */
   updateEndbossStatusBar(endboss) {
     const percentage = (endboss.energy / 20) * 100;
     this.endbossStatusBar.setPercentage(percentage);
   }
 
-  // Rendering
+  /**
+   * Zeichnet die Spielwelt.
+   */
   draw() {
     if (!this.gameOver) {
       this.clearCanvas();
@@ -288,10 +394,16 @@ class World {
     });
   }
 
+  /**
+   * Löscht das Canvas.
+   */
   clearCanvas() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
   }
 
+  /**
+   * Zeichnet den Hintergrund der Spielwelt.
+   */
   drawBackground() {
     this.ctx.translate(this.camera_x, 0);
     this.addObjectsToMap(this.level.backgroundObjects);
@@ -299,6 +411,9 @@ class World {
     this.ctx.translate(-this.camera_x, 0);
   }
 
+  /**
+   * Zeichnet statische Objekte wie die Statusleisten.
+   */
   drawFixedObjects() {
     this.addToMap(this.statusBar);
     this.addToMap(this.coinsStatusBar);
@@ -306,6 +421,9 @@ class World {
     this.addToMap(this.endbossStatusBar);
   }
 
+  /**
+   * Zeichnet dynamische Objekte wie den Charakter und Gegner.
+   */
   drawDynamicObjects() {
     this.ctx.translate(this.camera_x, 0);
     this.addToMap(this.character);
@@ -316,12 +434,20 @@ class World {
     this.ctx.translate(-this.camera_x, 0);
   }
 
+  /**
+   * Fügt mehrere Objekte zur Karte hinzu.
+   * @param {MovableObject[]} objects - Die Objekte.
+   */
   addObjectsToMap(objects) {
     objects.forEach((o) => {
       this.addToMap(o);
     });
   }
 
+  /**
+   * Fügt ein einzelnes Objekt zur Karte hinzu.
+   * @param {MovableObject} mo - Das Objekt.
+   */
   addToMap(mo) {
     if (mo.otherDirection) {
       this.flipImage(mo);
@@ -334,6 +460,10 @@ class World {
     }
   }
 
+  /**
+   * Spiegelt das Bild eines Objekts horizontal.
+   * @param {MovableObject} mo - Das Objekt.
+   */
   flipImage(mo) {
     this.ctx.save();
     this.ctx.translate(mo.width, 0);
@@ -341,6 +471,10 @@ class World {
     mo.x = mo.x * -1;
   }
 
+  /**
+   * Stellt das Bild eines Objekts nach einer Spiegelung wieder her.
+   * @param {MovableObject} mo - Das Objekt.
+   */
   flipImageBack(mo) {
     this.ctx.restore();
     mo.x = mo.x * -1;

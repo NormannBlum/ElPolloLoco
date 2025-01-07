@@ -11,9 +11,14 @@ class Coin extends DrawableObject {
     height: 60,
   };
 
+  /**
+   * Erstellt eine Instanz einer Münze mit Position und Animation.
+   * @param {number} x - Die x-Position der Münze.
+   * @param {number} y - Die y-Position der Münze.
+   */
   constructor(x, y) {
     super().loadImage("img_pollo_locco/img/8_coin/coin_1.png");
-    this.loadImages(this.IMAGES_COIN); 
+    this.loadImages(this.IMAGES_COIN);
     this.x = x;
     this.y = y;
     this.width = 100;
@@ -21,6 +26,9 @@ class Coin extends DrawableObject {
     this.startAnimation();
   }
 
+  /**
+   * Startet die Animation der Münze, um zwischen verschiedenen Bildern zu wechseln.
+   */
   startAnimation() {
     setInterval(() => {
       this.playAnimation(this.IMAGES_COIN);

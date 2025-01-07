@@ -45,12 +45,15 @@ class Endboss extends MovableObject {
     "img_pollo_locco/img/4_enemie_boss_chicken/5_dead/G26.png",
   ];
 
-  // isDead = false;
   hadFirstContact = false;
   attackCooldown = false;
   isAttacking = false;
   character;
 
+  /**
+   * Erstellt eine Instanz des Endbosses.
+   * @param {Character} character - Referenz auf den Charakter des Spielers.
+   */
   constructor(character) {
     super().loadImage(this.IMAGES_ALERT[0]);
     this.loadImages(this.IMAGES_ALERT);
@@ -71,14 +74,17 @@ class Endboss extends MovableObject {
     height: 100,
   };
 
+  /**
+   * Aktiviert die Bewegung und Animation des Endbosses.
+   */
   animate() {
     setInterval(() => {
       this.followCharacter();
-    }, 1000 / 60); // 60 FPS
+    }, 1000 / 60);
 
     setInterval(() => {
       this.playAnimation(this.IMAGES_WALKING);
-    }, 200); // Animationsgeschwindigkeit
+    }, 200);
 
     setInterval(() => {
       if (!this.hadFirstContact) {
@@ -87,6 +93,9 @@ class Endboss extends MovableObject {
     }, 100);
   }
 
+  /**
+   * Initialisiert Animationen wie "Tot" und "Verletzt".
+   */
   initAnimation() {
     setInterval(() => {
       this.playDeadAnimation();
@@ -94,55 +103,76 @@ class Endboss extends MovableObject {
     }, 200);
   }
 
+  /**
+   * Spielt die Todesanimation, wenn der Endboss tot ist.
+   */
   playDeadAnimation() {
     if (this.isDead()) {
       this.playAnimation(this.IMAGES_DEAD);
     }
   }
 
+  /**
+   * Spielt die Verletzungsanimation, wenn der Endboss verletzt wurde.
+   */
   playHurtAnimation() {
     if (this.isHurt()) {
       this.playAnimation(this.IMAGES_HURT);
     }
   }
 
+  /**
+   * Bewegt den Endboss in Richtung des Charakters.
+   */
   followCharacter() {
-    if (!this.character) return; // Verhindert Fehler, wenn character nicht gesetzt ist
+    if (!this.character) return;
 
     if (this.character.x < this.x) {
-      this.otherDirection = false; // Nach links schauen
-      this.moveLeft(); // Nach links bewegen
+      this.otherDirection = false;
+      this.moveLeft();
     } else if (this.character.x > this.x) {
-      this.otherDirection = true; // Nach rechts schauen
-      this.moveRight(); // Nach rechts bewegen
+      this.otherDirection = true;
+      this.moveRight();
     }
   }
 
+  /**
+   * Startet die Bewegung des Endbosses.
+   */
   startWalking() {
     setInterval(() => {
-      this.updateMovementDirection(); // Aktualisiert die Bewegungsrichtung
-      this.playWalkingAnimation(); // Spielt die Walking-Animation ab
+      this.updateMovementDirection();
+      this.playWalkingAnimation();
     }, 100);
   
-    this.initiateAttacking(); // Startet den Angriffsmodus
+    this.initiateAttacking();
   }
   
+  /**
+   * Aktualisiert die Bewegungsrichtung basierend auf der Position des Charakters.
+   */
   updateMovementDirection() {
     if (!this.hadFirstContact || this.isAttacking) return;
   
     if (this.character.x < this.x) {
-      this.moveLeft(); // Bewegung nach links
-      this.otherDirection = false; // Blickrichtung nach links
+      this.moveLeft();
+      this.otherDirection = false;
     } else if (this.character.x > this.x) {
-      this.moveRight(); // Bewegung nach rechts
-      this.otherDirection = true; // Blickrichtung nach rechts
+      this.moveRight();
+      this.otherDirection = true;
     }
   }
   
+  /**
+   * Spielt die Gehanimation ab.
+   */
   playWalkingAnimation() {
     this.playAnimation(this.IMAGES_WALKING);
   }
   
+  /**
+   * Startet den Angriffsmodus des Endbosses.
+   */
   initiateAttacking() {
     setInterval(() => {
       if (!this.attackCooldown && this.hadFirstContact) {
@@ -151,12 +181,18 @@ class Endboss extends MovableObject {
     }, 3000);
   }
 
+  /**
+   * Spielt die Angriffsanimation ab.
+   */
   playAttackAnimation() {
     this.attackInterval = setInterval(() => {
       this.playAnimation(this.IMAGES_ATTACK);
-    }, 100); // Schneller Wechsel für flüssige Animation
+    }, 100);
   }
 
+  /**
+   * Beginnt den Angriffszyklus des Endbosses.
+   */
   startAttackCycle() {
     this.attackCooldown = true;
     this.isAttacking = true;
@@ -165,27 +201,36 @@ class Endboss extends MovableObject {
 
     setTimeout(() => {
       this.completeAttackCycle();
-    }, 1000); // Angriffsdauer
+    }, 1000);
   }
 
+  /**
+   * Beendet den Angriffszyklus und führt eine schnelle Bewegung aus.
+   */
   completeAttackCycle() {
     clearInterval(this.attackInterval);
 
     if (this.otherDirection) {
-      this.moveRightQuickly(); // Schneller Angriff nach rechts
+      this.moveRightQuickly();
     } else {
-      this.moveLeftQuickly(); // Schneller Angriff nach links
+      this.moveLeftQuickly();
     }
 
     this.isAttacking = false;
     this.attackCooldown = false;
   }
 
+  /**
+   * Bewegt den Endboss schnell nach rechts.
+   */
   moveRightQuickly() {
-    this.x += 150; // Schnelle Bewegung nach rechts
+    this.x += 150;
   }
 
+  /**
+   * Bewegt den Endboss schnell nach links.
+   */
   moveLeftQuickly() {
-    this.x -= 150; // Schnelle Bewegung nach links
+    this.x -= 150;
   }
 }
