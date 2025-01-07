@@ -16,26 +16,10 @@ function init() {
  * Startet das Spiel, indem die Welt erstellt und der Startbildschirm ausgeblendet wird.
  */
 function startGame() {
-  hideStartScreen();
   resetGame();
+  hideStartScreen();
   world = new World(canvas, keyboard);
   gameRunning = true;
-}
-
-/**
- * Startet das Spiel neu, indem es zurückgesetzt und erneut gestartet wird.
- */
-function restartGame() {
-  resetGame();
-  startGame();
-}
-
-/**
- * Kehrt zum Hauptmenü zurück, indem das Spiel zurückgesetzt und der Startbildschirm angezeigt wird.
- */
-function goToMainMenu() {
-  resetGame();
-  showStartScreen();
 }
 
 /**
@@ -44,11 +28,28 @@ function goToMainMenu() {
 function resetGame() {
   if (world) {
     world.clearAllIntervals();
+    world = null;
   }
-  gameRunning = false;
+  level1 = resetLevel();
   clearAllIntervals();
+  gameRunning = false;
+  hideEndScreens();
+}
+
+/**
+ * Versteckt alle Endbildschirme.
+ */
+function hideEndScreens() {
   document.getElementById("game-over-screen").classList.add("hidden");
   document.getElementById("you-win-screen").classList.add("hidden");
+}
+
+/**
+ * Kehrt zum Hauptmenü zurück, indem das Spiel zurückgesetzt und der Startbildschirm angezeigt wird.
+ */
+function goToMainMenu() {
+  resetGame();
+  showStartScreen();
 }
 
 /**
@@ -83,7 +84,7 @@ function hideStartScreen() {
  * @param {string} id - Die ID des zu öffnenden Overlays.
  */
 function openOverlay(id) {
-  document.getElementById(id).classList.remove('hidden');
+  document.getElementById(id).classList.remove("hidden");
 }
 
 /**
@@ -91,8 +92,45 @@ function openOverlay(id) {
  * @param {string} id - Die ID des zu schließenden Overlays.
  */
 function closeOverlay(id) {
-  document.getElementById(id).classList.add('hidden');
+  document.getElementById(id).classList.add("hidden");
 }
+
+/**
+ * Initialisiert die Stummschaltfunktionalität, wenn das DOM vollständig geladen ist.
+ */
+document.addEventListener("DOMContentLoaded", () => {
+  const muteButton = document.getElementById("mute");
+  const muteIcon = document.getElementById("mute-icon");
+  let isMuted = false;
+
+  /**
+   * Event-Listener für den Klick auf den Stummschalt-Button.
+   * Schaltet zwischen "stumm" und "laut" um und aktualisiert das Symbol entsprechend.
+   */
+  muteButton.addEventListener("click", () => {
+    isMuted = !isMuted;
+
+    if (isMuted) {
+      muteIcon.src = "img_pollo_locco/img/10_project_img/soundon.svg";
+      muteIcon.alt = "Sound On";
+      muteAllSounds();
+    } else {
+      muteIcon.src = "img_pollo_locco/img/10_project_img/mute.svg";
+      muteIcon.alt = "Mute";
+      unmuteAllSounds();
+    }
+  });
+
+  function muteAllSounds() {
+    document.querySelectorAll("audio").forEach((audio) => (audio.muted = true));
+  }
+
+  function unmuteAllSounds() {
+    document
+      .querySelectorAll("audio")
+      .forEach((audio) => (audio.muted = false));
+  }
+});
 
 window.addEventListener("keydown", (event) => {
   if (event.code === "ArrowRight") keyboard.RIGHT = true;

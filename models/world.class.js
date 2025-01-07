@@ -1,5 +1,5 @@
 /**
- * Repräsentiert die Spielwelt, einschließlich des Charakters, Levels und Interaktionen.
+ * Eigenschaften der Spielwelt, einschließlich des Charakters, Levels und Interaktionen.
  */
 class World {
   character = new Character();
@@ -249,7 +249,7 @@ class World {
   }
 
   /**
-   * Tötet einen Gegner, falls er noch nicht tot ist.
+   * Tötet einen Gegner und entfernt diesen aus der Spielwelt.
    * @param {MovableObject} enemy - Der Gegner.
    */
   killEnemy(enemy) {
@@ -266,7 +266,7 @@ class World {
   }
 
   /**
-   * Prüft auf sammelbare Objekte (Münzen, Flaschen).
+   * Prüft sammelbare Objekte (Münzen, Flaschen).
    */
   checkCollectibles() {
     this.checkBottleCollectibles();

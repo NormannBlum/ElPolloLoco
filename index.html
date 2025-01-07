@@ -46,17 +46,32 @@
           <div id="top-buttons">
             <button id="start-button" onclick="startGame()">Start</button>
             <div id="top-left-buttons">
-              <button id="controls" class="icon-button" onclick="openOverlay('controls-overlay')">
-                <img src="img_pollo_locco/img/10_project_img/controls.svg" alt="Steuerung" />
-            </button>
-            <button id="impressum" class="icon-button" onclick="openOverlay('impressum-overlay')">
-                <img src="img_pollo_locco/img/10_project_img/imprint.svg" alt="Impressum" />
-            </button>
+              <button
+                id="controls"
+                class="icon-button"
+                onclick="openOverlay('controls-overlay')"
+              >
+                <img
+                  src="img_pollo_locco/img/10_project_img/controls.svg"
+                  alt="Steuerung"
+                />
+              </button>
+              <button
+                id="impressum"
+                class="icon-button"
+                onclick="openOverlay('impressum-overlay')"
+              >
+                <img
+                  src="img_pollo_locco/img/10_project_img/imprint.svg"
+                  alt="Impressum"
+                />
+              </button>
             </div>
             <button id="mute" class="icon-button">
               <img
                 src="img_pollo_locco/img/10_project_img/mute.svg"
                 alt="Mute"
+                id="mute-icon"
               />
             </button>
           </div>
@@ -71,7 +86,7 @@
           alt="Game Over"
         />
         <div class="button-container">
-          <button onclick="restartGame()">New Game</button>
+          <button onclick="startGame()">New Game</button>
           <button onclick="goToMainMenu()">Main Menu</button>
         </div>
       </div>
@@ -82,7 +97,7 @@
           alt="You Win"
         />
         <div class="button-container">
-          <button onclick="restartGame()">New Game</button>
+          <button onclick="startGame()">New Game</button>
           <button onclick="goToMainMenu()">Main Menu</button>
         </div>
       </div>
