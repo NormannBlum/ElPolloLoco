@@ -11,6 +11,7 @@
     />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="styles/assets.css" />
+    <link rel="stylesheet" href="styles/responsive.css" />
     <script src="models/drawable-object.class.js"></script>
     <script src="models/movable-object.class.js"></script>
     <script src="models/bottle.class.js"></script>
@@ -131,5 +132,29 @@
         </button>
       </div>
     </div>
+
+    <div id="orientation-warning">
+      <p>Please rotate your device to landscape mode.</p>
+    </div>
+
+    <div class="mobile-button-container">
+      <div class="mobile-button-group left">
+          <button ontouchstart="keyboard.LEFT = true" ontouchend="keyboard.LEFT = false">
+              <img src="img_pollo_locco/img/10_project_img/arrowleft.svg" alt="Left">
+          </button>
+          <button ontouchstart="keyboard.RIGHT = true" ontouchend="keyboard.RIGHT = false">
+              <img src="img_pollo_locco/img/10_project_img/arrowright.svg" alt="Right">
+          </button>
+      </div>
+      <div class="mobile-button-group right">
+          <button ontouchstart="keyboard.SPACE = true" ontouchend="keyboard.SPACE = false">
+              <img src="img_pollo_locco/img/10_project_img/arrowup.svg" alt="Jump">
+          </button>
+          <button ontouchstart="keyboard.D = true" ontouchend="keyboard.D = false">
+              <img src="img_pollo_locco/img/10_project_img/throwbottle.svg" alt="Attack">
+          </button>
+      </div>
+  </div>
+  
   </body>
 </html>

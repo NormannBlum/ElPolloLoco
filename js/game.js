@@ -149,3 +149,15 @@ window.addEventListener("keyup", (event) => {
   if (event.code === "Space") keyboard.SPACE = false;
   if (event.code === "KeyD") keyboard.D = false;
 });
+
+/**
+ * Überprüft die Bildschirmorientierung und zeigt eine Warnung an, wenn das Gerät im Hochformat ist.
+ */
+function checkOrientation() {
+  const warning = document.getElementById("orientation-warning");
+  if (window.innerWidth < 1200 && window.innerHeight > window.innerWidth) {
+    warning.classList.add("visible");
+  } else {
+    warning.classList.remove("visible");
+  }
+}

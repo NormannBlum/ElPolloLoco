@@ -1,0 +1,33 @@
+@media only screen and (max-width: 720px) {
+    canvas {
+        width: 100%; 
+    }
+}
+
+@media only screen and (max-height: 480px) {
+    canvas {
+        height: 100vh;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .mobile-button-container {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 666px) and (max-width: 1024px) and (orientation: landscape) {
+    h1 {
+        display: none;
+    }
+
+    canvas, #game-over-screen {
+        /* width: 100vw; */
+        height: 100vh;
+    }
+
+    #game-over-screen img {
+        height: 100vh;
+        width: 100vw;
+    }
+}

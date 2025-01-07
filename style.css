@@ -17,6 +17,15 @@ body {
     font-family: 'rye', Arial, Helvetica, sans-serif;
 }
 
+canvas {
+    position: absolute;
+    width: 720px;
+    height: 480px;
+    background-color: black;
+    z-index: 1;
+    display: block;
+}
+
 h1 {
     color: rgb(26, 16, 3);
     font-size: 64px;
@@ -31,14 +40,8 @@ h1 {
     width: 100vw;
     height: 100vh;
     position: relative;
-}
-
-canvas {
-    position: absolute;
-    width: 720px;
-    height: 480px;
-    background-color: black;
-    z-index: 1;
+    margin: 0;
+    padding: 0;
 }
 
 #start-screen {
@@ -77,7 +80,6 @@ canvas {
     width: 100vw;
     height: 40vh;
     object-fit: cover;
-
 }
 
 #you-win-screen img {
