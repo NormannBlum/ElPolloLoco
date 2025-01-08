@@ -132,18 +132,30 @@ function checkOrientation() {
 window.addEventListener("resize", checkOrientation);
 window.addEventListener("load", checkOrientation);
 
-let backgroundMusic = new Audio('audio/background_music.mp3');
+/**
+ * Hintergrundmusik für das Spiel.
+ * @type {HTMLAudioElement}
+ */
+let backgroundMusic = new Audio('audio/backgroundsound.mp3');
+
+/**
+ * Sammlung von Soundeffekten im Spiel.
+ * @type {Object<string, HTMLAudioElement>}
+ */
 let sounds = {
-  throwBottle: new Audio('audio/throw_bottle.mp3'),
+  throwBottle: new Audio('audio/throw.wav'),
   jump: new Audio('audio/jump.wav'),
-  snore: new Audio('audio/snore.mp3'),
-  hurt: new Audio('audio/hurt.mp3'),
-  dead: new Audio('audio/dead.mp3'),
-  chickenDead: new Audio('audio/chicken_dead.mp3'),
-  endbossHurt: new Audio('audio/endboss_hurt.mp3'),
-  endbossDead: new Audio('audio/endboss_dead.mp3')
+  snore: new Audio('audio/snore.wav'),
+  hurt: new Audio('audio/characterhurt.wav'),
+  dead: new Audio('audio/characterdead.wav'),
+  chickenDead: new Audio('audio/chickenhurt.wav'),
+  endbossHurt: new Audio('audio/endbosshurt.wav'),
+  endbossDead: new Audio('audio/endbossdead.wav')
 };
 
+/**
+ * Initialisiert die Audiosteuerung, sobald das DOM vollständig geladen ist.
+ */
 document.addEventListener("DOMContentLoaded", () => {
   backgroundMusic.loop = true;
   backgroundMusic.volume = 0.5;
@@ -153,6 +165,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const muteIcon = document.getElementById("mute-icon");
   let isMuted = false;
 
+  /**
+   * Event-Listener für den Stummschalt-Button.
+   * Schaltet zwischen "Stumm" und "Laut" und aktualisiert das Symbol entsprechend.
+   */
   muteButton.addEventListener("click", () => {
     isMuted = !isMuted;
 
@@ -165,14 +181,19 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  /**
+   * Schaltet alle Soundeffekte und die Hintergrundmusik stumm.
+   */
   function muteAllSounds() {
     Object.values(sounds).forEach((sound) => (sound.muted = true));
     backgroundMusic.muted = true;
   }
 
+  /**
+   * Aktiviert alle Soundeffekte und die Hintergrundmusik.
+   */
   function unmuteAllSounds() {
     Object.values(sounds).forEach((sound) => (sound.muted = false));
     backgroundMusic.muted = false;
   }
 });
-

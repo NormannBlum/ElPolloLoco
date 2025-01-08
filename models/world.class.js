@@ -323,7 +323,7 @@ class World {
     return (
       this.keyboard.D &&
       this.bottles > 0 &&
-      currentTime - this.lastThrowTime > 300
+      currentTime - this.lastThrowTime > 500
     );
   }
 
