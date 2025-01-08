@@ -96,8 +96,19 @@ class World {
   stopGame(win = false) {
     this.clearAllIntervals();
     this.gameOver = true;
+    this.stopAllSounds(); // Neue Methode, um alle Sounds zu stoppen
     this.showEndScreen(win);
   }
+  
+  stopAllSounds() {
+    // Stoppt alle Sounds und setzt sie zurück
+    Object.values(sounds).forEach((sound) => {
+      sound.pause();
+      sound.currentTime = 0; // Zurücksetzen auf Anfang
+    });
+    backgroundMusic.pause();
+    backgroundMusic.currentTime = 0;
+  }  
 
   /**
    * Zeigt den Endbildschirm (Sieg oder Niederlage).

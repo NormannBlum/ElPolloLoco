@@ -29,6 +29,7 @@ function startGame() {
 function resetGame() {
   if (world) {
     world.clearAllIntervals();
+    world.stopAllSounds(); // Sounds stoppen
     world = null;
   }
   level1 = resetLevel();
@@ -173,10 +174,10 @@ document.addEventListener("DOMContentLoaded", () => {
     isMuted = !isMuted;
 
     if (isMuted) {
-      muteIcon.src = "img_pollo_locco/img/10_project_img/soundon.svg";
+      muteIcon.src = "img_pollo_locco/img/10_project_img/mute.svg";
       muteAllSounds();
     } else {
-      muteIcon.src = "img_pollo_locco/img/10_project_img/mute.svg";
+      muteIcon.src = "img_pollo_locco/img/10_project_img/soundon.svg";
       unmuteAllSounds();
     }
   });
