@@ -3,6 +3,7 @@ class Endboss extends MovableObject {
   width = 250;
   y = 55;
   energy = 25;
+  speed = 0.6;
 
   IMAGES_ALERT = [
     "img_pollo_locco/img/4_enemie_boss_chicken/2_alert/G5.png",
@@ -140,17 +141,17 @@ class Endboss extends MovableObject {
     setInterval(() => {
       this.updateMovementDirection();
       this.playWalkingAnimation();
-    }, 100);
-  
+    }, 250);
+
     this.initiateAttacking();
   }
-  
+
   /**
    * Aktualisiert die Bewegungsrichtung basierend auf der Position des Charakters.
    */
   updateMovementDirection() {
     if (!this.hadFirstContact || this.isAttacking) return;
-  
+
     if (this.character.x < this.x) {
       this.moveLeft();
       this.otherDirection = false;
@@ -159,11 +160,11 @@ class Endboss extends MovableObject {
       this.otherDirection = true;
     }
   }
-  
+
   playWalkingAnimation() {
     this.playAnimation(this.IMAGES_WALKING);
   }
-  
+
   /**
    * Startet den Angriffsmodus des Endbosses.
    */
@@ -181,7 +182,7 @@ class Endboss extends MovableObject {
   playAttackAnimation() {
     this.attackInterval = setInterval(() => {
       this.playAnimation(this.IMAGES_ATTACK);
-    }, 100);
+    }, 500);
   }
 
   /**
@@ -193,33 +194,9 @@ class Endboss extends MovableObject {
 
     this.playAttackAnimation();
 
-    setTimeout(() => {
-      this.completeAttackCycle();
-    }, 1000);
-  }
-
-  /**
-   * Beendet den Angriffszyklus und führt eine schnelle Bewegung aus.
-   */
-  completeAttackCycle() {
-    clearInterval(this.attackInterval);
-
-    if (this.otherDirection) {
-      this.moveRightQuickly();
-    } else {
-      this.moveLeftQuickly();
-    }
-
-    this.isAttacking = false;
-    this.attackCooldown = false;
-  }
-
-  moveRightQuickly() {
-    this.x += 150;
-  }
-
-  moveLeftQuickly() {
-    this.x -= 150;
+    // setTimeout(() => {
+    //   this.completeAttackCycle();
+    // }, 1000);
   }
 
   hit() {
@@ -230,5 +207,28 @@ class Endboss extends MovableObject {
       sounds.endbossDead.play();
     }
   }
-  
+
+  /**
+   * Beendet den Angriffszyklus und führt eine schnelle Bewegung aus.
+   */
+  // completeAttackCycle() {
+  //   clearInterval(this.attackInterval);
+
+  //   if (this.otherDirection) {
+  //     this.moveRightQuickly();
+  //   } else {
+  //     this.moveLeftQuickly();
+  //   }
+
+  //   this.isAttacking = false;
+  //   this.attackCooldown = false;
+  // }
+
+  // moveRightQuickly() {
+  //   this.x += 150;
+  // }
+
+  // moveLeftQuickly() {
+  //   this.x -= 150;
+  // }
 }
