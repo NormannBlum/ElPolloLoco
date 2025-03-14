@@ -70,7 +70,7 @@ class Character extends MovableObject {
   ];
 
   world;
-  walking_sound = new Audio("audio/walking1.mp3");
+  // walking_sound = new Audio("audio/walking1.mp3");
 
   constructor() {
     super().loadImage("img_pollo_locco/img/2_character_pepe/2_walk/W-21.png");
@@ -104,7 +104,7 @@ class Character extends MovableObject {
    */
   initMovement() {
     setInterval(() => {
-      this.walking_sound.pause();
+      sounds.walking.pause();
       this.handleRightMovement();
       this.handleLeftMovement();
       this.handleJump();
@@ -119,7 +119,7 @@ class Character extends MovableObject {
     if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
       this.moveRight();
       this.otherDirection = false;
-      this.walking_sound.play();
+      sounds.walking.play();
       this.lastActionTime = Date.now();
     }
   }
@@ -131,7 +131,7 @@ class Character extends MovableObject {
     if (this.world.keyboard.LEFT && this.x > 0) {
       this.moveLeft();
       this.otherDirection = true;
-      this.walking_sound.play();
+      sounds.walking.play();
       this.lastActionTime = Date.now();
     }
   }

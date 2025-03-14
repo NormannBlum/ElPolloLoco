@@ -1,7 +1,7 @@
 #start-button {
     position: absolute;
-    top: 10px;
-    left: 50%;
+    top: 0%;
+    right: 0%;
     transform: translateX(-50%);
 }
 
@@ -60,10 +60,18 @@
 
 #mute {
     position: absolute;
-    /* top: 12%;  */
-    right: 8%;
+    top: 65px; 
+    right: 10px;
     cursor: pointer;
     z-index: 10;
+    padding: 4px 12px;
+    border: 2px solid #8B4513;
+    border-radius: 10px;
+    background-color: #FFD700;
+    font-family: 'Courier New', Courier, monospace;
+    text-transform: uppercase;
+    box-shadow: 2px 2px 0 #8B4513;
+    transition: all 0.2s ease-in-out;
 }
 
 .icon-button img {

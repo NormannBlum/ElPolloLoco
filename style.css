@@ -37,8 +37,8 @@ h1 {
     display: flex;
     justify-content: center;
     /* align-items: center;  */
-    width: 100vw;
-    height: 100vh;
+    width: 720px;
+    height: 480px;
     position: relative;
     margin: 0;
     padding: 0;
@@ -48,7 +48,7 @@ h1 {
     position: absolute;
     width: 720px;
     height: 480px;
-    transform: translate(0%, -3.2%);
+    /* transform: translate(0%, -3.2%); */
     /* display: flex; */
     flex-direction: column;
     justify-content: center;
@@ -71,7 +71,7 @@ h1 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    z-index: 2;
+    z-index: 20;
 }
 
 #game-over-screen img {

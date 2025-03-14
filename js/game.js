@@ -4,6 +4,19 @@ let keyboard = new Keyboard();
 let activeIntervals = [];
 let gameRunning = false;
 
+let backgroundMusic = new Audio("audio/backgroundsound.mp3");
+let sounds = {
+  walking: new Audio("audio/walking1.mp3"),
+  throwBottle: new Audio("audio/throw.wav"),
+  jump: new Audio("audio/jump.wav"),
+  snore: new Audio("audio/snore.wav"),
+  hurt: new Audio("audio/characterhurt.wav"),
+  dead: new Audio("audio/characterdead.wav"),
+  chickenDead: new Audio("audio/chickenhurt.wav"),
+  endbossHurt: new Audio("audio/endbosshurt.wav"),
+  endbossDead: new Audio("audio/endbossdead.wav"),
+};
+
 /**
  * Initialisiert das Spiel und zeigt den Startbildschirm an.
  */
@@ -97,35 +110,17 @@ function closeOverlay(id) {
   document.getElementById(id).classList.add("hidden");
 }
 
-window.addEventListener("keydown", (event) => {
-  if (event.code === "ArrowRight") keyboard.RIGHT = true;
-  if (event.code === "ArrowLeft") keyboard.LEFT = true;
-  if (event.code === "ArrowUp") keyboard.UP = true;
-  if (event.code === "ArrowDown") keyboard.DOWN = true;
-  if (event.code === "Space") keyboard.SPACE = true;
-  if (event.code === "KeyD") keyboard.D = true;
-});
-
-window.addEventListener("keyup", (event) => {
-  if (event.code === "ArrowRight") keyboard.RIGHT = false;
-  if (event.code === "ArrowLeft") keyboard.LEFT = false;
-  if (event.code === "ArrowUp") keyboard.UP = false;
-  if (event.code === "ArrowDown") keyboard.DOWN = false;
-  if (event.code === "Space") keyboard.SPACE = false;
-  if (event.code === "KeyD") keyboard.D = false;
-});
-
 /**
  * Überprüft die Bildschirmorientierung und zeigt eine Warnung an, wenn das Gerät im Hochformat ist.
  */
 function checkOrientation() {
   const warning = document.getElementById("orientation-warning");
-  
+
   // Prüfen, ob das Gerät im Hochformat ist und die Breite < 1200px
   if (window.innerWidth < 1200 && window.innerWidth < window.innerHeight) {
-      warning.classList.add("visible"); // Warnung anzeigen
+    warning.classList.add("visible"); // Warnung anzeigen
   } else {
-      warning.classList.remove("visible"); // Warnung ausblenden
+    warning.classList.remove("visible"); // Warnung ausblenden
   }
 }
 
@@ -134,37 +129,32 @@ window.addEventListener("resize", checkOrientation);
 window.addEventListener("load", checkOrientation);
 
 /**
- * Hintergrundmusik für das Spiel.
- * @type {HTMLAudioElement}
- */
-let backgroundMusic = new Audio('audio/backgroundsound.mp3');
-
-/**
- * Sammlung von Soundeffekten im Spiel.
- * @type {Object<string, HTMLAudioElement>}
- */
-let sounds = {
-  throwBottle: new Audio('audio/throw.wav'),
-  jump: new Audio('audio/jump.wav'),
-  snore: new Audio('audio/snore.wav'),
-  hurt: new Audio('audio/characterhurt.wav'),
-  dead: new Audio('audio/characterdead.wav'),
-  chickenDead: new Audio('audio/chickenhurt.wav'),
-  endbossHurt: new Audio('audio/endbosshurt.wav'),
-  endbossDead: new Audio('audio/endbossdead.wav')
-};
-
-/**
  * Initialisiert die Audiosteuerung, sobald das DOM vollständig geladen ist.
  */
 document.addEventListener("DOMContentLoaded", () => {
   backgroundMusic.loop = true;
   backgroundMusic.volume = 0.5;
-  backgroundMusic.play();
+
+  let hasInteracted = false;
+  let isMuted = true;
 
   const muteButton = document.getElementById("mute");
   const muteIcon = document.getElementById("mute-icon");
-  let isMuted = false;
+
+  if (isMuted) {
+    muteAllSounds();
+  }
+  function startBackgroundMusic() {
+    if (!hasInteracted) {
+      backgroundMusic
+        .play()
+        .catch((error) => console.log("Autoplay blockiert:", error));
+      hasInteracted = true; // Flag setzen, damit Musik nur einmal gestartet wird
+    }
+  }
+
+  document.addEventListener("click", startBackgroundMusic);
+  document.addEventListener("keydown", startBackgroundMusic);
 
   /**
    * Event-Listener für den Stummschalt-Button.
@@ -180,6 +170,8 @@ document.addEventListener("DOMContentLoaded", () => {
       muteIcon.src = "img_pollo_locco/img/10_project_img/soundon.svg";
       unmuteAllSounds();
     }
+
+    muteButton.blur();
   });
 
   /**
@@ -197,4 +189,32 @@ document.addEventListener("DOMContentLoaded", () => {
     Object.values(sounds).forEach((sound) => (sound.muted = false));
     backgroundMusic.muted = false;
   }
+});
+
+/**
+ * Reagiert auf gedrückte Tasten und setzt die entsprechende Eigenschaft im `keyboard`-Objekt auf `true`.
+ *
+ * @param {KeyboardEvent} event - Das Tastatur-Ereignis.
+ */
+window.addEventListener("keydown", (event) => {
+  if (event.code === "ArrowRight") keyboard.RIGHT = true;
+  if (event.code === "ArrowLeft") keyboard.LEFT = true;
+  if (event.code === "ArrowUp") keyboard.UP = true;
+  if (event.code === "ArrowDown") keyboard.DOWN = true;
+  if (event.code === "Space") keyboard.SPACE = true;
+  if (event.code === "KeyD") keyboard.D = true;
+});
+
+/**
+ * Reagiert auf losgelassene Tasten und setzt die entsprechende Eigenschaft im `keyboard`-Objekt auf `false`.
+ *
+ * @param {KeyboardEvent} event - Das Tastatur-Ereignis.
+ */
+window.addEventListener("keyup", (event) => {
+  if (event.code === "ArrowRight") keyboard.RIGHT = false;
+  if (event.code === "ArrowLeft") keyboard.LEFT = false;
+  if (event.code === "ArrowUp") keyboard.UP = false;
+  if (event.code === "ArrowDown") keyboard.DOWN = false;
+  if (event.code === "Space") keyboard.SPACE = false;
+  if (event.code === "KeyD") keyboard.D = false;
 });
