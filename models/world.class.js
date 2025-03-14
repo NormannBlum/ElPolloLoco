@@ -100,7 +100,7 @@ class World {
   stopGame(win = false) {
     this.clearAllIntervals();
     this.gameOver = true;
-    this.stopAllSounds(); // Neue Methode, um alle Sounds zu stoppen
+    this.stopAllSounds();
     this.showEndScreen(win);
   }
 
@@ -133,36 +133,67 @@ class World {
   }
 
   /**
-   * Prüft, ob der Charakter oder der Endboss gestorben ist und das Spiel beendet werden muss.
+   * Überprüft, ob das Spiel vorbei ist, basierend auf dem Status des Charakters oder des Endbosses.
+   *
+   * - Falls der Charakter tot ist, wird die Todesanimation abgespielt und das Spiel gestoppt.
+   * - Falls der Endboss besiegt wurde, wird seine Todesanimation abgespielt und das Spiel gestoppt.
+   *
+   * @returns {void}
    */
   checkGameOver() {
     if (this.character.isDead()) {
-      this.handleDeath(false);
+      this.character.playAnimation(this.character.IMAGES_DEAD);
+
+      setTimeout(() => {
+        this.stopGame(false);
+      }, 1500);
     } else if (this.isEndbossDead()) {
-      this.handleDeath(true);
+      const endboss = this.level.enemies.find(
+        (enemy) => enemy instanceof Endboss
+      );
+      if (endboss) {
+        endboss.playAnimation(endboss.IMAGES_DEAD);
+      }
+
+      setTimeout(() => {
+        this.stopGame(true);
+      }, 1500);
     }
   }
+
+  /**
+   * Prüft, ob der Charakter oder der Endboss gestorben ist und das Spiel beendet werden muss.
+   */
+  // checkGameOver() {
+  //   if (this.character.isDead()) {
+  //     this.handleDeath(false);
+  //   } else if (this.isEndbossDead()) {
+  //     this.handleDeath(true);
+  //   }
+  // }
 
   /**
    * Beendet das Spiel mit einem Sieg oder einer Niederlage.
    * @param {boolean} win - Ob der Spieler gewonnen hat.
    */
-  handleDeath(win) {
-    this.gameOver = true;
+  // handleDeath(win) {
+  //   this.gameOver = true;
 
-    if (win) {
-      const endboss = this.level.enemies.find(
-        (enemy) => enemy instanceof Endboss && enemy.isDead()
-      );
-      if (endboss) {
-        endboss.playAnimation(endboss.IMAGES_DEAD);
-      }
-    } else {
-      this.character.playAnimation(this.character.IMAGES_DEAD);
-    }
+  //   if (win) {
+  //     const endboss = this.level.enemies.find(
+  //       (enemy) => enemy instanceof Endboss && enemy.isDead()
+  //     );
+  //     if (endboss) {
+  //       endboss.playAnimation(endboss.IMAGES_DEAD);
+  //     }
+  //   } else {
+  //     this.character.playAnimation(this.character.IMAGES_DEAD);
+  //   }
 
-    this.stopGame(win);
-  }
+  //   setTimeout(() => {
+  //     this.stopGame(win);
+  // }, 2000);
+  // }
 
   /**
    * Überprüft, ob der Endboss besiegt wurde.
@@ -371,6 +402,7 @@ class World {
     this.bottles--;
     this.bottlesStatusBar.setPercentage((this.bottles / this.maxBottles) * 100);
   }
+
   /**
    * Prüft, ob der Endboss aktiviert werden soll.
    */

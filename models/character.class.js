@@ -70,7 +70,6 @@ class Character extends MovableObject {
   ];
 
   world;
-  // walking_sound = new Audio("audio/walking1.mp3");
 
   constructor() {
     super().loadImage("img_pollo_locco/img/2_character_pepe/2_walk/W-21.png");

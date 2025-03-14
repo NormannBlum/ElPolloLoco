@@ -42,7 +42,7 @@ function startGame() {
 function resetGame() {
   if (world) {
     world.clearAllIntervals();
-    world.stopAllSounds(); // Sounds stoppen
+    world.stopAllSounds();
     world = null;
   }
   level1 = resetLevel();
@@ -118,9 +118,9 @@ function checkOrientation() {
 
   // Prüfen, ob das Gerät im Hochformat ist und die Breite < 1200px
   if (window.innerWidth < 1200 && window.innerWidth < window.innerHeight) {
-    warning.classList.add("visible"); // Warnung anzeigen
+    warning.classList.add("visible");
   } else {
-    warning.classList.remove("visible"); // Warnung ausblenden
+    warning.classList.remove("visible");
   }
 }
 
@@ -136,7 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
   backgroundMusic.volume = 0.5;
 
   let hasInteracted = false;
-  let isMuted = true;
+  let isMuted = false;
 
   const muteButton = document.getElementById("mute");
   const muteIcon = document.getElementById("mute-icon");
@@ -149,7 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
       backgroundMusic
         .play()
         .catch((error) => console.log("Autoplay blockiert:", error));
-      hasInteracted = true; // Flag setzen, damit Musik nur einmal gestartet wird
+      hasInteracted = true;
     }
   }
 

@@ -147,7 +147,7 @@ class Endboss extends MovableObject {
    */
   startWalking() {
     setInterval(() => {
-      this.updateMovementDirection();
+      // this.updateMovementDirection();
       this.playWalkingAnimation();
     }, 250);
 
@@ -157,17 +157,17 @@ class Endboss extends MovableObject {
   /**
    * Aktualisiert die Bewegungsrichtung basierend auf der Position des Charakters.
    */
-  updateMovementDirection() {
-    if (!this.hadFirstContact || this.isAttacking) return;
+  // updateMovementDirection() {
+  //   if (!this.hadFirstContact || this.isAttacking) return;
 
-    if (this.character.x < this.x) {
-      this.moveLeft();
-      this.otherDirection = false;
-    } else if (this.character.x > this.x) {
-      this.moveRight();
-      this.otherDirection = true;
-    }
-  }
+  //   if (this.character.x < this.x) {
+  //     this.moveLeft();
+  //     this.otherDirection = false;
+  //   } else if (this.character.x > this.x) {
+  //     this.moveRight();
+  //     this.otherDirection = true;
+  //   }
+  // }
 
   /**
    * Spielt die Laufanimation des Objekts ab.

@@ -74,6 +74,12 @@
     transition: all 0.2s ease-in-out;
 }
 
+#mute:hover {
+    background-color: #FFA500;
+    transform: translateY(-2px);
+    box-shadow: 3px 3px 0 #8B4513;
+}
+
 .icon-button img {
     width: 30px;
     height: 30px;
