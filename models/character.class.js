@@ -244,19 +244,32 @@ class Character extends MovableObject {
     }
   }
 
+  /**
+   * Lässt das Objekt springen, indem es die vertikale Geschwindigkeit erhöht.
+   * @returns {void}
+   */
   jump() {
     this.speedY = 30;
   }
 
+  /**
+   * Verursacht Schaden am Objekt, indem die Energie um 5 reduziert wird.
+   * Spielt einen Treffer-Sound ab und setzt die Energie auf 0, falls sie negativ wird.
+   * Der Treffer kann nur alle 200 Millisekunden erfolgen, um mehrfachen Schaden in kurzer Zeit zu verhindern.
+   *
+   * @returns {void}
+   */
   hit() {
     const now = new Date().getTime();
     if (now - this.lastHit > 200) {
       this.energy -= 5;
       sounds.hurt.play();
+
       if (this.energy < 0) {
         this.energy = 0;
         sounds.dead.play();
       }
+
       this.lastHit = now;
     }
   }

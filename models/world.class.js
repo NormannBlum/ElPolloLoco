@@ -85,6 +85,10 @@ class World {
     return id;
   }
 
+  /**
+   * Beendet alle aktiven Intervalle, die in der `intervals`-Liste gespeichert sind.
+   * Dies wird verwendet, um sicherzustellen, dass keine laufenden Intervalle mehr existieren.
+   */
   clearAllIntervals() {
     this.intervals.forEach(clearInterval);
   }
@@ -99,16 +103,19 @@ class World {
     this.stopAllSounds(); // Neue Methode, um alle Sounds zu stoppen
     this.showEndScreen(win);
   }
-  
+
+  /**
+   * Stoppt alle Sounds und setzt sie auf den Anfang zurück.
+   * Dies beinhaltet alle Sounds im `sounds`-Objekt sowie die Hintergrundmusik.
+   */
   stopAllSounds() {
-    // Stoppt alle Sounds und setzt sie zurück
     Object.values(sounds).forEach((sound) => {
       sound.pause();
-      sound.currentTime = 0; // Zurücksetzen auf Anfang
+      sound.currentTime = 0;
     });
     backgroundMusic.pause();
     backgroundMusic.currentTime = 0;
-  }  
+  }
 
   /**
    * Zeigt den Endbildschirm (Sieg oder Niederlage).
@@ -338,6 +345,11 @@ class World {
     );
   }
 
+  /**
+   * Wirft eine Flasche in die aktuelle Blickrichtung des Charakters.
+   * Die Flasche wird als ThrowableObject erstellt und der Liste der werfbaren Objekte hinzugefügt.
+   * Zusätzlich wird der Zeitpunkt des letzten Wurfs gespeichert und ein Wurfgeräusch abgespielt.
+   */
   throwBottle() {
     this.lastThrowTime = new Date().getTime();
     let direction = this.character.otherDirection ? -1 : 1;
@@ -351,11 +363,14 @@ class World {
     this.throwableObjects.push(bottle);
   }
 
+  /**
+   * Aktualisiert den Flaschenstatus nach einem Wurf.
+   * Verringert die Anzahl der verfügbaren Flaschen und aktualisiert den Anzeigestatus der Flaschenleiste.
+   */
   updateBottleStatus() {
     this.bottles--;
     this.bottlesStatusBar.setPercentage((this.bottles / this.maxBottles) * 100);
   }
-
   /**
    * Prüft, ob der Endboss aktiviert werden soll.
    */
@@ -397,6 +412,9 @@ class World {
     });
   }
 
+  /**
+   * Löscht den gesamten Inhalt des Canvas, indem ein rechteckiger Bereich über die gesamte Canvas-Breite und -Höhe gelöscht wird.
+   */
   clearCanvas() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
   }

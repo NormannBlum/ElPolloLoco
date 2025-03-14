@@ -17,7 +17,9 @@ class Bottle extends DrawableObject {
    * @param {number} y - Die y-Position der Flasche.
    */
   constructor(x, y) {
-    super().loadImage("img_pollo_locco/img/6_salsa_bottle/1_salsa_bottle_on_ground.png");
+    super().loadImage(
+      "img_pollo_locco/img/6_salsa_bottle/1_salsa_bottle_on_ground.png"
+    );
     this.loadImages(this.IMAGES_BOTTLE);
     this.x = x;
     this.y = y;
@@ -26,6 +28,12 @@ class Bottle extends DrawableObject {
     this.startAnimation();
   }
 
+  /**
+   * Startet die Animation der Flasche.
+   * Die Animation wird alle 400 Millisekunden aktualisiert.
+   *
+   * @returns {void}
+   */
   startAnimation() {
     setInterval(() => {
       this.playAnimation(this.IMAGES_BOTTLE);

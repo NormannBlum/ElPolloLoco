@@ -137,6 +137,14 @@ class Endboss extends MovableObject {
     }
   }
 
+  /**
+   * Startet das Gehen des Objekts.
+   * Führt in regelmäßigen Abständen die Aktualisierung der Bewegungsrichtung
+   * sowie die Abspielung der Laufanimation aus.
+   *
+   * Zusätzlich wird das Angriffsverhalten initialisiert.
+   * @returns {void}
+   */
   startWalking() {
     setInterval(() => {
       this.updateMovementDirection();
@@ -161,6 +169,11 @@ class Endboss extends MovableObject {
     }
   }
 
+  /**
+   * Spielt die Laufanimation des Objekts ab.
+   * Nutzt die vordefinierten Bilder für die Laufbewegung.
+   * @returns {void}
+   */
   playWalkingAnimation() {
     this.playAnimation(this.IMAGES_WALKING);
   }
@@ -199,9 +212,16 @@ class Endboss extends MovableObject {
     // }, 1000);
   }
 
+  /**
+   * Reduziert die Energie des Objekts um 5 und spielt einen Treffer-Sound ab.
+   * Falls die Energie auf 0 oder darunter fällt, wird sie auf 0 gesetzt
+   * und der Todessound abgespielt.
+   * @returns {void}
+   */
   hit() {
     this.energy -= 5;
     sounds.endbossHurt.play();
+
     if (this.energy <= 0) {
       this.energy = 0;
       sounds.endbossDead.play();
