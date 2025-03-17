@@ -37,11 +37,14 @@ h1 {
     display: flex;
     justify-content: center;
     /* align-items: center;  */
-    width: 720px;
-    height: 480px;
+    width: 100vw;
+    height: 100vh;
+    max-width: 720px;
+    max-height: 480px;
     position: relative;
     margin: 0;
     padding: 0;
+    overflow: hidden;
 }
 
 #start-screen {
@@ -58,8 +61,8 @@ h1 {
 
 #start-image {
     width: 100%;
-    height: 100%;
-    max-width: 720px;
+    /* height: 100%;
+    max-width: 720px; */
 }
 
 .end-screen {

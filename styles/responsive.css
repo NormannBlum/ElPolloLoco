@@ -1,12 +1,16 @@
 @media only screen and (max-width: 720px) {
     canvas {
-        width: 100%; 
+        width: 100%;
     }
 }
 
 @media only screen and (max-height: 480px) {
     canvas {
         height: 100vh;
+    }
+
+    .end-screen {
+        transform: translate(0%, -23px);
     }
 }
 
@@ -21,7 +25,8 @@
         display: none;
     }
 
-    canvas, #game-over-screen {
+    canvas,
+    #game-over-screen {
         /* width: 100vw; */
         height: 100vh;
     }
@@ -33,5 +38,22 @@
 
     #top-buttons {
         top: 20px;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    #game-over-screen img {
+        height: 60vh;
+    }
+}
+
+@media only screen and (max-device-width: 667px) and (max-device-height: 375px) and (orientation: landscape) {
+    #start-button {
+        right: 76px;
+        transform: none;
+    }
+
+    #top-left-buttons {
+        margin-left: 16px;
     }
 }
