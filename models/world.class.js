@@ -382,6 +382,7 @@ class World {
    * Zusätzlich wird der Zeitpunkt des letzten Wurfs gespeichert und ein Wurfgeräusch abgespielt.
    */
   throwBottle() {
+    if (this.gameOver) return;
     this.lastThrowTime = new Date().getTime();
     let direction = this.character.otherDirection ? -1 : 1;
     let bottle = new ThrowableObject(

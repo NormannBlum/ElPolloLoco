@@ -115,36 +115,39 @@ class Character extends MovableObject {
    * Bewegt den Charakter nach rechts, wenn die entsprechende Taste gedrückt wird.
    */
   handleRightMovement() {
+    if (this.world.gameOver) return; 
     if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
-      this.moveRight();
-      this.otherDirection = false;
-      sounds.walking.play();
-      this.lastActionTime = Date.now();
+        this.moveRight();
+        this.otherDirection = false;
+        sounds.walking.play();
+        this.lastActionTime = Date.now();
     }
-  }
+}
 
   /**
    * Bewegt den Charakter nach links, wenn die entsprechende Taste gedrückt wird.
    */
   handleLeftMovement() {
+    if (this.world.gameOver) return; 
     if (this.world.keyboard.LEFT && this.x > 0) {
-      this.moveLeft();
-      this.otherDirection = true;
-      sounds.walking.play();
-      this.lastActionTime = Date.now();
+        this.moveLeft();
+        this.otherDirection = true;
+        sounds.walking.play();
+        this.lastActionTime = Date.now();
     }
-  }
+}
 
   /**
    * Lässt den Charakter springen, wenn die entsprechende Taste gedrückt wird.
    */
   handleJump() {
+    if (this.world.gameOver) return; 
     if (this.world.keyboard.SPACE && !this.isAboveGround()) {
-      this.jump();
-      sounds.jump.play();
-      this.lastActionTime = Date.now();
+        this.jump();
+        sounds.jump.play();
+        this.lastActionTime = Date.now();
     }
-  }
+}
 
   /**
    * Aktualisiert die Position der Kamera basierend auf der Position des Charakters.
@@ -223,6 +226,7 @@ class Character extends MovableObject {
    * Spielt die Leerlaufanimation ab, wenn der Charakter untätig ist.
    */
   playIdleAnimation() {
+    if (this.world.gameOver) return;
     if (this.isIdle()) {
       if (Date.now() - this.lastActionTime >= this.idleTimeout) {
         sounds.snore.play();
