@@ -124,11 +124,15 @@ class World {
   showEndScreen(win) {
     const gameOverScreen = document.getElementById("game-over-screen");
     const winScreen = document.getElementById("you-win-screen");
-
+    const mobileButtons = document.querySelector(".mobile-button-container");
     if (win) {
       winScreen.classList.remove("hidden");
     } else {
       gameOverScreen.classList.remove("hidden");
+    }
+
+    if (mobileButtons) {
+      mobileButtons.style.display = "none";
     }
   }
 

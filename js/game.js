@@ -31,6 +31,7 @@ function init() {
 function startGame() {
   resetGame();
   hideStartScreen();
+  document.querySelector(".mobile-button-container").style.display = "flex";
   world = new World(canvas, keyboard);
   backgroundMusic.play();
   gameRunning = true;
@@ -80,6 +81,7 @@ function clearAllIntervals() {
  */
 function showStartScreen() {
   document.getElementById("start-screen").classList.remove("hidden");
+  document.querySelector(".mobile-button-container").style.display = "flex";
   canvas.style.display = "none";
 }
 
