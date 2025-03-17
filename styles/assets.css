@@ -154,6 +154,7 @@
     padding: 0 120px; 
     z-index: 5; 
     box-sizing: border-box;
+    display: none;
 }
 
 .mobile-button-group {
@@ -175,7 +176,7 @@
     background-color: rgba(255, 255, 255, 0.8);
     border: 2px solid #8B4513;
     border-radius: 50%;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
