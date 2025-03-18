@@ -65,6 +65,18 @@
 @media only screen and (max-width: 1200px) {
     .mobile-button-container button {
         display: flex;
-     
+
+    }
+}
+
+@media only screen and (width: 1366px) and (height: 1024px) and (orientation: landscape) {
+    .mobile-button-container button {
+        display: flex !important;
+    }
+
+    .mobile-button-container {
+        position: absolute;
+        bottom: 200px;
+        width: 70%;
     }
 }

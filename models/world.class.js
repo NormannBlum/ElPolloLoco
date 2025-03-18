@@ -166,40 +166,6 @@ class World {
   }
 
   /**
-   * Prüft, ob der Charakter oder der Endboss gestorben ist und das Spiel beendet werden muss.
-   */
-  // checkGameOver() {
-  //   if (this.character.isDead()) {
-  //     this.handleDeath(false);
-  //   } else if (this.isEndbossDead()) {
-  //     this.handleDeath(true);
-  //   }
-  // }
-
-  /**
-   * Beendet das Spiel mit einem Sieg oder einer Niederlage.
-   * @param {boolean} win - Ob der Spieler gewonnen hat.
-   */
-  // handleDeath(win) {
-  //   this.gameOver = true;
-
-  //   if (win) {
-  //     const endboss = this.level.enemies.find(
-  //       (enemy) => enemy instanceof Endboss && enemy.isDead()
-  //     );
-  //     if (endboss) {
-  //       endboss.playAnimation(endboss.IMAGES_DEAD);
-  //     }
-  //   } else {
-  //     this.character.playAnimation(this.character.IMAGES_DEAD);
-  //   }
-
-  //   setTimeout(() => {
-  //     this.stopGame(win);
-  // }, 2000);
-  // }
-
-  /**
    * Überprüft, ob der Endboss besiegt wurde.
    * @returns {boolean} - True, wenn der Endboss tot ist.
    */

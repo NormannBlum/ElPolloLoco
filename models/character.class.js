@@ -2,7 +2,7 @@ class Character extends MovableObject {
   height = 250;
   y = 180;
   speed = 10;
-  energy = 100;
+  energy = 150;
   lastActionTime = Date.now();
   idleTimeout = 5000;
 
@@ -115,39 +115,39 @@ class Character extends MovableObject {
    * Bewegt den Charakter nach rechts, wenn die entsprechende Taste gedrückt wird.
    */
   handleRightMovement() {
-    if (this.world.gameOver) return; 
+    if (this.world.gameOver) return;
     if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
-        this.moveRight();
-        this.otherDirection = false;
-        sounds.walking.play();
-        this.lastActionTime = Date.now();
+      this.moveRight();
+      this.otherDirection = false;
+      sounds.walking.play();
+      this.lastActionTime = Date.now();
     }
-}
+  }
 
   /**
    * Bewegt den Charakter nach links, wenn die entsprechende Taste gedrückt wird.
    */
   handleLeftMovement() {
-    if (this.world.gameOver) return; 
+    if (this.world.gameOver) return;
     if (this.world.keyboard.LEFT && this.x > 0) {
-        this.moveLeft();
-        this.otherDirection = true;
-        sounds.walking.play();
-        this.lastActionTime = Date.now();
+      this.moveLeft();
+      this.otherDirection = true;
+      sounds.walking.play();
+      this.lastActionTime = Date.now();
     }
-}
+  }
 
   /**
    * Lässt den Charakter springen, wenn die entsprechende Taste gedrückt wird.
    */
   handleJump() {
-    if (this.world.gameOver) return; 
+    if (this.world.gameOver) return;
     if (this.world.keyboard.SPACE && !this.isAboveGround()) {
-        this.jump();
-        sounds.jump.play();
-        this.lastActionTime = Date.now();
+      this.jump();
+      sounds.jump.play();
+      this.lastActionTime = Date.now();
     }
-}
+  }
 
   /**
    * Aktualisiert die Position der Kamera basierend auf der Position des Charakters.
@@ -201,6 +201,7 @@ class Character extends MovableObject {
    */
   playWalkingAnimation() {
     if (
+      !this.isHurt() &&
       !this.isAboveGround() &&
       (this.world.keyboard.RIGHT || this.world.keyboard.LEFT)
     ) {
