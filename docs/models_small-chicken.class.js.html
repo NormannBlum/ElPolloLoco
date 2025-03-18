@@ -26,73 +26,78 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>class SmallChicken extends MovableObject {
-    height = 45;
-    width = 55;
-    y = 380;
-  
-    offset = {
-      x: 5,
-      y: 5,
-      width: 10,
-      height: 5,
-    };
-  
-    IMAGES_WALKING = [
-      "img_pollo_locco/img/3_enemies_chicken/chicken_small/1_walk/1_w.png",
-      "img_pollo_locco/img/3_enemies_chicken/chicken_small/1_walk/2_w.png",
-      "img_pollo_locco/img/3_enemies_chicken/chicken_small/1_walk/3_w.png",
-    ];
-  
-    IMAGES_DEAD = [
-      "img_pollo_locco/img/3_enemies_chicken/chicken_small/2_dead/dead.png",
-    ];
-  
-    isDead = false;
-  
-    /**
-     * Erstellt eine Instanz eines kleinen Huhns mit zufälliger Position und Geschwindigkeit.
-     */
-    constructor() {
-      super().loadImage("img_pollo_locco/img/3_enemies_chicken/chicken_small/1_walk/1_w.png");
-      this.loadImages(this.IMAGES_WALKING);
-      this.loadImages(this.IMAGES_DEAD);
-  
-      this.x = 700 + Math.random() * 3800; // Zufällige Startposition
-      this.speed = 0.1 + Math.random() * 0.3; // Langsame Geschwindigkeit
-  
-      this.animate();
-    }
-  
-    /**
-     * Aktiviert die Bewegung und Animation des kleinen Huhns.
-     */
-    animate() {
-      setInterval(() => {
-        if (!this.isDead) {
-          this.moveLeft();
-        }
-      }, 1000 / 60);
-  
-      setInterval(() => {
-        if (!this.isDead) {
-          this.playAnimation(this.IMAGES_WALKING);
-        }
-      }, 200);
-    }
-  
-    /**
-     * Setzt das kleine Huhn in den Zustand "tot", stoppt die Bewegung und spielt die Todesanimation ab.
-     */
-    kill() {
-      this.isDead = true;
-      this.speed = 0;
-      sounds.chickenDead.play();
-      this.playAnimation(this.IMAGES_DEAD);
-    }
-    
+            <pre class="prettyprint source linenums"><code>/**
+ * Die SmallChicken-Klasse stellt ein kleines Huhn als Gegner dar.
+ * Es bewegt sich mit einer zufälligen Geschwindigkeit nach links und kann besiegt werden.
+ */
+class SmallChicken extends MovableObject {
+  height = 45;
+  width = 55;
+  y = 380;
+
+  offset = {
+    x: 5,
+    y: 5,
+    width: 10,
+    height: 5,
+  };
+
+  IMAGES_WALKING = [
+    "img_pollo_locco/img/3_enemies_chicken/chicken_small/1_walk/1_w.png",
+    "img_pollo_locco/img/3_enemies_chicken/chicken_small/1_walk/2_w.png",
+    "img_pollo_locco/img/3_enemies_chicken/chicken_small/1_walk/3_w.png",
+  ];
+
+  IMAGES_DEAD = [
+    "img_pollo_locco/img/3_enemies_chicken/chicken_small/2_dead/dead.png",
+  ];
+
+  isDead = false;
+
+  /**
+   * Erstellt eine Instanz eines kleinen Huhns mit zufälliger Position und Geschwindigkeit.
+   */
+  constructor() {
+    super().loadImage(
+      "img_pollo_locco/img/3_enemies_chicken/chicken_small/1_walk/1_w.png"
+    );
+    this.loadImages(this.IMAGES_WALKING);
+    this.loadImages(this.IMAGES_DEAD);
+
+    this.x = 700 + Math.random() * 3800; // Zufällige Startposition
+    this.speed = 0.1 + Math.random() * 0.3; // Langsame Geschwindigkeit
+
+    this.animate();
   }
-  </code></pre>
+
+  /**
+   * Aktiviert die Bewegung und Animation des kleinen Huhns.
+   */
+  animate() {
+    setInterval(() => {
+      if (!this.isDead) {
+        this.moveLeft();
+      }
+    }, 1000 / 60);
+
+    setInterval(() => {
+      if (!this.isDead) {
+        this.playAnimation(this.IMAGES_WALKING);
+      }
+    }, 200);
+  }
+
+  /**
+   * Setzt das kleine Huhn in den Zustand "tot", stoppt die Bewegung und spielt die Todesanimation ab.
+   */
+  kill() {
+    this.isDead = true;
+    this.speed = 0;
+    sounds.chickenDead.play();
+    this.playAnimation(this.IMAGES_DEAD);
+  }
+}
+</code></pre>
         </article>
     </section>
 
@@ -102,13 +107,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="BackgroundObject.html">BackgroundObject</a></li><li><a href="Bottle.html">Bottle</a></li><li><a href="Chicken.html">Chicken</a></li><li><a href="Cloud.html">Cloud</a></li><li><a href="Coin.html">Coin</a></li><li><a href="Endboss.html">Endboss</a></li><li><a href="Level.html">Level</a></li><li><a href="SmallChicken.html">SmallChicken</a></li><li><a href="StatusBar.html">StatusBar</a></li><li><a href="World.html">World</a></li></ul><h3>Global</h3><ul><li><a href="global.html#checkOrientation">checkOrientation</a></li><li><a href="global.html#clearAllIntervals">clearAllIntervals</a></li><li><a href="global.html#closeOverlay">closeOverlay</a></li><li><a href="global.html#goToMainMenu">goToMainMenu</a></li><li><a href="global.html#hideEndScreens">hideEndScreens</a></li><li><a href="global.html#hideStartScreen">hideStartScreen</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#openOverlay">openOverlay</a></li><li><a href="global.html#resetGame">resetGame</a></li><li><a href="global.html#resetLevel">resetLevel</a></li><li><a href="global.html#showStartScreen">showStartScreen</a></li><li><a href="global.html#startGame">startGame</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="BackgroundObject.html">BackgroundObject</a></li><li><a href="Bottle.html">Bottle</a></li><li><a href="BottlesStatusBar.html">BottlesStatusBar</a></li><li><a href="Character.html">Character</a></li><li><a href="Chicken.html">Chicken</a></li><li><a href="Cloud.html">Cloud</a></li><li><a href="Coin.html">Coin</a></li><li><a href="CoinsStatusBar.html">CoinsStatusBar</a></li><li><a href="DrawableObject.html">DrawableObject</a></li><li><a href="Endboss.html">Endboss</a></li><li><a href="EndbossStatusBar.html">EndbossStatusBar</a></li><li><a href="Keyboard.html">Keyboard</a></li><li><a href="Level.html">Level</a></li><li><a href="MovableObject.html">MovableObject</a></li><li><a href="SmallChicken.html">SmallChicken</a></li><li><a href="StatusBar.html">StatusBar</a></li><li><a href="ThrowableObject.html">ThrowableObject</a></li><li><a href="World.html">World</a></li></ul><h3>Global</h3><ul><li><a href="global.html#checkOrientation">checkOrientation</a></li><li><a href="global.html#clearAllIntervals">clearAllIntervals</a></li><li><a href="global.html#closeOverlay">closeOverlay</a></li><li><a href="global.html#goToMainMenu">goToMainMenu</a></li><li><a href="global.html#hideEndScreens">hideEndScreens</a></li><li><a href="global.html#hideStartScreen">hideStartScreen</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#openOverlay">openOverlay</a></li><li><a href="global.html#resetGame">resetGame</a></li><li><a href="global.html#resetLevel">resetLevel</a></li><li><a href="global.html#showStartScreen">showStartScreen</a></li><li><a href="global.html#startGame">startGame</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Tue Mar 18 2025 12:14:16 GMT+0100 (Mitteleuropäische Normalzeit)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Tue Mar 18 2025 16:13:19 GMT+0100 (Mitteleuropäische Normalzeit)
 </footer>
 
 <script> prettyPrint(); </script>

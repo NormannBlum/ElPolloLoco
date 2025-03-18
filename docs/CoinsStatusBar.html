@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: models/level.class.js</title>
+    <title>JSDoc: Class: CoinsStatusBar</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,75 +17,141 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: models/level.class.js</h1>
+    <h1 class="page-title">Class: CoinsStatusBar</h1>
 
     
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>/**
- * Die Level-Klasse repräsentiert ein Level im Spiel.
- * Sie enthält Gegner, Hintergrundobjekte, sammelbare Items und die Endposition des Levels.
- */
-class Level {
-  /**
-   * Eine Liste aller Gegner im Level.
-   * @type {MovableObject[]}
-   */
-  enemies;
+        <h2><span class="attribs"><span class="type-signature"></span></span>CoinsStatusBar<span class="signature">()</span><span class="type-signature"></span></h2>
+        
+            <div class="class-description">Die CoinsStatusBar-Klasse zeigt die Anzahl der gesammelten Münzen des Spielers an.Sie erbt von der StatusBar-Klasse und verwendet verschiedene Bilder, um den Fortschritt darzustellen.</div>
+        
+    
+</header>
 
-  /**
-   * Eine Liste aller Wolken im Level.
-   * @type {Cloud[]}
-   */
-  clouds;
+<article>
+    <div class="container-overview">
+    
+        
 
-  /**
-   * Eine Liste aller Hintergrundobjekte im Level.
-   * @type {BackgroundObject[]}
-   */
-  backgroundObjects;
+    
+    <h2>Constructor</h2>
+    
 
-  /**
-   * Eine Liste aller Flaschen im Level, die gesammelt werden können.
-   * @type {Bottle[]}
-   */
-  bottles;
+    
+    <h4 class="name" id="CoinsStatusBar"><span class="type-signature"></span>new CoinsStatusBar<span class="signature">()</span><span class="type-signature"></span></h4>
+    
 
-  /**
-   * Eine Liste aller Münzen im Level.
-   * @type {Coin[]}
-   */
-  coins;
+    
 
-  /**
-   * Die x-Koordinate des Endes des Levels.
-   * @type {number}
-   */
-  level_end_x = 3600;
 
-  /**
-   * Erstellt eine Instanz eines Levels mit Gegnern, Wolken, Hintergrundobjekten, Flaschen und Münzen.
-   * @param {MovableObject[]} enemies - Eine Liste von Gegnern im Level.
-   * @param {Cloud[]} clouds - Eine Liste von Wolken im Level.
-   * @param {BackgroundObject[]} backgroundObjects - Eine Liste von Hintergrundobjekten.
-   * @param {Bottle[]} bottles - Eine Liste von sammelbaren Flaschen.
-   * @param {Coin[]} coins - Eine Liste von sammelbaren Münzen.
-   */
-  constructor(enemies, clouds, backgroundObjects, bottles, coins) {
-    this.enemies = enemies;
-    this.clouds = clouds;
-    this.backgroundObjects = backgroundObjects;
-    this.bottles = bottles;
-    this.coins = coins;
-  }
-}
-</code></pre>
-        </article>
-    </section>
+
+<div class="description">
+    Erstellt eine neue Instanz der CoinsStatusBar.Initialisiert die Bilder für die verschiedenen Münz-Fortschrittsstufenund setzt die Standardposition sowie den Anfangswert auf 0 %.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="models_status-bar-coins.class.js.html">models/status-bar-coins.class.js</a>, <a href="models_status-bar-coins.class.js.html#line5">line 5</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

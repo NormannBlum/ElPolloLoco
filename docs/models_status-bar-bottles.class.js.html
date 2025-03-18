@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: models/level.class.js</title>
+    <title>JSDoc: Source: models/status-bar-bottles.class.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: models/level.class.js</h1>
+    <h1 class="page-title">Source: models/status-bar-bottles.class.js</h1>
 
     
 
@@ -27,60 +27,30 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * Die Level-Klasse repräsentiert ein Level im Spiel.
- * Sie enthält Gegner, Hintergrundobjekte, sammelbare Items und die Endposition des Levels.
+ * Die BottlesStatusBar-Klasse zeigt die Anzahl der gesammelten Flaschen des Spielers an.
+ * Sie erbt von der StatusBar-Klasse und nutzt verschiedene Bilder, um den Fortschritt darzustellen.
  */
-class Level {
+class BottlesStatusBar extends StatusBar {
   /**
-   * Eine Liste aller Gegner im Level.
-   * @type {MovableObject[]}
+   * Erstellt eine neue Instanz der BottlesStatusBar.
+   * Initialisiert die Bilder für die verschiedenen Fortschrittsstufen der gesammelten Flaschen
+   * und setzt die Standardposition sowie den Anfangswert auf 0 %.
    */
-  enemies;
+  constructor() {
+    super();
+    this.IMAGES = [
+      "img_pollo_locco/img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/0.png",
+      "img_pollo_locco/img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/20.png",
+      "img_pollo_locco/img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/40.png",
+      "img_pollo_locco/img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/60.png",
+      "img_pollo_locco/img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/80.png",
+      "img_pollo_locco/img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/100.png",
+    ];
 
-  /**
-   * Eine Liste aller Wolken im Level.
-   * @type {Cloud[]}
-   */
-  clouds;
-
-  /**
-   * Eine Liste aller Hintergrundobjekte im Level.
-   * @type {BackgroundObject[]}
-   */
-  backgroundObjects;
-
-  /**
-   * Eine Liste aller Flaschen im Level, die gesammelt werden können.
-   * @type {Bottle[]}
-   */
-  bottles;
-
-  /**
-   * Eine Liste aller Münzen im Level.
-   * @type {Coin[]}
-   */
-  coins;
-
-  /**
-   * Die x-Koordinate des Endes des Levels.
-   * @type {number}
-   */
-  level_end_x = 3600;
-
-  /**
-   * Erstellt eine Instanz eines Levels mit Gegnern, Wolken, Hintergrundobjekten, Flaschen und Münzen.
-   * @param {MovableObject[]} enemies - Eine Liste von Gegnern im Level.
-   * @param {Cloud[]} clouds - Eine Liste von Wolken im Level.
-   * @param {BackgroundObject[]} backgroundObjects - Eine Liste von Hintergrundobjekten.
-   * @param {Bottle[]} bottles - Eine Liste von sammelbaren Flaschen.
-   * @param {Coin[]} coins - Eine Liste von sammelbaren Münzen.
-   */
-  constructor(enemies, clouds, backgroundObjects, bottles, coins) {
-    this.enemies = enemies;
-    this.clouds = clouds;
-    this.backgroundObjects = backgroundObjects;
-    this.bottles = bottles;
-    this.coins = coins;
+    this.loadImages(this.IMAGES);
+    this.setPercentage(0);
+    this.x = 10;
+    this.y = 80;
   }
 }
 </code></pre>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Level</title>
+    <title>JSDoc: Class: ThrowableObject</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Level</h1>
+    <h1 class="page-title">Class: ThrowableObject</h1>
 
     
 
@@ -28,9 +28,9 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Level<span class="signature">(enemies, clouds, backgroundObjects, bottles, coins)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>ThrowableObject<span class="signature">(x, y, direction, world)</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">Die Level-Klasse repräsentiert ein Level im Spiel.Sie enthält Gegner, Hintergrundobjekte, sammelbare Items und die Endposition des Levels.</div>
+            <div class="class-description">Repräsentiert ein werfbares Objekt (z. B. eine Flasche), das sich in der Luft drehtund bei Kollision eine Splash-Animation auslöst.Erbt von `MovableObject` und enthält sowohl die Rotations- als auch Splash-Animationen.</div>
         
     
 </header>
@@ -45,7 +45,7 @@
     
 
     
-    <h4 class="name" id="Level"><span class="type-signature"></span>new Level<span class="signature">(enemies, clouds, backgroundObjects, bottles, coins)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="ThrowableObject"><span class="type-signature"></span>new ThrowableObject<span class="signature">(x, y, direction, world)</span><span class="type-signature"></span></h4>
     
 
     
@@ -53,7 +53,7 @@
 
 
 <div class="description">
-    Erstellt eine Instanz eines Levels mit Gegnern, Wolken, Hintergrundobjekten, Flaschen und Münzen.
+    Erstellt eine Instanz eines werfbaren Objekts.
 </div>
 
 
@@ -89,13 +89,13 @@
 
         <tr>
             
-                <td class="name"><code>enemies</code></td>
+                <td class="name"><code>x</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Array.&lt;<a href="MovableObject.html">MovableObject</a>></span>
+<span class="param-type">number</span>
 
 
             
@@ -105,20 +105,20 @@
 
             
 
-            <td class="description last">Eine Liste von Gegnern im Level.</td>
+            <td class="description last">Die X-Position des Objekts beim Erstellen.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>clouds</code></td>
+                <td class="name"><code>y</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Array.&lt;<a href="Cloud.html">Cloud</a>></span>
+<span class="param-type">number</span>
 
 
             
@@ -128,20 +128,20 @@
 
             
 
-            <td class="description last">Eine Liste von Wolken im Level.</td>
+            <td class="description last">Die Y-Position des Objekts beim Erstellen.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>backgroundObjects</code></td>
+                <td class="name"><code>direction</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Array.&lt;<a href="BackgroundObject.html">BackgroundObject</a>></span>
+<span class="param-type">number</span>
 
 
             
@@ -151,20 +151,20 @@
 
             
 
-            <td class="description last">Eine Liste von Hintergrundobjekten.</td>
+            <td class="description last">Die Wurfrichtung (1 = rechts, -1 = links).</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>bottles</code></td>
+                <td class="name"><code>world</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Array.&lt;<a href="Bottle.html">Bottle</a>></span>
+<span class="param-type">Object</span>
 
 
             
@@ -174,30 +174,7 @@
 
             
 
-            <td class="description last">Eine Liste von sammelbaren Flaschen.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>coins</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Array.&lt;<a href="Coin.html">Coin</a>></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Eine Liste von sammelbaren Münzen.</td>
+            <td class="description last">Die Welt, in der sich das Objekt befindet.</td>
         </tr>
 
     
@@ -238,7 +215,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_level.class.js.html">models/level.class.js</a>, <a href="models_level.class.js.html#line5">line 5</a>
+        <a href="models_throwable-object.class.js.html">models/throwable-object.class.js</a>, <a href="models_throwable-object.class.js.html#line7">line 7</a>
     </li></ul></dd>
     
 
@@ -288,13 +265,13 @@
 
         
             
-<h4 class="name" id="backgroundObjects"><span class="type-signature"></span>backgroundObjects<span class="type-signature"> :Array.&lt;<a href="BackgroundObject.html">BackgroundObject</a>></span></h4>
+<h4 class="name" id="IMAGES_ROTATION"><span class="type-signature"></span>IMAGES_ROTATION<span class="type-signature"> :Array.&lt;string></span></h4>
 
 
 
 
 <div class="description">
-    Eine Liste aller Hintergrundobjekte im Level.
+    Enthält die Bildpfade für die Rotations-Animation der Flasche.
 </div>
 
 
@@ -303,7 +280,7 @@
     <ul>
         <li>
             
-<span class="param-type">Array.&lt;<a href="BackgroundObject.html">BackgroundObject</a>></span>
+<span class="param-type">Array.&lt;string></span>
 
 
         </li>
@@ -342,7 +319,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_level.class.js.html">models/level.class.js</a>, <a href="models_level.class.js.html#line22">line 22</a>
+        <a href="models_throwable-object.class.js.html">models/throwable-object.class.js</a>, <a href="models_throwable-object.class.js.html#line12">line 12</a>
     </li></ul></dd>
     
 
@@ -360,13 +337,13 @@
 
         
             
-<h4 class="name" id="bottles"><span class="type-signature"></span>bottles<span class="type-signature"> :Array.&lt;<a href="Bottle.html">Bottle</a>></span></h4>
+<h4 class="name" id="IMAGES_SPLASH"><span class="type-signature"></span>IMAGES_SPLASH<span class="type-signature"> :Array.&lt;string></span></h4>
 
 
 
 
 <div class="description">
-    Eine Liste aller Flaschen im Level, die gesammelt werden können.
+    Enthält die Bildpfade für die Splash-Animation nach Kollision.
 </div>
 
 
@@ -375,7 +352,7 @@
     <ul>
         <li>
             
-<span class="param-type">Array.&lt;<a href="Bottle.html">Bottle</a>></span>
+<span class="param-type">Array.&lt;string></span>
 
 
         </li>
@@ -414,7 +391,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_level.class.js.html">models/level.class.js</a>, <a href="models_level.class.js.html#line28">line 28</a>
+        <a href="models_throwable-object.class.js.html">models/throwable-object.class.js</a>, <a href="models_throwable-object.class.js.html#line23">line 23</a>
     </li></ul></dd>
     
 
@@ -431,27 +408,35 @@
 
 
         
-            
-<h4 class="name" id="clouds"><span class="type-signature"></span>clouds<span class="type-signature"> :Array.&lt;<a href="Cloud.html">Cloud</a>></span></h4>
+    
 
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="animate"><span class="type-signature"></span>animate<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
 
 
 
 <div class="description">
-    Eine Liste aller Wolken im Level.
+    Spielt die Rotationsanimation des Objekts ab, solange es sich in der Luft befindet.
 </div>
 
 
 
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">Array.&lt;<a href="Cloud.html">Cloud</a>></span>
 
 
-        </li>
-    </ul>
+
+
+
 
 
 
@@ -486,7 +471,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_level.class.js.html">models/level.class.js</a>, <a href="models_level.class.js.html#line16">line 16</a>
+        <a href="models_throwable-object.class.js.html">models/throwable-object.class.js</a>, <a href="models_throwable-object.class.js.html#line113">line 113</a>
     </li></ul></dd>
     
 
@@ -502,28 +487,93 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         
             
-<h4 class="name" id="coins"><span class="type-signature"></span>coins<span class="type-signature"> :Array.&lt;<a href="Coin.html">Coin</a>></span></h4>
 
+    
+
+    
+    <h4 class="name" id="playSplashAnimation"><span class="type-signature"></span>playSplashAnimation<span class="signature">(callback)</span><span class="type-signature"></span></h4>
+    
+
+    
 
 
 
 <div class="description">
-    Eine Liste aller Münzen im Level.
+    Spielt die Splash-Animation Bild für Bild ab und entfernt das Objekt nach Abschluss.
 </div>
 
 
 
-    <h5>Type:</h5>
-    <ul>
-        <li>
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
             
-<span class="param-type">Array.&lt;<a href="Coin.html">Coin</a>></span>
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
 
 
-        </li>
-    </ul>
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Eine Funktion, die nach der Animation ausgeführt wird (z. B. zum Entfernen des Objekts).</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
 
 
 
@@ -558,7 +608,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_level.class.js.html">models/level.class.js</a>, <a href="models_level.class.js.html#line34">line 34</a>
+        <a href="models_throwable-object.class.js.html">models/throwable-object.class.js</a>, <a href="models_throwable-object.class.js.html#line97">line 97</a>
     </li></ul></dd>
     
 
@@ -574,28 +624,44 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         
             
-<h4 class="name" id="enemies"><span class="type-signature"></span>enemies<span class="type-signature"> :Array.&lt;<a href="MovableObject.html">MovableObject</a>></span></h4>
 
+    
+
+    
+    <h4 class="name" id="splashEffect"><span class="type-signature"></span>splashEffect<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
 
 
 
 <div class="description">
-    Eine Liste aller Gegner im Level.
+    Löst die Splash-Animation aus, falls das Objekt eine Kollision hat.Beendet die Wurfbewegung und entfernt das Objekt nach der Animation.
 </div>
 
 
 
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">Array.&lt;<a href="MovableObject.html">MovableObject</a>></span>
 
 
-        </li>
-    </ul>
+
+
+
 
 
 
@@ -630,7 +696,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_level.class.js.html">models/level.class.js</a>, <a href="models_level.class.js.html#line10">line 10</a>
+        <a href="models_throwable-object.class.js.html">models/throwable-object.class.js</a>, <a href="models_throwable-object.class.js.html#line82">line 82</a>
     </li></ul></dd>
     
 
@@ -646,28 +712,44 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         
             
-<h4 class="name" id="level_end_x"><span class="type-signature"></span>level_end_x<span class="type-signature"> :number</span></h4>
 
+    
+
+    
+    <h4 class="name" id="throw"><span class="type-signature"></span>throw<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
 
 
 
 <div class="description">
-    Die x-Koordinate des Endes des Levels.
+    Startet die Wurfbewegung des Objekts, indem es mit einer Geschwindigkeit nach oben fliegtund sich mit der `applyGravity`-Funktion nach unten bewegt.Bewegt sich in die angegebene `direction` und wird nach 3 Sekunden entfernt, falls es nicht kollidiert.
 </div>
 
 
 
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">number</span>
 
 
-        </li>
-    </ul>
+
+
+
 
 
 
@@ -702,7 +784,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_level.class.js.html">models/level.class.js</a>, <a href="models_level.class.js.html#line40">line 40</a>
+        <a href="models_throwable-object.class.js.html">models/throwable-object.class.js</a>, <a href="models_throwable-object.class.js.html#line60">line 60</a>
     </li></ul></dd>
     
 
@@ -718,9 +800,21 @@
 
 
 
-        
-    
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
     
 
     

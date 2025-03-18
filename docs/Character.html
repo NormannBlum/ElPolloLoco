@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Endboss</title>
+    <title>JSDoc: Class: Character</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Endboss</h1>
+    <h1 class="page-title">Class: Character</h1>
 
     
 
@@ -28,9 +28,9 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Endboss<span class="signature">(character)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>Character<span class="signature">()</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">Die Endboss-Klasse repräsentiert den Endgegner im Spiel.Er besitzt verschiedene Phasen wie Alarmbereitschaft, Bewegung, Angriff und Verwundung.</div>
+            <div class="class-description">Die Character-Klasse repräsentiert den spielbaren Charakter.Sie erweitert die MovableObject-Klasse und ermöglicht Bewegung, Sprünge und Animationen.</div>
         
     
 </header>
@@ -45,72 +45,19 @@
     
 
     
-    <h4 class="name" id="Endboss"><span class="type-signature"></span>new Endboss<span class="signature">(character)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Character"><span class="type-signature"></span>new Character<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
 
 
 
-<div class="description">
-    Erstellt eine Instanz des Endbosses.
-</div>
 
 
 
 
 
 
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>character</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="Character.html">Character</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Referenz auf den Charakter des Spielers.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
 
 
 
@@ -146,7 +93,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_endboss.class.js.html">models/endboss.class.js</a>, <a href="models_endboss.class.js.html#line5">line 5</a>
+        <a href="models_character.class.js.html">models/character.class.js</a>, <a href="models_character.class.js.html#line5">line 5</a>
     </li></ul></dd>
     
 
@@ -210,7 +157,7 @@
 
 
 <div class="description">
-    Aktiviert die Bewegung und Animation des Endbosses.
+    Initialisiert die Animationen und die Bewegung des Charakters.
 </div>
 
 
@@ -254,7 +201,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_endboss.class.js.html">models/endboss.class.js</a>, <a href="models_endboss.class.js.html#line129">line 129</a>
+        <a href="models_character.class.js.html">models/character.class.js</a>, <a href="models_character.class.js.html#line100">line 100</a>
     </li></ul></dd>
     
 
@@ -290,7 +237,7 @@
     
 
     
-    <h4 class="name" id="checkForFirstContact"><span class="type-signature"></span>checkForFirstContact<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="chooseIdleAnimation"><span class="type-signature"></span>chooseIdleAnimation<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -298,7 +245,7 @@
 
 
 <div class="description">
-    Prüft wiederholt, ob der Spieler nahe genug ist, um den Endboss zu aktivieren.
+    Wählt und spielt die entsprechende Leerlaufanimation basierend auf der Inaktivitätsdauer.
 </div>
 
 
@@ -342,7 +289,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_endboss.class.js.html">models/endboss.class.js</a>, <a href="models_endboss.class.js.html#line88">line 88</a>
+        <a href="models_character.class.js.html">models/character.class.js</a>, <a href="models_character.class.js.html#line246">line 246</a>
     </li></ul></dd>
     
 
@@ -378,7 +325,7 @@
     
 
     
-    <h4 class="name" id="followCharacter"><span class="type-signature"></span>followCharacter<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="handleJump"><span class="type-signature"></span>handleJump<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -386,7 +333,7 @@
 
 
 <div class="description">
-    Bewegt den Endboss in Richtung des Charakters.
+    Lässt den Charakter springen, wenn die entsprechende Taste gedrückt wird.
 </div>
 
 
@@ -430,7 +377,183 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_endboss.class.js.html">models/endboss.class.js</a>, <a href="models_endboss.class.js.html#line178">line 178</a>
+        <a href="models_character.class.js.html">models/character.class.js</a>, <a href="models_character.class.js.html#line147">line 147</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="handleLeftMovement"><span class="type-signature"></span>handleLeftMovement<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Bewegt den Charakter nach links, wenn die entsprechende Taste gedrückt wird.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="models_character.class.js.html">models/character.class.js</a>, <a href="models_character.class.js.html#line134">line 134</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="handleRightMovement"><span class="type-signature"></span>handleRightMovement<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Bewegt den Charakter nach rechts, wenn die entsprechende Taste gedrückt wird.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="models_character.class.js.html">models/character.class.js</a>, <a href="models_character.class.js.html#line121">line 121</a>
     </li></ul></dd>
     
 
@@ -474,7 +597,7 @@
 
 
 <div class="description">
-    Reduziert die Energie des Objekts um 5 und spielt einen Treffer-Sound ab.Falls die Energie auf 0 oder darunter fällt, wird sie auf 0 gesetztund der Todessound abgespielt.
+    Verursacht Schaden am Objekt, indem die Energie um 5 reduziert wird.Spielt einen Treffer-Sound ab und setzt die Energie auf 0, falls sie negativ wird.Der Treffer kann nur alle 200 Millisekunden erfolgen, um mehrfachen Schaden in kurzer Zeit zu verhindern.
 </div>
 
 
@@ -518,7 +641,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_endboss.class.js.html">models/endboss.class.js</a>, <a href="models_endboss.class.js.html#line271">line 271</a>
+        <a href="models_character.class.js.html">models/character.class.js</a>, <a href="models_character.class.js.html#line270">line 270</a>
     </li></ul></dd>
     
 
@@ -580,7 +703,7 @@
 
 
 <div class="description">
-    Initialisiert Animationen wie "Tot" und "Verletzt".
+    Initialisiert die Animationszyklen für den Charakter.
 </div>
 
 
@@ -624,7 +747,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_endboss.class.js.html">models/endboss.class.js</a>, <a href="models_endboss.class.js.html#line150">line 150</a>
+        <a href="models_character.class.js.html">models/character.class.js</a>, <a href="models_character.class.js.html#line166">line 166</a>
     </li></ul></dd>
     
 
@@ -660,7 +783,7 @@
     
 
     
-    <h4 class="name" id="initiateAttacking"><span class="type-signature"></span>initiateAttacking<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="initMovement"><span class="type-signature"></span>initMovement<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -668,7 +791,7 @@
 
 
 <div class="description">
-    Startet den Angriffsmodus des Endbosses.
+    Startet die Bewegung des Charakters basierend auf Benutzereingaben.
 </div>
 
 
@@ -712,7 +835,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_endboss.class.js.html">models/endboss.class.js</a>, <a href="models_endboss.class.js.html#line234">line 234</a>
+        <a href="models_character.class.js.html">models/character.class.js</a>, <a href="models_character.class.js.html#line108">line 108</a>
     </li></ul></dd>
     
 
@@ -748,7 +871,7 @@
     
 
     
-    <h4 class="name" id="playAlertAnimation"><span class="type-signature"></span>playAlertAnimation<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="isIdle"><span class="type-signature"></span>isIdle<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
     
 
     
@@ -756,7 +879,7 @@
 
 
 <div class="description">
-    Spielt die Alert-Animation langsam ab, bevor der Endboss startet.
+    Prüft, ob der Charakter im Leerlauf ist.
 </div>
 
 
@@ -800,7 +923,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_endboss.class.js.html">models/endboss.class.js</a>, <a href="models_endboss.class.js.html#line103">line 103</a>
+        <a href="models_character.class.js.html">models/character.class.js</a>, <a href="models_character.class.js.html#line220">line 220</a>
     </li></ul></dd>
     
 
@@ -825,6 +948,28 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - True, wenn der Charakter im Leerlauf ist.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -836,7 +981,7 @@
     
 
     
-    <h4 class="name" id="playAttackAnimation"><span class="type-signature"></span>playAttackAnimation<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="jump"><span class="type-signature"></span>jump<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -844,7 +989,7 @@
 
 
 <div class="description">
-    Spielt die Angriffsanimation ab.
+    Lässt das Objekt springen, indem es die vertikale Geschwindigkeit erhöht.
 </div>
 
 
@@ -888,7 +1033,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_endboss.class.js.html">models/endboss.class.js</a>, <a href="models_endboss.class.js.html#line245">line 245</a>
+        <a href="models_character.class.js.html">models/character.class.js</a>, <a href="models_character.class.js.html#line259">line 259</a>
     </li></ul></dd>
     
 
@@ -913,6 +1058,24 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -932,7 +1095,7 @@
 
 
 <div class="description">
-    Spielt die Todesanimation, wenn der Endboss tot ist.
+    Spielt die Todesanimation ab, wenn der Charakter tot ist.
 </div>
 
 
@@ -976,7 +1139,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_endboss.class.js.html">models/endboss.class.js</a>, <a href="models_endboss.class.js.html#line160">line 160</a>
+        <a href="models_character.class.js.html">models/character.class.js</a>, <a href="models_character.class.js.html#line179">line 179</a>
     </li></ul></dd>
     
 
@@ -1020,7 +1183,7 @@
 
 
 <div class="description">
-    Spielt die Verletzungsanimation, wenn der Endboss verletzt wurde.
+    Spielt die Verletzungsanimation ab, wenn der Charakter verletzt ist.
 </div>
 
 
@@ -1064,7 +1227,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_endboss.class.js.html">models/endboss.class.js</a>, <a href="models_endboss.class.js.html#line169">line 169</a>
+        <a href="models_character.class.js.html">models/character.class.js</a>, <a href="models_character.class.js.html#line188">line 188</a>
     </li></ul></dd>
     
 
@@ -1100,7 +1263,7 @@
     
 
     
-    <h4 class="name" id="playWalkingAnimation"><span class="type-signature"></span>playWalkingAnimation<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id="playIdleAnimation"><span class="type-signature"></span>playIdleAnimation<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -1108,7 +1271,7 @@
 
 
 <div class="description">
-    Spielt die Laufanimation des Objekts ab.Nutzt die vordefinierten Bilder für die Laufbewegung.
+    Spielt die Leerlaufanimation ab, wenn der Charakter untätig ist.
 </div>
 
 
@@ -1152,113 +1315,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_endboss.class.js.html">models/endboss.class.js</a>, <a href="models_endboss.class.js.html#line227">line 227</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">void</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="startAttackCycle"><span class="type-signature"></span>startAttackCycle<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Beginnt den Angriffszyklus des Endbosses.
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_endboss.class.js.html">models/endboss.class.js</a>, <a href="models_endboss.class.js.html#line254">line 254</a>
+        <a href="models_character.class.js.html">models/character.class.js</a>, <a href="models_character.class.js.html#line233">line 233</a>
     </li></ul></dd>
     
 
@@ -1294,7 +1351,7 @@
     
 
     
-    <h4 class="name" id="startBoss"><span class="type-signature"></span>startBoss<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="playJumpingAnimation"><span class="type-signature"></span>playJumpingAnimation<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -1302,7 +1359,7 @@
 
 
 <div class="description">
-    Endboss beginnt sich zu bewegen und zu kämpfen.
+    Spielt die Sprunganimation ab, wenn der Charakter springt.
 </div>
 
 
@@ -1346,7 +1403,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_endboss.class.js.html">models/endboss.class.js</a>, <a href="models_endboss.class.js.html#line121">line 121</a>
+        <a href="models_character.class.js.html">models/character.class.js</a>, <a href="models_character.class.js.html#line197">line 197</a>
     </li></ul></dd>
     
 
@@ -1382,7 +1439,7 @@
     
 
     
-    <h4 class="name" id="startWalking"><span class="type-signature"></span>startWalking<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id="playWalkingAnimation"><span class="type-signature"></span>playWalkingAnimation<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -1390,7 +1447,7 @@
 
 
 <div class="description">
-    Startet das Gehen des Objekts.Führt in regelmäßigen Abständen die Aktualisierung der Bewegungsrichtungsowie die Abspielung der Laufanimation aus.Zusätzlich wird das Angriffsverhalten initialisiert.
+    Spielt die Laufanimation ab, wenn der Charakter läuft.
 </div>
 
 
@@ -1434,7 +1491,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_endboss.class.js.html">models/endboss.class.js</a>, <a href="models_endboss.class.js.html#line198">line 198</a>
+        <a href="models_character.class.js.html">models/character.class.js</a>, <a href="models_character.class.js.html#line206">line 206</a>
     </li></ul></dd>
     
 
@@ -1459,24 +1516,6 @@
 
 
 
-<h5>Returns:</h5>
-
-        
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">void</span>
-
-
-    </dd>
-</dl>
-
-    
 
 
 
@@ -1488,7 +1527,7 @@
     
 
     
-    <h4 class="name" id="updateMovementDirection"><span class="type-signature"></span>updateMovementDirection<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="updateCamera"><span class="type-signature"></span>updateCamera<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -1496,7 +1535,7 @@
 
 
 <div class="description">
-    Aktualisiert die Bewegungsrichtung basierend auf der Position des Charakters.
+    Aktualisiert die Position der Kamera basierend auf der Position des Charakters.
 </div>
 
 
@@ -1540,7 +1579,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_endboss.class.js.html">models/endboss.class.js</a>, <a href="models_endboss.class.js.html#line210">line 210</a>
+        <a href="models_character.class.js.html">models/character.class.js</a>, <a href="models_character.class.js.html#line159">line 159</a>
     </li></ul></dd>
     
 
