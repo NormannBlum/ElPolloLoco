@@ -1,3 +1,7 @@
+/**
+ * Die Cloud-Klasse stellt eine bewegliche Wolke im Hintergrund des Spiels dar.
+ * Sie erweitert die MovableObject-Klasse und bewegt sich kontinuierlich nach links.
+ */
 class Cloud extends MovableObject {
   width = 500;
   height = 250;

@@ -1,3 +1,7 @@
+/**
+ * Die Character-Klasse repräsentiert den spielbaren Charakter.
+ * Sie erweitert die MovableObject-Klasse und ermöglicht Bewegung, Sprünge und Animationen.
+ */
 class Character extends MovableObject {
   height = 250;
   y = 180;

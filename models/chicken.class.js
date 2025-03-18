@@ -1,3 +1,7 @@
+/**
+ * Die Chicken-Klasse stellt einen feindlichen Gegner im Spiel dar.
+ * Das Huhn bewegt sich von rechts nach links und kann besiegt werden.
+ */
 class Chicken extends MovableObject {
   height = 55;
   width = 70;

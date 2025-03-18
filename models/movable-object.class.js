@@ -1,3 +1,7 @@
+/**
+ * Die MovableObject-Klasse repräsentiert ein bewegliches Objekt in der Spielwelt.
+ * Sie erweitert die DrawableObject-Klasse und fügt Bewegung, Schwerkraft und Kollisionserkennung hinzu.
+ */
 class MovableObject extends DrawableObject {
   speed = 0.15;
   otherDirection = false;

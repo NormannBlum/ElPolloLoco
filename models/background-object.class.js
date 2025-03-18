@@ -1,3 +1,7 @@
+/**
+ * Die BackgroundObject-Klasse stellt ein bewegliches Hintergrundobjekt im Spiel dar.
+ * Sie erweitert die MovableObject-Klasse und bewegt sich mit der Spielwelt.
+ */
 class BackgroundObject extends MovableObject {
   width = 720;
   height = 480;

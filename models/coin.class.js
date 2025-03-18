@@ -1,3 +1,7 @@
+/**
+ * Die Coin-Klasse stellt eine sammelbare Münze im Spiel dar.
+ * Sie erweitert die DrawableObject-Klasse und enthält Animationen für rotierende Münzen.
+ */
 class Coin extends DrawableObject {
   IMAGES_COIN = [
     "img_pollo_locco/img/8_coin/coin_1.png",

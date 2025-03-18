@@ -1,3 +1,7 @@
+/**
+ * Die DrawableObject-Klasse stellt ein zeichnbares Objekt im Spiel dar.
+ * Sie enthält Methoden zum Laden und Anzeigen von Bildern auf dem Canvas.
+ */
 class DrawableObject {
   img;
   imagesCache = {};

@@ -1,4 +1,14 @@
+/**
+ * Repräsentiert eine Statusleiste für die Gesundheit des Spielers oder anderer Objekte.
+ * Die Statusleiste ändert sich je nach Gesundheitszustand und zeigt verschiedene Bilder an.
+ *
+ * Erbt von `DrawableObject` und aktualisiert dynamisch die angezeigte Grafik.
+ */
 class StatusBar extends DrawableObject {
+  /**
+   * Enthält die Bildpfade für verschiedene Gesundheitsstufen der Statusleiste.
+   * @type {string[]}
+   */
   IMAGES = [
     "img_pollo_locco/img/7_statusbars/1_statusbar/2_statusbar_health/green/0.png",
     "img_pollo_locco/img/7_statusbars/1_statusbar/2_statusbar_health/green/20.png",

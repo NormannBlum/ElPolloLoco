@@ -1,3 +1,7 @@
+/**
+ * Die Bottle-Klasse stellt eine sammelbare oder werfbare Flasche im Spiel dar.
+ * Sie erweitert die DrawableObject-Klasse und kann auf den Boden fallen oder geworfen werden.
+ */
 class Bottle extends DrawableObject {
   IMAGES_BOTTLE = [
     "img_pollo_locco/img/6_salsa_bottle/2_salsa_bottle_on_ground.png",

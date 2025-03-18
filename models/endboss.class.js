@@ -1,4 +1,9 @@
+/**
+ * Die Endboss-Klasse repräsentiert den Endgegner im Spiel.
+ * Er besitzt verschiedene Phasen wie Alarmbereitschaft, Bewegung, Angriff und Verwundung.
+ */
 class Endboss extends MovableObject {
+  
   height = 400;
   width = 250;
   y = 55;
