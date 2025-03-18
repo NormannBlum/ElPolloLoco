@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: models/movable-object.class.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: models/movable-object.class.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>class MovableObject extends DrawableObject {
+  speed = 0.15;
+  otherDirection = false;
+  speedY = 0;
+  accelaration = 2.5;
+  energy = 100;
+  lastHit = 0;
+
+  /**
+   * Wendet die Schwerkraft auf das Objekt an, indem die y-Position und Geschwindigkeit aktualisiert werden.
+   */
+  applyGravity() {
+    setInterval(() => {
+      if (this.isAboveGround() || this.speedY > 0) {
+        this.y -= this.speedY;
+        this.speedY -= this.accelaration;
+      }
+    }, 1000 / 25);
+  }
+
+  /**
+   * Überprüft, ob sich das Objekt über dem Boden befindet.
+   * @returns {boolean} - True, wenn das Objekt über dem Boden ist.
+   */
+  isAboveGround() {
+    if (this instanceof ThrowableObject) {
+      return true; // Werfbare Objekte fallen immer.
+    } else {
+      return this.y &lt; 180;
+    }
+  }
+
+  /**
+   * Überprüft, ob das aktuelle Objekt mit einem anderen Objekt kollidiert.
+   * @param {MovableObject} mo - Das andere Objekt.
+   * @returns {boolean} - True, wenn die Objekte kollidieren.
+   */
+  isColliding(mo) {
+    return (
+      this.x + this.offset.x + this.width - this.offset.width >
+        mo.x + mo.offset.x &amp;&amp;
+      this.y + this.offset.y + this.height - this.offset.height >
+        mo.y + mo.offset.y &amp;&amp;
+      this.x + this.offset.x &lt;
+        mo.x + mo.offset.x + mo.width - mo.offset.width &amp;&amp;
+      this.y + this.offset.y &lt; mo.y + mo.offset.y + mo.height - mo.offset.height
+    );
+  }
+
+  /**
+   * Reduziert die Energie des Objekts, wenn es getroffen wird, mit einem Cooldown von 200ms.
+   */
+  hit() {
+    const now = new Date().getTime();
+    if (now - this.lastHit > 200) {
+      this.energy -= 5;
+      if (this.energy &lt; 0) this.energy = 0;
+      this.lastHit = now;
+    }
+  }
+
+  /**
+   * Überprüft, ob das Objekt kürzlich getroffen wurde.
+   * @returns {boolean} - True, wenn das Objekt in den letzten 1 Sekunde getroffen wurde.
+   */
+  isHurt() {
+    let timepassed = new Date().getTime() - this.lastHit;
+    timepassed = timepassed / 1000;
+    return timepassed &lt; 1;
+  }
+
+  /**
+   * Überprüft, ob das Objekt tot ist.
+   * @returns {boolean} - True, wenn die Energie des Objekts 0 ist.
+   */
+  isDead() {
+    return this.energy === 0;
+  }
+
+  /**
+   * Spielt eine Animation ab, indem zwischen einer Liste von Bildern zyklisch gewechselt wird.
+   * @param {string[]} images - Eine Liste von Bildpfaden.
+   */
+  playAnimation(images) {
+    let i = this.currentImage % images.length;
+    let path = images[i];
+    this.img = this.imagesCache[path];
+    this.currentImage++;
+  }
+
+  /**
+   * Bewegt das Objekt nach rechts.
+   */
+  moveRight() {
+    this.x += this.speed;
+  }
+
+  /**
+   * Bewegt das Objekt nach links.
+   */
+  moveLeft() {
+    this.x -= this.speed;
+  }
+
+  /**
+   * Lässt das Objekt springen.
+   */
+  jump() {
+    this.speedY = 30;
+  }
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="BackgroundObject.html">BackgroundObject</a></li><li><a href="Bottle.html">Bottle</a></li><li><a href="Chicken.html">Chicken</a></li><li><a href="Cloud.html">Cloud</a></li><li><a href="Coin.html">Coin</a></li><li><a href="Endboss.html">Endboss</a></li><li><a href="Level.html">Level</a></li><li><a href="SmallChicken.html">SmallChicken</a></li><li><a href="StatusBar.html">StatusBar</a></li><li><a href="World.html">World</a></li></ul><h3>Global</h3><ul><li><a href="global.html#checkOrientation">checkOrientation</a></li><li><a href="global.html#clearAllIntervals">clearAllIntervals</a></li><li><a href="global.html#closeOverlay">closeOverlay</a></li><li><a href="global.html#goToMainMenu">goToMainMenu</a></li><li><a href="global.html#hideEndScreens">hideEndScreens</a></li><li><a href="global.html#hideStartScreen">hideStartScreen</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#openOverlay">openOverlay</a></li><li><a href="global.html#resetGame">resetGame</a></li><li><a href="global.html#resetLevel">resetLevel</a></li><li><a href="global.html#showStartScreen">showStartScreen</a></li><li><a href="global.html#startGame">startGame</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Tue Mar 18 2025 12:14:16 GMT+0100 (Mitteleuropäische Normalzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

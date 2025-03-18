@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: levels/level1.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: levels/level1.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Funktion, um das Level neu zu initialisieren.
+ * @returns {Level} Ein neues Level-Objekt.
+ */
+function resetLevel() {
+    return new Level(
+        [
+            new Chicken(),
+            new Chicken(),
+            new Chicken(),
+            new Chicken(),
+            new Chicken(),
+            new Chicken(),
+            new Chicken(),
+            new Chicken(),
+            new Chicken(),
+            new SmallChicken(),
+            new SmallChicken(),
+            new SmallChicken(),
+            new SmallChicken(),
+            new SmallChicken(),
+            new SmallChicken(),
+            new SmallChicken(),
+            new SmallChicken(),
+            new Endboss(),
+        ],
+        [
+            new Cloud(210),
+            new Cloud(430),
+            new Cloud(670),
+            new Cloud(820),
+            new Cloud(1170),
+            new Cloud(1350),
+            new Cloud(1580),
+            new Cloud(1900),
+            new Cloud(2150),
+            new Cloud(2430),
+            new Cloud(2670),
+            new Cloud(2820),
+            new Cloud(3160),
+            new Cloud(3410),
+            new Cloud(3670),
+            new Cloud(3820),
+            new Cloud(4060),
+            new Cloud(4250),
+            new Cloud(4460),
+            new Cloud(4710),
+            new Cloud(4970),
+            new Cloud(5130),
+            new Cloud(5460),
+            new Cloud(5750),
+            new Cloud(5980),
+        ],
+        [
+            new BackgroundObject("img_pollo_locco/img/5_background/layers/air.png", -719),
+            new BackgroundObject("img_pollo_locco/img/5_background/layers/3_third_layer/2.png", -719),
+            new BackgroundObject("img_pollo_locco/img/5_background/layers/2_second_layer/2.png", -719),
+            new BackgroundObject("img_pollo_locco/img/5_background/layers/1_first_layer/2.png", -719),
+
+            new BackgroundObject("img_pollo_locco/img/5_background/layers/air.png", 0),
+            new BackgroundObject("img_pollo_locco/img/5_background/layers/3_third_layer/1.png", 0),
+            new BackgroundObject("img_pollo_locco/img/5_background/layers/2_second_layer/1.png", 0),
+            new BackgroundObject("img_pollo_locco/img/5_background/layers/1_first_layer/1.png", 0),
+
+            new BackgroundObject("img_pollo_locco/img/5_background/layers/air.png", 719),
+            new BackgroundObject("img_pollo_locco/img/5_background/layers/3_third_layer/2.png", 719),
+            new BackgroundObject("img_pollo_locco/img/5_background/layers/2_second_layer/2.png", 719),
+            new BackgroundObject("img_pollo_locco/img/5_background/layers/1_first_layer/2.png", 719),
+
+            new BackgroundObject("img_pollo_locco/img/5_background/layers/air.png", 719 * 2),
+            new BackgroundObject("img_pollo_locco/img/5_background/layers/3_third_layer/1.png", 719 * 2),
+            new BackgroundObject("img_pollo_locco/img/5_background/layers/2_second_layer/1.png", 719 * 2),
+            new BackgroundObject("img_pollo_locco/img/5_background/layers/1_first_layer/1.png", 719 * 2),
+
+            new BackgroundObject("img_pollo_locco/img/5_background/layers/air.png", 719 * 3),
+            new BackgroundObject("img_pollo_locco/img/5_background/layers/3_third_layer/2.png", 719 * 3),
+            new BackgroundObject("img_pollo_locco/img/5_background/layers/2_second_layer/2.png", 719 * 3),
+            new BackgroundObject("img_pollo_locco/img/5_background/layers/1_first_layer/2.png", 719 * 3),
+
+            new BackgroundObject("img_pollo_locco/img/5_background/layers/air.png", 719 * 4),
+            new BackgroundObject("img_pollo_locco/img/5_background/layers/3_third_layer/1.png", 719 * 4),
+            new BackgroundObject("img_pollo_locco/img/5_background/layers/2_second_layer/1.png", 719 * 4),
+            new BackgroundObject("img_pollo_locco/img/5_background/layers/1_first_layer/1.png", 719 * 4),
+
+            new BackgroundObject("img_pollo_locco/img/5_background/layers/air.png", 719 * 5),
+            new BackgroundObject("img_pollo_locco/img/5_background/layers/3_third_layer/2.png", 719 * 5),
+            new BackgroundObject("img_pollo_locco/img/5_background/layers/2_second_layer/2.png", 719 * 5),
+            new BackgroundObject("img_pollo_locco/img/5_background/layers/1_first_layer/2.png", 719 * 5),
+        ],
+        [
+            new Bottle(510, 370),
+            new Bottle(800, 370),
+            new Bottle(1120, 370),
+            new Bottle(1530, 370),
+            new Bottle(1860, 370),
+            new Bottle(2240, 370),
+            new Bottle(2400, 370),
+            new Bottle(2620, 370),
+            new Bottle(2870, 370),
+            new Bottle(3050, 370),
+            new Bottle(3200, 370),
+            new Bottle(3490, 370),
+        ],
+        [
+            new Coin(600, 140),
+            new Coin(1100, 230),
+            new Coin(1580, 270),
+            new Coin(1860, 170),
+            new Coin(2150, 240),
+            new Coin(2400, 170),
+            new Coin(2660, 230),
+            new Coin(2900, 140),
+            new Coin(3200, 220),
+            new Coin(3380, 180),
+        ]
+    );
+}
+
+let level1 = resetLevel();
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="BackgroundObject.html">BackgroundObject</a></li><li><a href="Bottle.html">Bottle</a></li><li><a href="Chicken.html">Chicken</a></li><li><a href="Cloud.html">Cloud</a></li><li><a href="Coin.html">Coin</a></li><li><a href="Endboss.html">Endboss</a></li><li><a href="Level.html">Level</a></li><li><a href="SmallChicken.html">SmallChicken</a></li><li><a href="StatusBar.html">StatusBar</a></li><li><a href="World.html">World</a></li></ul><h3>Global</h3><ul><li><a href="global.html#checkOrientation">checkOrientation</a></li><li><a href="global.html#clearAllIntervals">clearAllIntervals</a></li><li><a href="global.html#closeOverlay">closeOverlay</a></li><li><a href="global.html#goToMainMenu">goToMainMenu</a></li><li><a href="global.html#hideEndScreens">hideEndScreens</a></li><li><a href="global.html#hideStartScreen">hideStartScreen</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#openOverlay">openOverlay</a></li><li><a href="global.html#resetGame">resetGame</a></li><li><a href="global.html#resetLevel">resetLevel</a></li><li><a href="global.html#showStartScreen">showStartScreen</a></li><li><a href="global.html#startGame">startGame</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Tue Mar 18 2025 12:14:16 GMT+0100 (Mitteleuropäische Normalzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
