@@ -280,7 +280,7 @@ class World {
         if (enemyIndex > -1) {
           this.level.enemies.splice(enemyIndex, 1);
         }
-      }, 10000);
+      }, 2000);
     }
   }
 
@@ -346,23 +346,36 @@ class World {
     );
   }
 
-  /**
-   * Wirft eine Flasche in die aktuelle Blickrichtung des Charakters.
-   * Die Flasche wird als ThrowableObject erstellt und der Liste der werfbaren Objekte hinzugefügt.
-   * Zusätzlich wird der Zeitpunkt des letzten Wurfs gespeichert und ein Wurfgeräusch abgespielt.
-   */
   throwBottle() {
     if (this.gameOver) return;
     this.lastThrowTime = new Date().getTime();
+
     let direction = this.character.otherDirection ? -1 : 1;
     let bottle = new ThrowableObject(
       this.character.x + 50 * direction,
-      this.character.y + 100,
-      direction
+      this.character.y + 170,
+      direction,
+      this
     );
+
     sounds.throwBottle.play();
-    bottle.speed = 10 * direction;
     this.throwableObjects.push(bottle);
+  }
+
+  processBottleCollision(bottleIndex, enemy) {
+    let bottle = this.throwableObjects[bottleIndex];
+
+    if (!bottle.isSplashing) {
+      if (enemy instanceof Endboss) {
+        enemy.hit();
+        this.updateEndbossStatusBar(enemy);
+      } else {
+        this.killEnemy(enemy);
+      }
+
+      console.log("🔥 Flasche trifft Gegner → Splash-Effekt startet!");
+      bottle.splashEffect();
+    }
   }
 
   /**
