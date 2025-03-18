@@ -3,7 +3,7 @@ class Endboss extends MovableObject {
   width = 250;
   y = 55;
   energy = 25;
-  speed = 0.6;
+  speed = 1.5;
 
   IMAGES_ALERT = [
     "img_pollo_locco/img/4_enemie_boss_chicken/2_alert/G5.png",
@@ -49,6 +49,7 @@ class Endboss extends MovableObject {
   hadFirstContact = false;
   attackCooldown = false;
   isAttacking = false;
+  isAlerting = false;
   character;
 
   /**
@@ -64,8 +65,9 @@ class Endboss extends MovableObject {
     this.loadImages(this.IMAGES_DEAD);
     this.x = 3900;
     this.character = character;
-    this.animate();
+    // this.animate();
     this.initAnimation();
+    this.checkForFirstContact();
   }
 
   offset = {
@@ -76,22 +78,65 @@ class Endboss extends MovableObject {
   };
 
   /**
+   * Prüft wiederholt, ob der Spieler nahe genug ist, um den Endboss zu aktivieren.
+   */
+  checkForFirstContact() {
+    let checkInterval = setInterval(() => {
+      if (!this.character) return;
+
+      if (this.character.x + 800 > this.x && !this.isAlerting) {
+        clearInterval(checkInterval);
+        this.isAlerting = true;
+        this.playAlertAnimation();
+      }
+    }, 500);
+  }
+
+  /**
+   * Spielt die Alert-Animation langsam ab, bevor der Endboss startet.
+   */
+  playAlertAnimation() {
+    let i = 0;
+    let interval = setInterval(() => {
+      if (i >= this.IMAGES_ALERT.length) {
+        clearInterval(interval);
+        this.isAlerting = false;
+        this.hadFirstContact = true;
+        this.startBoss();
+      } else {
+        this.loadImage(this.IMAGES_ALERT[i]);
+        i++;
+      }
+    }, 500);
+  }
+
+  /**
+   * Endboss beginnt sich zu bewegen und zu kämpfen.
+   */
+  startBoss() {
+    this.animate();
+    this.initiateAttacking();
+  }
+
+  /**
    * Aktiviert die Bewegung und Animation des Endbosses.
    */
   animate() {
     setInterval(() => {
-      this.followCharacter();
+      if (this.hadFirstContact && !this.isDead()) {
+        this.followCharacter();
+      }
     }, 1000 / 60);
 
     setInterval(() => {
       this.playAnimation(this.IMAGES_WALKING);
-    }, 200);
+    }, 500);
 
-    setInterval(() => {
-      if (!this.hadFirstContact) {
-        this.playAnimation(this.IMAGES_ALERT);
-      }
-    }, 100);
+    // setInterval(() => {
+    //   if (!this.hadFirstContact) {
+    //     this.playAnimation(this.IMAGES_ALERT);
+    //   }
+    // }, 500);
   }
 
   /**
@@ -149,7 +194,7 @@ class Endboss extends MovableObject {
     setInterval(() => {
       // this.updateMovementDirection();
       this.playWalkingAnimation();
-    }, 250);
+    }, 300);
 
     this.initiateAttacking();
   }
@@ -157,17 +202,17 @@ class Endboss extends MovableObject {
   /**
    * Aktualisiert die Bewegungsrichtung basierend auf der Position des Charakters.
    */
-  // updateMovementDirection() {
-  //   if (!this.hadFirstContact || this.isAttacking) return;
+  updateMovementDirection() {
+    if (!this.hadFirstContact || this.isAttacking) return;
 
-  //   if (this.character.x < this.x) {
-  //     this.moveLeft();
-  //     this.otherDirection = false;
-  //   } else if (this.character.x > this.x) {
-  //     this.moveRight();
-  //     this.otherDirection = true;
-  //   }
-  // }
+    if (this.character.x < this.x) {
+      this.moveLeft();
+      this.otherDirection = false;
+    } else if (this.character.x > this.x) {
+      this.moveRight();
+      this.otherDirection = true;
+    }
+  }
 
   /**
    * Spielt die Laufanimation des Objekts ab.
@@ -186,7 +231,7 @@ class Endboss extends MovableObject {
       if (!this.attackCooldown && this.hadFirstContact) {
         this.startAttackCycle();
       }
-    }, 3000);
+    }, 2000);
   }
 
   /**
@@ -219,12 +264,17 @@ class Endboss extends MovableObject {
    * @returns {void}
    */
   hit() {
-    this.energy -= 5;
-    sounds.endbossHurt.play();
+    let now = new Date().getTime();
+    if (now - this.lastHit > 200) {
+      // alle 200ms darf er erneut Schaden nehmen
+      this.lastHit = now; // <-- ZEILE HINZUFÜGEN
+      this.energy -= 5;
+      sounds.endbossHurt.play();
 
-    if (this.energy <= 0) {
-      this.energy = 0;
-      sounds.endbossDead.play();
+      if (this.energy <= 0) {
+        this.energy = 0;
+        sounds.endbossDead.play();
+      }
     }
   }
 

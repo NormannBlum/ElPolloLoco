@@ -346,6 +346,13 @@ class World {
     );
   }
 
+  /**
+   * Erstellt und wirft eine Flasche in die Richtung des Charakters.
+   * Spielt den Soundeffekt für das Werfen ab und fügt die Flasche zur Liste der geworfenen Objekte hinzu.
+   * Die Flasche wird basierend auf der Blickrichtung des Charakters positioniert.
+   *
+   * @returns {void} - Die Methode gibt keinen Rückgabewert zurück.
+   */
   throwBottle() {
     if (this.gameOver) return;
     this.lastThrowTime = new Date().getTime();
@@ -362,6 +369,16 @@ class World {
     this.throwableObjects.push(bottle);
   }
 
+  /**
+   * Behandelt die Kollision einer geworfenen Flasche mit einem Gegner.
+   * Falls der Gegner der Endboss ist, wird dieser getroffen und seine Statusleiste aktualisiert.
+   * Falls es ein normaler Gegner ist, wird dieser eliminiert.
+   * Startet außerdem die Splash-Animation der Flasche.
+   *
+   * @param {number} bottleIndex - Der Index der kollidierenden Flasche im `throwableObjects`-Array.
+   * @param {MovableObject} enemy - Das getroffene Gegnerobjekt.
+   * @returns {void} - Die Methode gibt keinen Rückgabewert zurück.
+   */
   processBottleCollision(bottleIndex, enemy) {
     let bottle = this.throwableObjects[bottleIndex];
 
@@ -372,8 +389,6 @@ class World {
       } else {
         this.killEnemy(enemy);
       }
-
-      console.log("🔥 Flasche trifft Gegner → Splash-Effekt startet!");
       bottle.splashEffect();
     }
   }
