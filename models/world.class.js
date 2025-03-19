@@ -64,7 +64,7 @@ class World {
       this.checkCollisions();
       this.checkCollectibles();
       this.checkThrowObjects();
-      this.checkEndbossSpawn();
+      // this.checkEndbossSpawn();
     }, 10);
 
     this.addInterval(() => {
@@ -415,7 +415,7 @@ class World {
       this.character.x + 500 > endboss.x
     ) {
       endboss.hadFirstContact = true;
-      endboss.startWalking();
+      // endboss.startWalking();
     }
   }
 

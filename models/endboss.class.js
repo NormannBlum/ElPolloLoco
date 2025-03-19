@@ -7,7 +7,7 @@ class Endboss extends MovableObject {
   width = 250;
   y = 55;
   energy = 25;
-  speed = 2;
+  speed = 1;
 
   IMAGES_ALERT = [
     "img_pollo_locco/img/4_enemie_boss_chicken/2_alert/G5.png",
@@ -71,6 +71,7 @@ class Endboss extends MovableObject {
     this.character = character;
     this.initAnimation();
     this.checkForFirstContact();
+    this.speed = 2.5;
   }
 
   offset = {
@@ -92,7 +93,7 @@ class Endboss extends MovableObject {
         this.isAlerting = true;
         this.playAlertAnimation();
       }
-    }, 500);
+    }, 300);
   }
 
   /**
@@ -133,7 +134,7 @@ class Endboss extends MovableObject {
 
     setInterval(() => {
       this.playAnimation(this.IMAGES_WALKING);
-    }, 500);
+    }, 300);
   }
 
   /**
@@ -180,46 +181,6 @@ class Endboss extends MovableObject {
   }
 
   /**
-   * Starts the object's walking animation.
-   * Periodically updates movement direction
-   * and plays the walking animation.
-   *
-   * Additionally, the attack behavior is initialized.
-   * @returns {void}
-   */
-  startWalking() {
-    setInterval(() => {
-      this.playWalkingAnimation();
-    }, 300);
-
-    this.initiateAttacking();
-  }
-
-  /**
-   * Updates the movement direction based on the character's position.
-   */
-  updateMovementDirection() {
-    if (!this.hadFirstContact || this.isAttacking) return;
-
-    if (this.character.x < this.x) {
-      this.moveLeft();
-      this.otherDirection = false;
-    } else if (this.character.x > this.x) {
-      this.moveRight();
-      this.otherDirection = true;
-    }
-  }
-
-  /**
-   * Plays the walking animation of the object.
-   * Uses predefined images for the walking movement.
-   * @returns {void}
-   */
-  playWalkingAnimation() {
-    this.playAnimation(this.IMAGES_WALKING);
-  }
-
-  /**
    * Starts the Endboss's attack mode.
    */
   initiateAttacking() {
@@ -227,16 +188,7 @@ class Endboss extends MovableObject {
       if (!this.attackCooldown && this.hadFirstContact) {
         this.startAttackCycle();
       }
-    }, 2000);
-  }
-
-  /**
-   * Plays the attack animation.
-   */
-  playAttackAnimation() {
-    this.attackInterval = setInterval(() => {
-      this.playAnimation(this.IMAGES_ATTACK);
-    }, 500);
+    }, 1000);
   }
 
   /**
@@ -247,6 +199,15 @@ class Endboss extends MovableObject {
     this.isAttacking = true;
 
     this.playAttackAnimation();
+  }
+
+  /**
+   * Plays the attack animation.
+   */
+  playAttackAnimation() {
+    this.attackInterval = setInterval(() => {
+      this.playAnimation(this.IMAGES_ATTACK);
+    }, 500);
   }
 
   /**
