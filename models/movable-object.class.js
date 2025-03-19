@@ -1,6 +1,6 @@
 /**
- * Die MovableObject-Klasse repräsentiert ein bewegliches Objekt in der Spielwelt.
- * Sie erweitert die DrawableObject-Klasse und fügt Bewegung, Schwerkraft und Kollisionserkennung hinzu.
+ * The MovableObject class represents a movable object in the game world.
+ * It extends the DrawableObject class and adds movement, gravity, and collision detection.
  */
 class MovableObject extends DrawableObject {
   speed = 0.15;
@@ -11,7 +11,7 @@ class MovableObject extends DrawableObject {
   lastHit = 0;
 
   /**
-   * Wendet die Schwerkraft auf das Objekt an, indem die y-Position und Geschwindigkeit aktualisiert werden.
+   * Applies gravity to the object by updating its y-position and speed.
    */
   applyGravity() {
     setInterval(() => {
@@ -23,21 +23,21 @@ class MovableObject extends DrawableObject {
   }
 
   /**
-   * Überprüft, ob sich das Objekt über dem Boden befindet.
-   * @returns {boolean} - True, wenn das Objekt über dem Boden ist.
+   * Checks if the object is above the ground.
+   * @returns {boolean} - True if the object is above the ground.
    */
   isAboveGround() {
     if (this instanceof ThrowableObject) {
-      return true; // Werfbare Objekte fallen immer.
+      return true; // Throwable objects always fall.
     } else {
       return this.y < 180;
     }
   }
 
   /**
-   * Überprüft, ob das aktuelle Objekt mit einem anderen Objekt kollidiert.
-   * @param {MovableObject} mo - Das andere Objekt.
-   * @returns {boolean} - True, wenn die Objekte kollidieren.
+   * Checks if the current object is colliding with another object.
+   * @param {MovableObject} mo - The other object.
+   * @returns {boolean} - True if the objects are colliding.
    */
   isColliding(mo) {
     return (
@@ -52,7 +52,7 @@ class MovableObject extends DrawableObject {
   }
 
   /**
-   * Reduziert die Energie des Objekts, wenn es getroffen wird, mit einem Cooldown von 200ms.
+   * Reduces the object's energy when hit, with a cooldown of 200ms.
    */
   hit() {
     const now = new Date().getTime();
@@ -64,8 +64,8 @@ class MovableObject extends DrawableObject {
   }
 
   /**
-   * Überprüft, ob das Objekt kürzlich getroffen wurde.
-   * @returns {boolean} - True, wenn das Objekt in den letzten 1 Sekunde getroffen wurde.
+   * Checks if the object was recently hit.
+   * @returns {boolean} - True if the object was hit within the last 1 second.
    */
   isHurt() {
     let timepassed = new Date().getTime() - this.lastHit;
@@ -74,16 +74,16 @@ class MovableObject extends DrawableObject {
   }
 
   /**
-   * Überprüft, ob das Objekt tot ist.
-   * @returns {boolean} - True, wenn die Energie des Objekts 0 ist.
+   * Checks if the object is dead.
+   * @returns {boolean} - True if the object's energy is 0.
    */
   isDead() {
     return this.energy === 0;
   }
 
   /**
-   * Spielt eine Animation ab, indem zwischen einer Liste von Bildern zyklisch gewechselt wird.
-   * @param {string[]} images - Eine Liste von Bildpfaden.
+   * Plays an animation by cycling through a list of images.
+   * @param {string[]} images - A list of image paths.
    */
   playAnimation(images) {
     let i = this.currentImage % images.length;
@@ -93,21 +93,21 @@ class MovableObject extends DrawableObject {
   }
 
   /**
-   * Bewegt das Objekt nach rechts.
+   * Moves the object to the right.
    */
   moveRight() {
     this.x += this.speed;
   }
 
   /**
-   * Bewegt das Objekt nach links.
+   * Moves the object to the left.
    */
   moveLeft() {
     this.x -= this.speed;
   }
 
   /**
-   * Lässt das Objekt springen.
+   * Makes the object jump.
    */
   jump() {
     this.speedY = 30;

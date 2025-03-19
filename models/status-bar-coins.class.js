@@ -1,12 +1,12 @@
 /**
- * Die CoinsStatusBar-Klasse zeigt die Anzahl der gesammelten Münzen des Spielers an.
- * Sie erbt von der StatusBar-Klasse und verwendet verschiedene Bilder, um den Fortschritt darzustellen.
+ * The CoinsStatusBar class displays the number of coins collected by the player.
+ * It inherits from the StatusBar class and uses different images to represent progress.
  */
 class CoinsStatusBar extends StatusBar {
   /**
-   * Erstellt eine neue Instanz der CoinsStatusBar.
-   * Initialisiert die Bilder für die verschiedenen Münz-Fortschrittsstufen
-   * und setzt die Standardposition sowie den Anfangswert auf 0 %.
+   * Creates a new instance of the CoinsStatusBar.
+   * Initializes the images for different coin progress levels
+   * and sets the default position as well as the starting value to 0%.
    */
   constructor() {
     super();

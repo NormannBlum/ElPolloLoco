@@ -1,6 +1,6 @@
 /**
- * Die Coin-Klasse stellt eine sammelbare Münze im Spiel dar.
- * Sie erweitert die DrawableObject-Klasse und enthält Animationen für rotierende Münzen.
+ * The Coin class represents a collectible coin in the game.
+ * It extends the DrawableObject class and includes animations for rotating coins.
  */
 class Coin extends DrawableObject {
   IMAGES_COIN = [
@@ -16,9 +16,9 @@ class Coin extends DrawableObject {
   };
 
   /**
-   * Erstellt eine Instanz einer Münze mit Position und Animation.
-   * @param {number} x - Die x-Position der Münze.
-   * @param {number} y - Die y-Position der Münze.
+   * Creates an instance of a coin with position and animation.
+   * @param {number} x - The x-position of the coin.
+   * @param {number} y - The y-position of the coin.
    */
   constructor(x, y) {
     super().loadImage("img_pollo_locco/img/8_coin/coin_1.png");
@@ -31,7 +31,7 @@ class Coin extends DrawableObject {
   }
 
   /**
-   * Startet die Animation der Münze, um zwischen verschiedenen Bildern zu wechseln.
+   * Starts the coin animation, switching between different images.
    */
   startAnimation() {
     setInterval(() => {

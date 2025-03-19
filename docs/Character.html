@@ -30,7 +30,7 @@
     
         <h2><span class="attribs"><span class="type-signature"></span></span>Character<span class="signature">()</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">Die Character-Klasse repräsentiert den spielbaren Charakter.Sie erweitert die MovableObject-Klasse und ermöglicht Bewegung, Sprünge und Animationen.</div>
+            <div class="class-description">The Character class represents the playable character.It extends the MovableObject class and enables movement, jumps, and animations.</div>
         
     
 </header>
@@ -157,7 +157,7 @@
 
 
 <div class="description">
-    Initialisiert die Animationen und die Bewegung des Charakters.
+    Initializes the character's animations and movement.
 </div>
 
 
@@ -237,94 +237,6 @@
     
 
     
-    <h4 class="name" id="chooseIdleAnimation"><span class="type-signature"></span>chooseIdleAnimation<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Wählt und spielt die entsprechende Leerlaufanimation basierend auf der Inaktivitätsdauer.
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_character.class.js.html">models/character.class.js</a>, <a href="models_character.class.js.html#line246">line 246</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
     <h4 class="name" id="handleJump"><span class="type-signature"></span>handleJump<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
@@ -333,7 +245,7 @@
 
 
 <div class="description">
-    Lässt den Charakter springen, wenn die entsprechende Taste gedrückt wird.
+    Makes the character jump if the corresponding key is pressed.
 </div>
 
 
@@ -421,7 +333,7 @@
 
 
 <div class="description">
-    Bewegt den Charakter nach links, wenn die entsprechende Taste gedrückt wird.
+    Moves the character to the left if the corresponding key is pressed.
 </div>
 
 
@@ -509,7 +421,7 @@
 
 
 <div class="description">
-    Bewegt den Charakter nach rechts, wenn die entsprechende Taste gedrückt wird.
+    Moves the character to the right if the corresponding key is pressed.
 </div>
 
 
@@ -589,112 +501,6 @@
     
 
     
-    <h4 class="name" id="hit"><span class="type-signature"></span>hit<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Verursacht Schaden am Objekt, indem die Energie um 5 reduziert wird.Spielt einen Treffer-Sound ab und setzt die Energie auf 0, falls sie negativ wird.Der Treffer kann nur alle 200 Millisekunden erfolgen, um mehrfachen Schaden in kurzer Zeit zu verhindern.
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_character.class.js.html">models/character.class.js</a>, <a href="models_character.class.js.html#line270">line 270</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">void</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
     <h4 class="name" id="initAnimation"><span class="type-signature"></span>initAnimation<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
@@ -703,7 +509,7 @@
 
 
 <div class="description">
-    Initialisiert die Animationszyklen für den Charakter.
+    Initializes the animation cycles for the character.
 </div>
 
 
@@ -791,7 +597,7 @@
 
 
 <div class="description">
-    Startet die Bewegung des Charakters basierend auf Benutzereingaben.
+    Starts character movement based on user input.
 </div>
 
 
@@ -871,222 +677,6 @@
     
 
     
-    <h4 class="name" id="isIdle"><span class="type-signature"></span>isIdle<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Prüft, ob der Charakter im Leerlauf ist.
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_character.class.js.html">models/character.class.js</a>, <a href="models_character.class.js.html#line220">line 220</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    - True, wenn der Charakter im Leerlauf ist.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">boolean</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="jump"><span class="type-signature"></span>jump<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Lässt das Objekt springen, indem es die vertikale Geschwindigkeit erhöht.
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_character.class.js.html">models/character.class.js</a>, <a href="models_character.class.js.html#line259">line 259</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">void</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
     <h4 class="name" id="playDeadAnimation"><span class="type-signature"></span>playDeadAnimation<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
@@ -1095,7 +685,7 @@
 
 
 <div class="description">
-    Spielt die Todesanimation ab, wenn der Charakter tot ist.
+    Plays the death animation if the character is dead.
 </div>
 
 
@@ -1183,7 +773,7 @@
 
 
 <div class="description">
-    Spielt die Verletzungsanimation ab, wenn der Charakter verletzt ist.
+    Plays the hurt animation if the character is injured.
 </div>
 
 
@@ -1263,94 +853,6 @@
     
 
     
-    <h4 class="name" id="playIdleAnimation"><span class="type-signature"></span>playIdleAnimation<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Spielt die Leerlaufanimation ab, wenn der Charakter untätig ist.
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_character.class.js.html">models/character.class.js</a>, <a href="models_character.class.js.html#line233">line 233</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
     <h4 class="name" id="playJumpingAnimation"><span class="type-signature"></span>playJumpingAnimation<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
@@ -1359,7 +861,7 @@
 
 
 <div class="description">
-    Spielt die Sprunganimation ab, wenn der Charakter springt.
+    Plays the jumping animation if the character is in the air.
 </div>
 
 
@@ -1447,7 +949,7 @@
 
 
 <div class="description">
-    Spielt die Laufanimation ab, wenn der Charakter läuft.
+    Plays the walking animation if the character is moving.
 </div>
 
 
@@ -1535,7 +1037,7 @@
 
 
 <div class="description">
-    Aktualisiert die Position der Kamera basierend auf der Position des Charakters.
+    Updates the camera position based on the character's position.
 </div>
 
 
@@ -1631,7 +1133,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Tue Mar 18 2025 16:13:19 GMT+0100 (Mitteleuropäische Normalzeit)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Wed Mar 19 2025 09:37:16 GMT+0100 (Mitteleuropäische Normalzeit)
 </footer>
 
 <script> prettyPrint(); </script>

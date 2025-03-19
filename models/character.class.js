@@ -1,6 +1,6 @@
 /**
- * Die Character-Klasse repräsentiert den spielbaren Charakter.
- * Sie erweitert die MovableObject-Klasse und ermöglicht Bewegung, Sprünge und Animationen.
+ * The Character class represents the playable character.
+ * It extends the MovableObject class and enables movement, jumps, and animations.
  */
 class Character extends MovableObject {
   height = 250;
@@ -95,7 +95,7 @@ class Character extends MovableObject {
   };
 
   /**
-   * Initialisiert die Animationen und die Bewegung des Charakters.
+   * Initializes the character's animations and movement.
    */
   animate() {
     this.initMovement();
@@ -103,7 +103,7 @@ class Character extends MovableObject {
   }
 
   /**
-   * Startet die Bewegung des Charakters basierend auf Benutzereingaben.
+   * Starts character movement based on user input.
    */
   initMovement() {
     setInterval(() => {
@@ -116,7 +116,7 @@ class Character extends MovableObject {
   }
 
   /**
-   * Bewegt den Charakter nach rechts, wenn die entsprechende Taste gedrückt wird.
+   * Moves the character to the right if the corresponding key is pressed.
    */
   handleRightMovement() {
     if (this.world.gameOver) return;
@@ -129,7 +129,7 @@ class Character extends MovableObject {
   }
 
   /**
-   * Bewegt den Charakter nach links, wenn die entsprechende Taste gedrückt wird.
+   * Moves the character to the left if the corresponding key is pressed.
    */
   handleLeftMovement() {
     if (this.world.gameOver) return;
@@ -142,7 +142,7 @@ class Character extends MovableObject {
   }
 
   /**
-   * Lässt den Charakter springen, wenn die entsprechende Taste gedrückt wird.
+   * Makes the character jump if the corresponding key is pressed.
    */
   handleJump() {
     if (this.world.gameOver) return;
@@ -154,14 +154,14 @@ class Character extends MovableObject {
   }
 
   /**
-   * Aktualisiert die Position der Kamera basierend auf der Position des Charakters.
+   * Updates the camera position based on the character's position.
    */
   updateCamera() {
     this.world.camera_x = -this.x + 100;
   }
 
   /**
-   * Initialisiert die Animationszyklen für den Charakter.
+   * Initializes the animation cycles for the character.
    */
   initAnimation() {
     setInterval(() => {
@@ -174,7 +174,7 @@ class Character extends MovableObject {
   }
 
   /**
-   * Spielt die Todesanimation ab, wenn der Charakter tot ist.
+   * Plays the death animation if the character is dead.
    */
   playDeadAnimation() {
     if (this.isDead()) {
@@ -183,7 +183,7 @@ class Character extends MovableObject {
   }
 
   /**
-   * Spielt die Verletzungsanimation ab, wenn der Charakter verletzt ist.
+   * Plays the hurt animation if the character is injured.
    */
   playHurtAnimation() {
     if (this.isHurt()) {
@@ -192,7 +192,7 @@ class Character extends MovableObject {
   }
 
   /**
-   * Spielt die Sprunganimation ab, wenn der Charakter springt.
+   * Plays the jumping animation if the character is in the air.
    */
   playJumpingAnimation() {
     if (this.isAboveGround()) {
@@ -201,7 +201,7 @@ class Character extends MovableObject {
   }
 
   /**
-   * Spielt die Laufanimation ab, wenn der Charakter läuft.
+   * Plays the walking animation if the character is moving.
    */
   playWalkingAnimation() {
     if (
@@ -212,10 +212,9 @@ class Character extends MovableObject {
       this.playAnimation(this.IMAGES_WALKING);
     }
   }
-
   /**
-   * Prüft, ob der Charakter im Leerlauf ist.
-   * @returns {boolean} - True, wenn der Charakter im Leerlauf ist.
+   * Checks if the character is idle.
+   * @returns {boolean} - True if the character is idle.
    */
   isIdle() {
     return (
@@ -228,7 +227,7 @@ class Character extends MovableObject {
   }
 
   /**
-   * Spielt die Leerlaufanimation ab, wenn der Charakter untätig ist.
+   * Plays the idle animation if the character is inactive.
    */
   playIdleAnimation() {
     if (this.world.gameOver) return;
@@ -241,7 +240,7 @@ class Character extends MovableObject {
   }
 
   /**
-   * Wählt und spielt die entsprechende Leerlaufanimation basierend auf der Inaktivitätsdauer.
+   * Selects and plays the appropriate idle animation based on inactivity duration.
    */
   chooseIdleAnimation() {
     let timeSinceLastAction = Date.now() - this.lastActionTime;
@@ -253,7 +252,7 @@ class Character extends MovableObject {
   }
 
   /**
-   * Lässt das Objekt springen, indem es die vertikale Geschwindigkeit erhöht.
+   * Makes the object jump by increasing its vertical speed.
    * @returns {void}
    */
   jump() {
@@ -261,9 +260,9 @@ class Character extends MovableObject {
   }
 
   /**
-   * Verursacht Schaden am Objekt, indem die Energie um 5 reduziert wird.
-   * Spielt einen Treffer-Sound ab und setzt die Energie auf 0, falls sie negativ wird.
-   * Der Treffer kann nur alle 200 Millisekunden erfolgen, um mehrfachen Schaden in kurzer Zeit zu verhindern.
+   * Causes damage to the object by reducing energy by 5.
+   * Plays a hit sound and sets energy to 0 if it falls below zero.
+   * The hit can only occur once every 200 milliseconds to prevent multiple hits in a short time.
    *
    * @returns {void}
    */

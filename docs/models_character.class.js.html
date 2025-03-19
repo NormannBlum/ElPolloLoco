@@ -27,8 +27,8 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * Die Character-Klasse repräsentiert den spielbaren Charakter.
- * Sie erweitert die MovableObject-Klasse und ermöglicht Bewegung, Sprünge und Animationen.
+ * The Character class represents the playable character.
+ * It extends the MovableObject class and enables movement, jumps, and animations.
  */
 class Character extends MovableObject {
   height = 250;
@@ -123,7 +123,7 @@ class Character extends MovableObject {
   };
 
   /**
-   * Initialisiert die Animationen und die Bewegung des Charakters.
+   * Initializes the character's animations and movement.
    */
   animate() {
     this.initMovement();
@@ -131,7 +131,7 @@ class Character extends MovableObject {
   }
 
   /**
-   * Startet die Bewegung des Charakters basierend auf Benutzereingaben.
+   * Starts character movement based on user input.
    */
   initMovement() {
     setInterval(() => {
@@ -144,7 +144,7 @@ class Character extends MovableObject {
   }
 
   /**
-   * Bewegt den Charakter nach rechts, wenn die entsprechende Taste gedrückt wird.
+   * Moves the character to the right if the corresponding key is pressed.
    */
   handleRightMovement() {
     if (this.world.gameOver) return;
@@ -157,7 +157,7 @@ class Character extends MovableObject {
   }
 
   /**
-   * Bewegt den Charakter nach links, wenn die entsprechende Taste gedrückt wird.
+   * Moves the character to the left if the corresponding key is pressed.
    */
   handleLeftMovement() {
     if (this.world.gameOver) return;
@@ -170,7 +170,7 @@ class Character extends MovableObject {
   }
 
   /**
-   * Lässt den Charakter springen, wenn die entsprechende Taste gedrückt wird.
+   * Makes the character jump if the corresponding key is pressed.
    */
   handleJump() {
     if (this.world.gameOver) return;
@@ -182,14 +182,14 @@ class Character extends MovableObject {
   }
 
   /**
-   * Aktualisiert die Position der Kamera basierend auf der Position des Charakters.
+   * Updates the camera position based on the character's position.
    */
   updateCamera() {
     this.world.camera_x = -this.x + 100;
   }
 
   /**
-   * Initialisiert die Animationszyklen für den Charakter.
+   * Initializes the animation cycles for the character.
    */
   initAnimation() {
     setInterval(() => {
@@ -202,7 +202,7 @@ class Character extends MovableObject {
   }
 
   /**
-   * Spielt die Todesanimation ab, wenn der Charakter tot ist.
+   * Plays the death animation if the character is dead.
    */
   playDeadAnimation() {
     if (this.isDead()) {
@@ -211,7 +211,7 @@ class Character extends MovableObject {
   }
 
   /**
-   * Spielt die Verletzungsanimation ab, wenn der Charakter verletzt ist.
+   * Plays the hurt animation if the character is injured.
    */
   playHurtAnimation() {
     if (this.isHurt()) {
@@ -220,7 +220,7 @@ class Character extends MovableObject {
   }
 
   /**
-   * Spielt die Sprunganimation ab, wenn der Charakter springt.
+   * Plays the jumping animation if the character is in the air.
    */
   playJumpingAnimation() {
     if (this.isAboveGround()) {
@@ -229,7 +229,7 @@ class Character extends MovableObject {
   }
 
   /**
-   * Spielt die Laufanimation ab, wenn der Charakter läuft.
+   * Plays the walking animation if the character is moving.
    */
   playWalkingAnimation() {
     if (
@@ -238,75 +238,6 @@ class Character extends MovableObject {
       (this.world.keyboard.RIGHT || this.world.keyboard.LEFT)
     ) {
       this.playAnimation(this.IMAGES_WALKING);
-    }
-  }
-
-  /**
-   * Prüft, ob der Charakter im Leerlauf ist.
-   * @returns {boolean} - True, wenn der Charakter im Leerlauf ist.
-   */
-  isIdle() {
-    return (
-      !this.isDead() &amp;&amp;
-      !this.isHurt() &amp;&amp;
-      !this.isAboveGround() &amp;&amp;
-      !this.world.keyboard.RIGHT &amp;&amp;
-      !this.world.keyboard.LEFT
-    );
-  }
-
-  /**
-   * Spielt die Leerlaufanimation ab, wenn der Charakter untätig ist.
-   */
-  playIdleAnimation() {
-    if (this.world.gameOver) return;
-    if (this.isIdle()) {
-      if (Date.now() - this.lastActionTime >= this.idleTimeout) {
-        sounds.snore.play();
-      }
-      this.chooseIdleAnimation();
-    }
-  }
-
-  /**
-   * Wählt und spielt die entsprechende Leerlaufanimation basierend auf der Inaktivitätsdauer.
-   */
-  chooseIdleAnimation() {
-    let timeSinceLastAction = Date.now() - this.lastActionTime;
-    if (timeSinceLastAction >= this.idleTimeout) {
-      this.playAnimation(this.IMAGES_LONGIDLE);
-    } else {
-      this.playAnimation(this.IMAGES_IDLE);
-    }
-  }
-
-  /**
-   * Lässt das Objekt springen, indem es die vertikale Geschwindigkeit erhöht.
-   * @returns {void}
-   */
-  jump() {
-    this.speedY = 30;
-  }
-
-  /**
-   * Verursacht Schaden am Objekt, indem die Energie um 5 reduziert wird.
-   * Spielt einen Treffer-Sound ab und setzt die Energie auf 0, falls sie negativ wird.
-   * Der Treffer kann nur alle 200 Millisekunden erfolgen, um mehrfachen Schaden in kurzer Zeit zu verhindern.
-   *
-   * @returns {void}
-   */
-  hit() {
-    const now = new Date().getTime();
-    if (now - this.lastHit > 200) {
-      this.energy -= 5;
-      sounds.hurt.play();
-
-      if (this.energy &lt; 0) {
-        this.energy = 0;
-        sounds.dead.play();
-      }
-
-      this.lastHit = now;
     }
   }
 }
@@ -326,7 +257,7 @@ class Character extends MovableObject {
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Tue Mar 18 2025 16:13:19 GMT+0100 (Mitteleuropäische Normalzeit)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Wed Mar 19 2025 09:37:16 GMT+0100 (Mitteleuropäische Normalzeit)
 </footer>
 
 <script> prettyPrint(); </script>

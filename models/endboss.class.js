@@ -1,14 +1,13 @@
 /**
- * Die Endboss-Klasse repräsentiert den Endgegner im Spiel.
- * Er besitzt verschiedene Phasen wie Alarmbereitschaft, Bewegung, Angriff und Verwundung.
+ * The Endboss class represents the final boss in the game.
+ * It has different phases such as alert mode, movement, attack, and injury.
  */
 class Endboss extends MovableObject {
-  
   height = 400;
   width = 250;
   y = 55;
   energy = 25;
-  speed = 1.5;
+  speed = 2;
 
   IMAGES_ALERT = [
     "img_pollo_locco/img/4_enemie_boss_chicken/2_alert/G5.png",
@@ -58,8 +57,8 @@ class Endboss extends MovableObject {
   character;
 
   /**
-   * Erstellt eine Instanz des Endbosses.
-   * @param {Character} character - Referenz auf den Charakter des Spielers.
+   * Creates an instance of the Endboss.
+   * @param {Character} character - Reference to the player's character.
    */
   constructor(character) {
     super().loadImage(this.IMAGES_ALERT[0]);
@@ -70,7 +69,6 @@ class Endboss extends MovableObject {
     this.loadImages(this.IMAGES_DEAD);
     this.x = 3900;
     this.character = character;
-    // this.animate();
     this.initAnimation();
     this.checkForFirstContact();
   }
@@ -83,7 +81,7 @@ class Endboss extends MovableObject {
   };
 
   /**
-   * Prüft wiederholt, ob der Spieler nahe genug ist, um den Endboss zu aktivieren.
+   * Continuously checks if the player is close enough to activate the Endboss.
    */
   checkForFirstContact() {
     let checkInterval = setInterval(() => {
@@ -98,7 +96,7 @@ class Endboss extends MovableObject {
   }
 
   /**
-   * Spielt die Alert-Animation langsam ab, bevor der Endboss startet.
+   * Plays the alert animation slowly before the Endboss starts.
    */
   playAlertAnimation() {
     let i = 0;
@@ -116,7 +114,7 @@ class Endboss extends MovableObject {
   }
 
   /**
-   * Endboss beginnt sich zu bewegen und zu kämpfen.
+   * Starts the Endboss movement and combat.
    */
   startBoss() {
     this.animate();
@@ -124,7 +122,7 @@ class Endboss extends MovableObject {
   }
 
   /**
-   * Aktiviert die Bewegung und Animation des Endbosses.
+   * Activates the movement and animation of the Endboss.
    */
   animate() {
     setInterval(() => {
@@ -136,16 +134,10 @@ class Endboss extends MovableObject {
     setInterval(() => {
       this.playAnimation(this.IMAGES_WALKING);
     }, 500);
-
-    // setInterval(() => {
-    //   if (!this.hadFirstContact) {
-    //     this.playAnimation(this.IMAGES_ALERT);
-    //   }
-    // }, 500);
   }
 
   /**
-   * Initialisiert Animationen wie "Tot" und "Verletzt".
+   * Initializes animations such as "Dead" and "Hurt".
    */
   initAnimation() {
     setInterval(() => {
@@ -155,7 +147,7 @@ class Endboss extends MovableObject {
   }
 
   /**
-   * Spielt die Todesanimation, wenn der Endboss tot ist.
+   * Plays the death animation when the Endboss is dead.
    */
   playDeadAnimation() {
     if (this.isDead()) {
@@ -164,7 +156,7 @@ class Endboss extends MovableObject {
   }
 
   /**
-   * Spielt die Verletzungsanimation, wenn der Endboss verletzt wurde.
+   * Plays the hurt animation when the Endboss is injured.
    */
   playHurtAnimation() {
     if (this.isHurt()) {
@@ -173,7 +165,7 @@ class Endboss extends MovableObject {
   }
 
   /**
-   * Bewegt den Endboss in Richtung des Charakters.
+   * Moves the Endboss towards the character.
    */
   followCharacter() {
     if (!this.character) return;
@@ -188,16 +180,15 @@ class Endboss extends MovableObject {
   }
 
   /**
-   * Startet das Gehen des Objekts.
-   * Führt in regelmäßigen Abständen die Aktualisierung der Bewegungsrichtung
-   * sowie die Abspielung der Laufanimation aus.
+   * Starts the object's walking animation.
+   * Periodically updates movement direction
+   * and plays the walking animation.
    *
-   * Zusätzlich wird das Angriffsverhalten initialisiert.
+   * Additionally, the attack behavior is initialized.
    * @returns {void}
    */
   startWalking() {
     setInterval(() => {
-      // this.updateMovementDirection();
       this.playWalkingAnimation();
     }, 300);
 
@@ -205,7 +196,7 @@ class Endboss extends MovableObject {
   }
 
   /**
-   * Aktualisiert die Bewegungsrichtung basierend auf der Position des Charakters.
+   * Updates the movement direction based on the character's position.
    */
   updateMovementDirection() {
     if (!this.hadFirstContact || this.isAttacking) return;
@@ -220,8 +211,8 @@ class Endboss extends MovableObject {
   }
 
   /**
-   * Spielt die Laufanimation des Objekts ab.
-   * Nutzt die vordefinierten Bilder für die Laufbewegung.
+   * Plays the walking animation of the object.
+   * Uses predefined images for the walking movement.
    * @returns {void}
    */
   playWalkingAnimation() {
@@ -229,7 +220,7 @@ class Endboss extends MovableObject {
   }
 
   /**
-   * Startet den Angriffsmodus des Endbosses.
+   * Starts the Endboss's attack mode.
    */
   initiateAttacking() {
     setInterval(() => {
@@ -240,7 +231,7 @@ class Endboss extends MovableObject {
   }
 
   /**
-   * Spielt die Angriffsanimation ab.
+   * Plays the attack animation.
    */
   playAttackAnimation() {
     this.attackInterval = setInterval(() => {
@@ -249,30 +240,25 @@ class Endboss extends MovableObject {
   }
 
   /**
-   * Beginnt den Angriffszyklus des Endbosses.
+   * Begins the Endboss's attack cycle.
    */
   startAttackCycle() {
     this.attackCooldown = true;
     this.isAttacking = true;
 
     this.playAttackAnimation();
-
-    // setTimeout(() => {
-    //   this.completeAttackCycle();
-    // }, 1000);
   }
 
   /**
-   * Reduziert die Energie des Objekts um 5 und spielt einen Treffer-Sound ab.
-   * Falls die Energie auf 0 oder darunter fällt, wird sie auf 0 gesetzt
-   * und der Todessound abgespielt.
+   * Reduces the object's energy by 5 and plays a hit sound.
+   * If energy reaches 0 or below, it is set to 0
+   * and the death sound is played.
    * @returns {void}
    */
   hit() {
     let now = new Date().getTime();
     if (now - this.lastHit > 200) {
-      // alle 200ms darf er erneut Schaden nehmen
-      this.lastHit = now; // <-- ZEILE HINZUFÜGEN
+      this.lastHit = now;
       this.energy -= 5;
       sounds.endbossHurt.play();
 
@@ -282,28 +268,4 @@ class Endboss extends MovableObject {
       }
     }
   }
-
-  /**
-   * Beendet den Angriffszyklus und führt eine schnelle Bewegung aus.
-   */
-  // completeAttackCycle() {
-  //   clearInterval(this.attackInterval);
-
-  //   if (this.otherDirection) {
-  //     this.moveRightQuickly();
-  //   } else {
-  //     this.moveLeftQuickly();
-  //   }
-
-  //   this.isAttacking = false;
-  //   this.attackCooldown = false;
-  // }
-
-  // moveRightQuickly() {
-  //   this.x += 150;
-  // }
-
-  // moveLeftQuickly() {
-  //   this.x -= 150;
-  // }
 }

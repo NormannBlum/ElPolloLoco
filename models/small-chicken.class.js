@@ -1,6 +1,6 @@
 /**
- * Die SmallChicken-Klasse stellt ein kleines Huhn als Gegner dar.
- * Es bewegt sich mit einer zufälligen Geschwindigkeit nach links und kann besiegt werden.
+ * The SmallChicken class represents a small chicken as an enemy.
+ * It moves left at a random speed and can be defeated.
  */
 class SmallChicken extends MovableObject {
   height = 45;
@@ -27,7 +27,7 @@ class SmallChicken extends MovableObject {
   isDead = false;
 
   /**
-   * Erstellt eine Instanz eines kleinen Huhns mit zufälliger Position und Geschwindigkeit.
+   * Creates an instance of a small chicken with a random position and speed.
    */
   constructor() {
     super().loadImage(
@@ -36,14 +36,14 @@ class SmallChicken extends MovableObject {
     this.loadImages(this.IMAGES_WALKING);
     this.loadImages(this.IMAGES_DEAD);
 
-    this.x = 700 + Math.random() * 3800; // Zufällige Startposition
-    this.speed = 0.1 + Math.random() * 0.3; // Langsame Geschwindigkeit
+    this.x = 700 + Math.random() * 3800; // Random starting position
+    this.speed = 0.1 + Math.random() * 0.3; // Slow speed
 
     this.animate();
   }
 
   /**
-   * Aktiviert die Bewegung und Animation des kleinen Huhns.
+   * Activates the movement and animation of the small chicken.
    */
   animate() {
     setInterval(() => {
@@ -60,7 +60,7 @@ class SmallChicken extends MovableObject {
   }
 
   /**
-   * Setzt das kleine Huhn in den Zustand "tot", stoppt die Bewegung und spielt die Todesanimation ab.
+   * Sets the small chicken to a "dead" state, stops its movement, and plays the death animation.
    */
   kill() {
     this.isDead = true;

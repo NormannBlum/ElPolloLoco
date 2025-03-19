@@ -1,6 +1,6 @@
 /**
- * Die Cloud-Klasse stellt eine bewegliche Wolke im Hintergrund des Spiels dar.
- * Sie erweitert die MovableObject-Klasse und bewegt sich kontinuierlich nach links.
+ * The Cloud class represents a moving cloud in the game's background.
+ * It extends the MovableObject class and continuously moves to the left.
  */
 class Cloud extends MovableObject {
   width = 500;
@@ -12,8 +12,8 @@ class Cloud extends MovableObject {
   ];
 
   /**
-   * Erstellt eine Instanz einer Wolke mit zufälligem Bild und Position.
-   * @param {number} x - Die x-Position der Wolke.
+   * Creates an instance of a cloud with a random image and position.
+   * @param {number} x - The x-position of the cloud.
    */
   constructor(x) {
     super();
@@ -26,7 +26,7 @@ class Cloud extends MovableObject {
   }
 
   /**
-   * Aktiviert die Bewegung der Wolke nach links.
+   * Activates the movement of the cloud to the left.
    */
   animate() {
     setInterval(() => {

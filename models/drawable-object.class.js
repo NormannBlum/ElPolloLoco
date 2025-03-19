@@ -1,6 +1,6 @@
 /**
- * Die DrawableObject-Klasse stellt ein zeichnbares Objekt im Spiel dar.
- * Sie enthält Methoden zum Laden und Anzeigen von Bildern auf dem Canvas.
+ * The DrawableObject class represents a drawable object in the game.
+ * It contains methods for loading and displaying images on the canvas.
  */
 class DrawableObject {
   img;
@@ -19,8 +19,8 @@ class DrawableObject {
   };
 
   /**
-   * Lädt ein Bild in das `img`-Attribut.
-   * @param {string} path - Der Pfad zum Bild.
+   * Loads an image into the `img` attribute.
+   * @param {string} path - The path to the image.
    */
   loadImage(path) {
     this.img = new Image();
@@ -28,16 +28,16 @@ class DrawableObject {
   }
 
   /**
-   * Zeichnet das aktuelle Bild des Objekts auf das Canvas.
-   * @param {CanvasRenderingContext2D} ctx - Der Zeichenkontext des Canvas.
+   * Draws the current image of the object onto the canvas.
+   * @param {CanvasRenderingContext2D} ctx - The drawing context of the canvas.
    */
   draw(ctx) {
     ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
   }
 
   /**
-   * Lädt eine Liste von Bildern in den `imagesCache`.
-   * @param {string[]} arr - Ein Array von Bildpfaden.
+   * Loads a list of images into the `imagesCache`.
+   * @param {string[]} arr - An array of image paths.
    */
   loadImages(arr) {
     arr.forEach((path) => {
@@ -48,8 +48,8 @@ class DrawableObject {
   }
 
   /**
-   * Spielt eine Animation ab, indem Bilder aus der übergebenen Liste zyklisch angezeigt werden.
-   * @param {string[]} images - Eine Liste von Bildpfaden für die Animation.
+   * Plays an animation by cycling through images from the provided list.
+   * @param {string[]} images - A list of image paths for the animation.
    */
   playAnimation(images) {
     let i = this.currentImage % images.length;
@@ -57,4 +57,3 @@ class DrawableObject {
     this.currentImage++;
   }
 }
-

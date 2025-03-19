@@ -1,51 +1,51 @@
 /**
- * Die Level-Klasse repräsentiert ein Level im Spiel.
- * Sie enthält Gegner, Hintergrundobjekte, sammelbare Items und die Endposition des Levels.
+ * The Level class represents a level in the game.
+ * It contains enemies, background objects, collectible items, and the end position of the level.
  */
 class Level {
   /**
-   * Eine Liste aller Gegner im Level.
+   * A list of all enemies in the level.
    * @type {MovableObject[]}
    */
   enemies;
 
   /**
-   * Eine Liste aller Wolken im Level.
+   * A list of all clouds in the level.
    * @type {Cloud[]}
    */
   clouds;
 
   /**
-   * Eine Liste aller Hintergrundobjekte im Level.
+   * A list of all background objects in the level.
    * @type {BackgroundObject[]}
    */
   backgroundObjects;
 
   /**
-   * Eine Liste aller Flaschen im Level, die gesammelt werden können.
+   * A list of all bottles in the level that can be collected.
    * @type {Bottle[]}
    */
   bottles;
 
   /**
-   * Eine Liste aller Münzen im Level.
+   * A list of all coins in the level.
    * @type {Coin[]}
    */
   coins;
 
   /**
-   * Die x-Koordinate des Endes des Levels.
+   * The x-coordinate of the end of the level.
    * @type {number}
    */
   level_end_x = 3600;
 
   /**
-   * Erstellt eine Instanz eines Levels mit Gegnern, Wolken, Hintergrundobjekten, Flaschen und Münzen.
-   * @param {MovableObject[]} enemies - Eine Liste von Gegnern im Level.
-   * @param {Cloud[]} clouds - Eine Liste von Wolken im Level.
-   * @param {BackgroundObject[]} backgroundObjects - Eine Liste von Hintergrundobjekten.
-   * @param {Bottle[]} bottles - Eine Liste von sammelbaren Flaschen.
-   * @param {Coin[]} coins - Eine Liste von sammelbaren Münzen.
+   * Creates an instance of a level with enemies, clouds, background objects, bottles, and coins.
+   * @param {MovableObject[]} enemies - A list of enemies in the level.
+   * @param {Cloud[]} clouds - A list of clouds in the level.
+   * @param {BackgroundObject[]} backgroundObjects - A list of background objects.
+   * @param {Bottle[]} bottles - A list of collectible bottles.
+   * @param {Coin[]} coins - A list of collectible coins.
    */
   constructor(enemies, clouds, backgroundObjects, bottles, coins) {
     this.enemies = enemies;

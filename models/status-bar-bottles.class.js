@@ -1,12 +1,12 @@
 /**
- * Die BottlesStatusBar-Klasse zeigt die Anzahl der gesammelten Flaschen des Spielers an.
- * Sie erbt von der StatusBar-Klasse und nutzt verschiedene Bilder, um den Fortschritt darzustellen.
+ * The BottlesStatusBar class displays the number of bottles collected by the player.
+ * It inherits from the StatusBar class and uses different images to represent progress.
  */
 class BottlesStatusBar extends StatusBar {
   /**
-   * Erstellt eine neue Instanz der BottlesStatusBar.
-   * Initialisiert die Bilder für die verschiedenen Fortschrittsstufen der gesammelten Flaschen
-   * und setzt die Standardposition sowie den Anfangswert auf 0 %.
+   * Creates a new instance of the BottlesStatusBar.
+   * Initializes the images for different progress levels of collected bottles
+   * and sets the default position as well as the starting value to 0%.
    */
   constructor() {
     super();

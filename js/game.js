@@ -18,7 +18,7 @@ let sounds = {
 };
 
 /**
- * Initialisiert das Spiel und zeigt den Startbildschirm an.
+ * Initializes the game and displays the start screen.
  */
 function init() {
   canvas = document.getElementById("canvas");
@@ -26,7 +26,7 @@ function init() {
 }
 
 /**
- * Startet das Spiel, indem die Welt erstellt und der Startbildschirm ausgeblendet wird.
+ * Starts the game by creating the world and hiding the start screen.
  */
 function startGame() {
   resetGame();
@@ -38,7 +38,7 @@ function startGame() {
 }
 
 /**
- * Setzt das Spiel zurück, entfernt aktive Intervalle und versteckt Endbildschirme.
+ * Resets the game, removes active intervals, and hides end screens.
  */
 function resetGame() {
   if (world) {
@@ -53,7 +53,7 @@ function resetGame() {
 }
 
 /**
- * Versteckt alle Endbildschirme.
+ * Hides all end screens.
  */
 function hideEndScreens() {
   document.getElementById("game-over-screen").classList.add("hidden");
@@ -61,7 +61,7 @@ function hideEndScreens() {
 }
 
 /**
- * Kehrt zum Hauptmenü zurück, indem das Spiel zurückgesetzt und der Startbildschirm angezeigt wird.
+ * Returns to the main menu by resetting the game and displaying the start screen.
  */
 function goToMainMenu() {
   resetGame();
@@ -69,7 +69,7 @@ function goToMainMenu() {
 }
 
 /**
- * Entfernt alle aktiven Intervalle und leert die Liste der Intervalle.
+ * Removes all active intervals and clears the interval list.
  */
 function clearAllIntervals() {
   activeIntervals.forEach(clearInterval);
@@ -77,7 +77,7 @@ function clearAllIntervals() {
 }
 
 /**
- * Zeigt den Startbildschirm an und versteckt das Canvas-Element.
+ * Displays the start screen and hides the canvas element.
  */
 function showStartScreen() {
   document.getElementById("start-screen").classList.remove("hidden");
@@ -86,7 +86,7 @@ function showStartScreen() {
 }
 
 /**
- * Versteckt den Startbildschirm und zeigt das Canvas-Element.
+ * Hides the start screen and displays the canvas element.
  */
 function hideStartScreen() {
   const startScreen = document.getElementById("start-screen");
@@ -97,28 +97,28 @@ function hideStartScreen() {
 }
 
 /**
- * Öffnet ein Overlay, indem es sichtbar gemacht wird.
- * @param {string} id - Die ID des zu öffnenden Overlays.
+ * Opens an overlay by making it visible.
+ * @param {string} id - The ID of the overlay to open.
  */
 function openOverlay(id) {
   document.getElementById(id).classList.remove("hidden");
 }
 
 /**
- * Schließt ein Overlay, indem es versteckt wird.
- * @param {string} id - Die ID des zu schließenden Overlays.
+ * Closes an overlay by hiding it.
+ * @param {string} id - The ID of the overlay to close.
  */
 function closeOverlay(id) {
   document.getElementById(id).classList.add("hidden");
 }
 
 /**
- * Überprüft die Bildschirmorientierung und zeigt eine Warnung an, wenn das Gerät im Hochformat ist.
+ * Checks the screen orientation and displays a warning if the device is in portrait mode.
  */
 function checkOrientation() {
   const warning = document.getElementById("orientation-warning");
 
-  // Prüfen, ob das Gerät im Hochformat ist und die Breite < 1200px
+  // Check if the device is in portrait mode and width < 1200px
   if (window.innerWidth < 1200 && window.innerWidth < window.innerHeight) {
     warning.classList.add("visible");
   } else {
@@ -126,12 +126,12 @@ function checkOrientation() {
   }
 }
 
-// Event-Listener für Änderungen der Fenstergröße und beim Laden der Seite
+// Event listeners for window resizing and page load
 window.addEventListener("resize", checkOrientation);
 window.addEventListener("load", checkOrientation);
 
 /**
- * Initialisiert die Audiosteuerung, sobald das DOM vollständig geladen ist.
+ * Initializes audio controls once the DOM is fully loaded.
  */
 document.addEventListener("DOMContentLoaded", () => {
   backgroundMusic.loop = true;
@@ -146,11 +146,12 @@ document.addEventListener("DOMContentLoaded", () => {
   if (isMuted) {
     muteAllSounds();
   }
+
   function startBackgroundMusic() {
     if (!hasInteracted) {
       backgroundMusic
         .play()
-        .catch((error) => console.log("Autoplay blockiert:", error));
+        .catch((error) => console.log("Autoplay blocked:", error));
       hasInteracted = true;
     }
   }
@@ -159,8 +160,8 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("keydown", startBackgroundMusic);
 
   /**
-   * Event-Listener für den Stummschalt-Button.
-   * Schaltet zwischen "Stumm" und "Laut" und aktualisiert das Symbol entsprechend.
+   * Event listener for the mute button.
+   * Toggles between "mute" and "sound on" and updates the icon accordingly.
    */
   muteButton.addEventListener("click", () => {
     isMuted = !isMuted;
@@ -177,7 +178,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /**
-   * Schaltet alle Soundeffekte und die Hintergrundmusik stumm.
+   * Mutes all sound effects and background music.
    */
   function muteAllSounds() {
     Object.values(sounds).forEach((sound) => (sound.muted = true));
@@ -185,7 +186,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /**
-   * Aktiviert alle Soundeffekte und die Hintergrundmusik.
+   * Unmutes all sound effects and background music.
    */
   function unmuteAllSounds() {
     Object.values(sounds).forEach((sound) => (sound.muted = false));
@@ -194,9 +195,9 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /**
- * Reagiert auf gedrückte Tasten und setzt die entsprechende Eigenschaft im `keyboard`-Objekt auf `true`.
+ * Handles key press events and sets the corresponding property in the `keyboard` object to `true`.
  *
- * @param {KeyboardEvent} event - Das Tastatur-Ereignis.
+ * @param {KeyboardEvent} event - The keyboard event.
  */
 window.addEventListener("keydown", (event) => {
   if (event.code === "ArrowRight") keyboard.RIGHT = true;
@@ -208,9 +209,9 @@ window.addEventListener("keydown", (event) => {
 });
 
 /**
- * Reagiert auf losgelassene Tasten und setzt die entsprechende Eigenschaft im `keyboard`-Objekt auf `false`.
+ * Handles key release events and sets the corresponding property in the `keyboard` object to `false`.
  *
- * @param {KeyboardEvent} event - Das Tastatur-Ereignis.
+ * @param {KeyboardEvent} event - The keyboard event.
  */
 window.addEventListener("keyup", (event) => {
   if (event.code === "ArrowRight") keyboard.RIGHT = false;

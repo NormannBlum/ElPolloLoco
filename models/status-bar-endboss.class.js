@@ -1,13 +1,13 @@
 /**
- * Die EndbossStatusBar-Klasse stellt die Gesundheitsanzeige des Endbosses dar.
- * Sie erbt von der StatusBar-Klasse und verwaltet die verschiedenen Bilder,
- * die den Gesundheitsstatus des Endbosses anzeigen.
+ * The EndbossStatusBar class represents the health display of the end boss.
+ * It inherits from the StatusBar class and manages the different images
+ * that indicate the end boss's health status.
  */
 class EndbossStatusBar extends StatusBar {
   /**
-   * Erstellt eine neue Instanz der EndbossStatusBar.
-   * Initialisiert die Bilder für die verschiedenen Gesundheitszustände des Endbosses
-   * und setzt die Startposition sowie den Anfangswert der Lebensanzeige.
+   * Creates a new instance of the EndbossStatusBar.
+   * Initializes the images for different health levels of the end boss
+   * and sets the starting position as well as the initial health value.
    */
   constructor() {
     super();

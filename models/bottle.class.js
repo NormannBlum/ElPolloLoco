@@ -1,6 +1,6 @@
 /**
- * Die Bottle-Klasse stellt eine sammelbare oder werfbare Flasche im Spiel dar.
- * Sie erweitert die DrawableObject-Klasse und kann auf den Boden fallen oder geworfen werden.
+ * The Bottle class represents a collectible or throwable bottle in the game.
+ * It extends the DrawableObject class and can either lie on the ground or be thrown.
  */
 class Bottle extends DrawableObject {
   IMAGES_BOTTLE = [
@@ -16,9 +16,9 @@ class Bottle extends DrawableObject {
   };
 
   /**
-   * Erstellt eine Instanz einer Flasche mit Position und Animation.
-   * @param {number} x - Die x-Position der Flasche.
-   * @param {number} y - Die y-Position der Flasche.
+   * Creates an instance of a bottle with a position and animation.
+   * @param {number} x - The x-position of the bottle.
+   * @param {number} y - The y-position of the bottle.
    */
   constructor(x, y) {
     super().loadImage(
@@ -33,8 +33,8 @@ class Bottle extends DrawableObject {
   }
 
   /**
-   * Startet die Animation der Flasche.
-   * Die Animation wird alle 400 Millisekunden aktualisiert.
+   * Starts the bottle animation.
+   * The animation updates every 400 milliseconds.
    *
    * @returns {void}
    */

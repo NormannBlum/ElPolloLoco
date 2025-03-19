@@ -1,6 +1,6 @@
 /**
- * Die Keyboard-Klasse verwaltet den Zustand der Tasten für die Steuerung des Spiels.
- * Sie speichert, ob bestimmte Steuerungstasten gedrückt sind oder nicht.
+ * The Keyboard class manages the state of keys for controlling the game.
+ * It stores whether certain control keys are pressed or not.
  */
 class Keyboard {
   LEFT = false;

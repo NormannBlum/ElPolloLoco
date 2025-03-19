@@ -1,6 +1,6 @@
 /**
- * Die Chicken-Klasse stellt einen feindlichen Gegner im Spiel dar.
- * Das Huhn bewegt sich von rechts nach links und kann besiegt werden.
+ * The Chicken class represents an enemy opponent in the game.
+ * The chicken moves from right to left and can be defeated.
  */
 class Chicken extends MovableObject {
   height = 55;
@@ -27,7 +27,7 @@ class Chicken extends MovableObject {
   isDead = false;
 
   /**
-   * Erstellt eine Instanz des Hühnchens mit zufälliger Position und Geschwindigkeit.
+   * Creates an instance of the chicken with a random position and speed.
    */
   constructor() {
     super().loadImage(
@@ -43,7 +43,7 @@ class Chicken extends MovableObject {
   }
 
   /**
-   * Aktiviert die Animationen und Bewegung des Hühnchens.
+   * Activates the animations and movement of the chicken.
    */
   animate() {
     setInterval(() => {
@@ -60,7 +60,7 @@ class Chicken extends MovableObject {
   }
 
   /**
-   * Setzt das Hühnchen in den Zustand "tot", stoppt seine Bewegung und spielt die Todesanimation ab.
+   * Sets the chicken to the "dead" state, stops its movement, and plays the death animation.
    */
   kill() {
     this.isDead = true;
