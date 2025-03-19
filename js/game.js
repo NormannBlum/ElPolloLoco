@@ -15,6 +15,9 @@ let sounds = {
   chickenDead: new Audio("audio/chickenhurt.wav"),
   endbossHurt: new Audio("audio/endbosshurt.wav"),
   endbossDead: new Audio("audio/endbossdead.wav"),
+  coinCollect: new Audio("audio/coinCollect.wav"),
+  bottleCollect: new Audio("audio/bottleCollect.ogg"),
+  bottleBreaks: new Audio("audio/bottleBreaksShort.wav")
 };
 
 /**

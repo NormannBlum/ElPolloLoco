@@ -64,7 +64,6 @@ class World {
       this.checkCollisions();
       this.checkCollectibles();
       this.checkThrowObjects();
-      // this.checkEndbossSpawn();
     }, 10);
 
     this.addInterval(() => {
@@ -306,6 +305,8 @@ class World {
           (this.bottles / this.maxBottles) * 100
         );
         this.level.bottles.splice(index, 1);
+
+        sounds.bottleCollect.play();
       }
     });
   }
@@ -319,6 +320,8 @@ class World {
         this.coins++;
         this.coinsStatusBar.setPercentage((this.coins / this.maxCoins) * 100);
         this.level.coins.splice(index, 1);
+
+        sounds.coinCollect.play();
       }
     });
   }
@@ -390,6 +393,7 @@ class World {
         this.killEnemy(enemy);
       }
       bottle.splashEffect();
+      sounds.bottleBreaks.play();
     }
   }
 
@@ -415,7 +419,6 @@ class World {
       this.character.x + 500 > endboss.x
     ) {
       endboss.hadFirstContact = true;
-      // endboss.startWalking();
     }
   }
 
