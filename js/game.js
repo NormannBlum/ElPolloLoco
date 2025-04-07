@@ -5,6 +5,7 @@ let activeIntervals = [];
 let gameRunning = false;
 
 let backgroundMusic = new Audio("audio/backgroundsound.mp3");
+
 let sounds = {
   walking: new Audio("audio/walking1.mp3"),
   throwBottle: new Audio("audio/throw.wav"),
@@ -17,7 +18,7 @@ let sounds = {
   endbossDead: new Audio("audio/endbossdead.wav"),
   coinCollect: new Audio("audio/coinCollect.wav"),
   bottleCollect: new Audio("audio/bottleCollect.ogg"),
-  bottleBreaks: new Audio("audio/bottleBreaksShort.wav")
+  bottleBreaks: new Audio("audio/bottleBreaksShort.wav"),
 };
 
 /**
@@ -56,6 +57,14 @@ function resetGame() {
 }
 
 /**
+ * Removes all active intervals and clears the interval list.
+ */
+function clearAllIntervals() {
+  activeIntervals.forEach(clearInterval);
+  activeIntervals = [];
+}
+
+/**
  * Hides all end screens.
  */
 function hideEndScreens() {
@@ -69,14 +78,6 @@ function hideEndScreens() {
 function goToMainMenu() {
   resetGame();
   showStartScreen();
-}
-
-/**
- * Removes all active intervals and clears the interval list.
- */
-function clearAllIntervals() {
-  activeIntervals.forEach(clearInterval);
-  activeIntervals = [];
 }
 
 /**
