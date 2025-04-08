@@ -50,6 +50,8 @@ class Endboss extends MovableObject {
     "img_pollo_locco/img/4_enemie_boss_chicken/5_dead/G26.png",
   ];
 
+  offset = {x: 20, y: 70, width: 25, height: 100};
+
   hadFirstContact = false;
   attackCooldown = false;
   isAttacking = false;
@@ -74,15 +76,8 @@ class Endboss extends MovableObject {
     this.speed = 2.5;
   }
 
-  offset = {
-    x: 20,
-    y: 70,
-    width: 25,
-    height: 100,
-  };
-
   /**
-   * Continuously checks if the player is close enough to activate the Endboss.
+   * Periodically checks if the player is close enough to trigger the boss.
    */
   checkForFirstContact() {
     let checkInterval = setInterval(() => {
@@ -97,7 +92,7 @@ class Endboss extends MovableObject {
   }
 
   /**
-   * Plays the alert animation slowly before the Endboss starts.
+   * Plays the alert animation before activating the boss.
    */
   playAlertAnimation() {
     let i = 0;
@@ -115,7 +110,7 @@ class Endboss extends MovableObject {
   }
 
   /**
-   * Starts the Endboss movement and combat.
+   * Starts movement and attack behavior.
    */
   startBoss() {
     this.animate();
@@ -123,7 +118,7 @@ class Endboss extends MovableObject {
   }
 
   /**
-   * Activates the movement and animation of the Endboss.
+   * Controls movement and walking animation.
    */
   animate() {
     setInterval(() => {
@@ -138,7 +133,7 @@ class Endboss extends MovableObject {
   }
 
   /**
-   * Initializes animations such as "Dead" and "Hurt".
+   * Handles hurt and death animations.
    */
   initAnimation() {
     setInterval(() => {
@@ -166,7 +161,7 @@ class Endboss extends MovableObject {
   }
 
   /**
-   * Moves the Endboss towards the character.
+   * Moves toward the player's character.
    */
   followCharacter() {
     if (!this.character) return;
@@ -181,7 +176,7 @@ class Endboss extends MovableObject {
   }
 
   /**
-   * Starts the Endboss's attack mode.
+   * Begins checking for attack opportunities.
    */
   initiateAttacking() {
     setInterval(() => {
@@ -192,17 +187,16 @@ class Endboss extends MovableObject {
   }
 
   /**
-   * Begins the Endboss's attack cycle.
+   * Starts a single attack cycle.
    */
   startAttackCycle() {
     this.attackCooldown = true;
     this.isAttacking = true;
-
     this.playAttackAnimation();
   }
 
   /**
-   * Plays the attack animation.
+   * Repeats the attack animation.
    */
   playAttackAnimation() {
     this.attackInterval = setInterval(() => {
@@ -211,10 +205,7 @@ class Endboss extends MovableObject {
   }
 
   /**
-   * Reduces the object's energy by 5 and plays a hit sound.
-   * If energy reaches 0 or below, it is set to 0
-   * and the death sound is played.
-   * @returns {void}
+   * Reduces energy on hit and handles death logic.
    */
   hit() {
     let now = new Date().getTime();
