@@ -103,6 +103,18 @@ class Character extends MovableObject {
   }
 
   /**
+   * Selects and plays the appropriate idle animation based on inactivity duration.
+   */
+  chooseIdleAnimation() {
+    let timeSinceLastAction = Date.now() - this.lastActionTime;
+    if (timeSinceLastAction >= this.idleTimeout) {
+      this.playAnimation(this.IMAGES_LONGIDLE);
+    } else {
+      this.playAnimation(this.IMAGES_IDLE);
+    }
+  }
+
+  /**
    * Starts character movement based on user input.
    */
   initMovement() {
@@ -116,16 +128,16 @@ class Character extends MovableObject {
   }
 
   /**
-   * Moves the character to the right if the corresponding key is pressed.
+   * Initializes the animation cycles for the character.
    */
-  handleRightMovement() {
-    if (this.world.gameOver) return;
-    if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
-      this.moveRight();
-      this.otherDirection = false;
-      sounds.walking.play();
-      this.lastActionTime = Date.now();
-    }
+  initAnimation() {
+    setInterval(() => {
+      this.playDeadAnimation();
+      this.playHurtAnimation();
+      this.playJumpingAnimation();
+      this.playWalkingAnimation();
+      this.playIdleAnimation();
+    }, 200);
   }
 
   /**
@@ -154,23 +166,60 @@ class Character extends MovableObject {
   }
 
   /**
-   * Updates the camera position based on the character's position.
+   * Moves the character to the right if the corresponding key is pressed.
    */
-  updateCamera() {
-    this.world.camera_x = -this.x + 100;
+  handleRightMovement() {
+    if (this.world.gameOver) return;
+    if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
+      this.moveRight();
+      this.otherDirection = false;
+      sounds.walking.play();
+      this.lastActionTime = Date.now();
+    }
   }
 
   /**
-   * Initializes the animation cycles for the character.
+   * Causes damage to the object by reducing energy by 5.
+   * Plays a hit sound and sets energy to 0 if it falls below zero.
+   * The hit can only occur once every 200 milliseconds to prevent multiple hits in a short time.
+   *
+   * @returns {void}
    */
-  initAnimation() {
-    setInterval(() => {
-      this.playDeadAnimation();
-      this.playHurtAnimation();
-      this.playJumpingAnimation();
-      this.playWalkingAnimation();
-      this.playIdleAnimation();
-    }, 200);
+  hit() {
+    const now = new Date().getTime();
+    if (now - this.lastHit > 200) {
+      this.energy -= 5;
+      sounds.hurt.play();
+
+      if (this.energy < 0) {
+        this.energy = 0;
+        sounds.dead.play();
+      }
+
+      this.lastHit = now;
+    }
+  }
+
+  /**
+   * Checks if the character is idle.
+   * @returns {boolean} - True if the character is idle.
+   */
+  isIdle() {
+    return (
+      !this.isDead() &&
+      !this.isHurt() &&
+      !this.isAboveGround() &&
+      !this.world.keyboard.RIGHT &&
+      !this.world.keyboard.LEFT
+    );
+  }
+
+  /**
+   * Makes the object jump by increasing its vertical speed.
+   * @returns {void}
+   */
+  jump() {
+    this.speedY = 30;
   }
 
   /**
@@ -188,6 +237,19 @@ class Character extends MovableObject {
   playHurtAnimation() {
     if (this.isHurt()) {
       this.playAnimation(this.IMAGES_HURT);
+    }
+  }
+
+  /**
+   * Plays the idle animation if the character is inactive.
+   */
+  playIdleAnimation() {
+    if (this.world.gameOver) return;
+    if (this.isIdle()) {
+      if (Date.now() - this.lastActionTime >= this.idleTimeout) {
+        sounds.snore.play();
+      }
+      this.chooseIdleAnimation();
     }
   }
 
@@ -212,72 +274,11 @@ class Character extends MovableObject {
       this.playAnimation(this.IMAGES_WALKING);
     }
   }
-  /**
-   * Checks if the character is idle.
-   * @returns {boolean} - True if the character is idle.
-   */
-  isIdle() {
-    return (
-      !this.isDead() &&
-      !this.isHurt() &&
-      !this.isAboveGround() &&
-      !this.world.keyboard.RIGHT &&
-      !this.world.keyboard.LEFT
-    );
-  }
 
   /**
-   * Plays the idle animation if the character is inactive.
+   * Updates the camera position based on the character's position.
    */
-  playIdleAnimation() {
-    if (this.world.gameOver) return;
-    if (this.isIdle()) {
-      if (Date.now() - this.lastActionTime >= this.idleTimeout) {
-        sounds.snore.play();
-      }
-      this.chooseIdleAnimation();
-    }
-  }
-
-  /**
-   * Selects and plays the appropriate idle animation based on inactivity duration.
-   */
-  chooseIdleAnimation() {
-    let timeSinceLastAction = Date.now() - this.lastActionTime;
-    if (timeSinceLastAction >= this.idleTimeout) {
-      this.playAnimation(this.IMAGES_LONGIDLE);
-    } else {
-      this.playAnimation(this.IMAGES_IDLE);
-    }
-  }
-
-  /**
-   * Makes the object jump by increasing its vertical speed.
-   * @returns {void}
-   */
-  jump() {
-    this.speedY = 30;
-  }
-
-  /**
-   * Causes damage to the object by reducing energy by 5.
-   * Plays a hit sound and sets energy to 0 if it falls below zero.
-   * The hit can only occur once every 200 milliseconds to prevent multiple hits in a short time.
-   *
-   * @returns {void}
-   */
-  hit() {
-    const now = new Date().getTime();
-    if (now - this.lastHit > 200) {
-      this.energy -= 5;
-      sounds.hurt.play();
-
-      if (this.energy < 0) {
-        this.energy = 0;
-        sounds.dead.play();
-      }
-
-      this.lastHit = now;
-    }
+  updateCamera() {
+    this.world.camera_x = -this.x + 100;
   }
 }
