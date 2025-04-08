@@ -35,6 +35,27 @@ class MovableObject extends DrawableObject {
   }
 
   /**
+   * Moves the object to the right.
+   */
+  moveRight() {
+    this.x += this.speed;
+  }
+
+  /**
+   * Moves the object to the left.
+   */
+  moveLeft() {
+    this.x -= this.speed;
+  }
+
+  /**
+   * Makes the object jump.
+   */
+  jump() {
+    this.speedY = 30;
+  }
+
+  /**
    * Checks if the current object is colliding with another object.
    * @param {MovableObject} mo - The other object.
    * @returns {boolean} - True if the objects are colliding.
@@ -90,26 +111,5 @@ class MovableObject extends DrawableObject {
     let path = images[i];
     this.img = this.imagesCache[path];
     this.currentImage++;
-  }
-
-  /**
-   * Moves the object to the right.
-   */
-  moveRight() {
-    this.x += this.speed;
-  }
-
-  /**
-   * Moves the object to the left.
-   */
-  moveLeft() {
-    this.x -= this.speed;
-  }
-
-  /**
-   * Makes the object jump.
-   */
-  jump() {
-    this.speedY = 30;
   }
 }
