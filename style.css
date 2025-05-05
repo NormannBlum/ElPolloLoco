@@ -50,7 +50,6 @@ h1 {
     position: absolute;
     width: 720px;
     height: 480px;
-    /* display: flex; */
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -76,9 +75,9 @@ h1 {
 
 #game-over-screen img {
     max-width: 100%;
-    max-height: 100%;
+    /* max-height: 100%; */
     width: 100vw;
-    height: 40vh;
+    height: 65vh;
     object-fit: cover;
 }
 
