@@ -1,3 +1,7 @@
+/* =======================================
+   Mobile Portrait & kleine Bildschirme
+======================================= */
+
 @media only screen and (max-width: 720px) {
     canvas {
         width: 100%;
@@ -10,9 +14,13 @@
     }
 
     .end-screen {
-        transform: translate(0%, -23px);
+        transform: translate(0%, -68px);
     }
 }
+
+/* =======================================
+   Kleine Tablets / Mobile Landscape
+======================================= */
 
 @media only screen and (max-width: 1024px) and (max-height: 768px) {
     #game-over-screen img {
@@ -30,11 +38,19 @@
     }
 }
 
+/* =======================================
+   Allgemein: Buttons auf kleineren Geräten anzeigen
+======================================= */
+
 @media only screen and (max-width: 1200px) {
     .mobile-button-container button {
         display: flex;
     }
 }
+
+/* =======================================
+   Tablets & kleine Laptops (Landscape)
+======================================= */
 
 @media only screen and (min-width: 666px) and (max-width: 1024px) and (orientation: landscape) {
     h1 {
@@ -46,7 +62,7 @@
     }
 
     #game-over-screen img {
-        height: 100vh;
+        height: 110vh;
         width: 100vw;
     }
 
@@ -54,6 +70,10 @@
         top: 20px;
     }
 }
+
+/* =======================================
+   Sehr kleine Geräte (z. B. iPhone SE quer)
+======================================= */
 
 @media only screen and (max-device-width: 667px) and (max-device-height: 375px) and (orientation: landscape) {
     #start-button {
@@ -65,6 +85,10 @@
         margin-left: 16px;
     }
 }
+
+/* =======================================
+   Feste Auflösung: 1366x1024 Landscape
+======================================= */
 
 @media only screen and (width: 1366px) and (height: 1024px) and (orientation: landscape) {
     .mobile-button-container button {
@@ -81,6 +105,10 @@
         height: 50vh;
     }
 }
+
+/* =======================================
+   Große Bildschirme (Desktops)
+======================================= */
 
 @media only screen and (min-width: 1200px) {
     .mobile-button-container {
