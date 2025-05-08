@@ -1,5 +1,5 @@
 /* =======================================
-   Mobile Portrait & kleine Bildschirme
+   Mobile Portrait & Small Screens
 ======================================= */
 
 @media only screen and (max-width: 720px) {
@@ -19,7 +19,7 @@
 }
 
 /* =======================================
-   Kleine Tablets / Mobile Landscape
+   Small Tablets / Mobile Landscape
 ======================================= */
 
 @media only screen and (max-width: 1024px) and (max-height: 768px) {
@@ -39,7 +39,7 @@
 }
 
 /* =======================================
-   Allgemein: Buttons auf kleineren Geräten anzeigen
+   Show Buttons on Smaller Devices
 ======================================= */
 
 @media only screen and (max-width: 1200px) {
@@ -49,7 +49,7 @@
 }
 
 /* =======================================
-   Tablets & kleine Laptops (Landscape)
+   Tablets & Small Laptops (Landscape)
 ======================================= */
 
 @media only screen and (min-width: 666px) and (max-width: 1024px) and (orientation: landscape) {
@@ -72,7 +72,7 @@
 }
 
 /* =======================================
-   Sehr kleine Geräte (z. B. iPhone SE quer)
+   Very Small Devices (e.g. iPhone SE Landscape)
 ======================================= */
 
 @media only screen and (max-device-width: 667px) and (max-device-height: 375px) and (orientation: landscape) {
@@ -87,7 +87,7 @@
 }
 
 /* =======================================
-   Feste Auflösung: 1366x1024 Landscape
+   Fixed Resolution: 1366x1024 Landscape
 ======================================= */
 
 @media only screen and (width: 1366px) and (height: 1024px) and (orientation: landscape) {
@@ -107,7 +107,7 @@
 }
 
 /* =======================================
-   Große Bildschirme (Desktops)
+   Large Screens (Desktops)
 ======================================= */
 
 @media only screen and (min-width: 1200px) {
